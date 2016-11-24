@@ -1,0 +1,22 @@
+class UserController < ApplicationController
+  before_action :authenticate_user!
+
+  def add_user_info
+    if current_user.id = params[:id]
+      @user = User.find(params[:id])
+      @user.update(user_params)
+      render :json => @user
+    else
+      render json:{
+        error: "Unauthorized access", status: 403
+      }
+    end
+  end
+
+
+  private
+  def user_params
+    params.require(:user).permit(:id, :risk_level, :phone, :action,
+    :martial_status, :dependants, :citizenship, :dob, :ssn, :address)
+  end
+end
