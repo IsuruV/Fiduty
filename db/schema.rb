@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130014357) do
+ActiveRecord::Schema.define(version: 20161130221446) do
 
   create_table "advisors", force: :cascade do |t|
     t.string   "name"
@@ -39,6 +39,13 @@ ActiveRecord::Schema.define(version: 20161130014357) do
     t.datetime "updated_at",      null: false
     t.integer  "advisor_id"
     t.string   "investment_type"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "portfolio_id"
+    t.string   "content"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "user_portfolios", force: :cascade do |t|

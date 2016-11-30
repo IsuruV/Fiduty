@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reviews
   resources :user_portfolios
   resources :advisors
   resources :portfolios
