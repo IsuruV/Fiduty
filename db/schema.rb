@@ -10,7 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124185219) do
+ActiveRecord::Schema.define(version: 20161130014357) do
+
+  create_table "advisors", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "type"
+  end
+
+  create_table "portfolios", force: :cascade do |t|
+    t.string   "fund_type"
+    t.float    "open"
+    t.float    "day_high"
+    t.float    "day_low"
+    t.string   "volume"
+    t.string   "week_52"
+    t.string   "ytd"
+    t.string   "avg_1"
+    t.string   "avg_3"
+    t.string   "avg_5"
+    t.string   "market_cap"
+    t.string   "p_e"
+    t.float    "beta"
+    t.text     "description"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "advisor_id"
+    t.string   "investment_type"
+  end
+
+  create_table "user_portfolios", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "portfolio_id"
+    t.float    "inital_investment"
+    t.integer  "shares"
+    t.float    "gain_loss"
+    t.float    "account_value"
+    t.string   "investment_date"
+    t.string   "datetime"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false
