@@ -1,0 +1,24 @@
+<h1>Upload Portfolios</h1>
+<div>
+    <h4>
+        <b>** Make sure that the rows start from column A and ends at column AD. </b><br>
+        <b>So the first column should be "Number" column. Last column should be "Descripton" column.</b><br>
+        <b> There should be a total of 30 columns</b><br>
+        <b>This only allows to import portfolio and advisor info only so leave out the review and ratings columns </b><br>
+    </h4>
+</div>
+<%= form_tag portfolios_upload_path, multipart: true do %>
+  <%= file_field_tag :leads %>
+  <%= submit_tag "Import Portfolios" %>
+<% end %>
+
+<h3>Current Portfolios in Database</h3>
+<ul>
+
+<% @portfolios.each do |portfolio| %>
+  <li><%= "#{portfolio.investment_type} - #{portfolio.fund_type} - #{portfolio.open} - #{portfolio.day_high} - #{portfolio.day_low} - #{portfolio.volume} - #{portfolio.week_52}
+   - #{portfolio.ytd} - #{portfolio.avg_1} - #{portfolio.avg_3} - #{portfolio.avg_5} - #{portfolio.market_cap} - #{portfolio.p_e} - #{portfolio.beta}
+    - #{portfolio.description}" %></li><br>
+<% end %>
+</ul>
+
