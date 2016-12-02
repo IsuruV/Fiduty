@@ -1,13 +1,21 @@
 class PortfoliosController < ApplicationController
+    before_action :authenticate_user!
         def new
     end
     
     def show
         @portfolio = Portfolio.find(params[:id])
+     if @portfolio
         respond_to do |format|
             format.json {render json: @portfolio}
             format.html {render :show }
-        end 
+        end
+     else
+                 respond_to do |format|
+            format.json {render json: {"error":"portfolio does not exist"} }
+        end
+     end 
+        
     end
     
     def create
