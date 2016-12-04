@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
   has_many :user_portfolios
   has_many :portfolios, :through => :user_portfolios
+  has_many :reviews
 end
