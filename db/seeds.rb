@@ -8,9 +8,14 @@
 #     portfolio.reviews.create(content: Faker::Company.catch_phrase)
 # end
 
+# Review.all.each do |review|
+#     review.rating = rand(1..5)
+#     review.save
+# end
+
 # require 'csv'
 # require 'pry'
-# csv_text = File.read('app/channels/Safety_Net.csv')
+# csv_text = File.read('db/migrate/Safety_Net.csv')
 # csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 # csv.each do |row|
   
@@ -22,7 +27,7 @@
                           
 # end
 
-# csv_text = File.read('app/channels/Conservative.csv')
+# csv_text = File.read('db/migrate/Conservative.csv')
 # csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 # csv.each do |row|
   
@@ -34,7 +39,7 @@
                           
 # end
 
-# csv_text = File.read('app/channels/Moderate.csv')
+# csv_text = File.read('db/migrate/Moderate.csv')
 # csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 # csv.each do |row|
   
@@ -47,7 +52,7 @@
 # end
 
 
-# csv_text = File.read('app/channels/Aggressive.csv')
+# csv_text = File.read('db/migrate/Aggressive.csv')
 # csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
 # csv.each do |row|
   
