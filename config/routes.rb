@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  resources :welcomes
   resources :reviews
+  resources :users
   resources :user_portfolios
   resources :advisors
   resources :portfolios do 

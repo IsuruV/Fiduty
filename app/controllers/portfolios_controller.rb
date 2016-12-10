@@ -23,7 +23,8 @@ class PortfoliosController < ApplicationController
     end
     
     def index
-        @portfolios = Portfolio.all
+        # @portfolios = Portfolio.all
+        @portfolios = Portfolio.find(params[:investment_type])
         respond_to do |format|
             format.json {render json: @portfolios}
             format.html {render :index }
