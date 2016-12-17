@@ -3,7 +3,7 @@ class PortfoliosController < ApplicationController
     
     def new
     end
-    
+
     def show
         @portfolio = Portfolio.find(params[:id])
      if @portfolio
@@ -14,7 +14,7 @@ class PortfoliosController < ApplicationController
      else
                  respond_to do |format|
             format.json {render json: {"error":"portfolio does not exist"} }
-        end
+        ends
      end 
         
     end
