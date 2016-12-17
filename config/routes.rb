@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
-  resources :welcomes
+  resources :welcome
   resources :reviews
   resources :users
   resources :user_portfolios
   resources :advisors
-  resources :portfolios do 
+  resources :portfolios do
     resources :reviews
-  end 
+  end
   mount_devise_token_auth_for 'User', at: 'auth'
   post '/users/:id/add_user_info' => "user#add_user_info"
   post 'portfolios/upload', to: 'portfolios#upload'
