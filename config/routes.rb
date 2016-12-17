@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   post '/users/:id/add_user_info' => "user#add_user_info"
   post 'portfolios/upload', to: 'portfolios#upload'
   post 'user_portfolios/add_portfolio' => 'user_portfolios#create'
+  post '/portfolios/portfolios_by_type' => 'portfolios#portfolios_by_type'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

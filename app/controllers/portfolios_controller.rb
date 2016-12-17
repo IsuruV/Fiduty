@@ -23,10 +23,17 @@ class PortfoliosController < ApplicationController
     end
     
     def index
-        # @portfolios = Portfolio.all
-        @portfolios = Portfolio.find(params[:investment_type])
+        @portfolios = Portfolio.all
         respond_to do |format|
             format.json {render json: @portfolios}
+            format.html {render :index }
+        end 
+    end 
+    def portfolios_by_type
+        @portfolios = Portfolio.where(investment_type: params[:investment_type])
+        # @portfolios = Portfolio.all
+        respond_to do |format|
+            format.json {render json: @portfolios.to_json}
             format.html {render :index }
         end 
     end 
