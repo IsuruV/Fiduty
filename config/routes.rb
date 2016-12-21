@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :welcome
   resources :reviews
   resources :users
+  get '/users/current_user' => 'users#show'
   resources :user_portfolios
   resources :advisors
   resources :portfolios do

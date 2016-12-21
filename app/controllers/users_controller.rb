@@ -1,6 +1,13 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
   before_action :authenticate_user!
   
+  def show
+    @user = current_user
+     respond_to do |format|
+       format.json {render json: @user}
+     end
+   end
+   
   def add_user_info
     if current_user.id = params[:id]
       @user = User.find(params[:id])
@@ -12,12 +19,7 @@ class UserController < ApplicationController
       }
     end
   end
-   def show
-     respond_to do |format|
-       format.json {render json: current_user}
-     end
-   end
-
+  
 
   private
   def user_params
