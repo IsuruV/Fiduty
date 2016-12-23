@@ -3,7 +3,7 @@ class PortfoliosController < ApplicationController
     
     def new
     end
-
+    
     def show
         @portfolio = Portfolio.find(params[:id])
      if @portfolio
@@ -14,7 +14,7 @@ class PortfoliosController < ApplicationController
      else
                  respond_to do |format|
             format.json {render json: {"error":"portfolio does not exist"} }
-        ends
+        end
      end 
         
     end
@@ -29,11 +29,19 @@ class PortfoliosController < ApplicationController
             format.html {render :index }
         end 
     end 
+    
     def portfolios_by_type
-        @portfolios = Portfolio.where(investment_type: params[:investment_type])
-        # @portfolios = Portfolio.all
+        if params[:investment_type] && params[:type_of_fund]
+            @portfolios = Portfolio.search_portfolios_by_criteria(params[:investment_type], params[:type_of_fund])
+        elsif  params[:investment_type] && !params[:type_of_fund]
+          @portfolios = Portfolio.search_portfolio_type_only(params[:investment_type])
+        elsif !params[:investment_type] && params[:type_of_fund]
+            @portfolios =  Portfolio.search_fund_type_only(params[:type_of_fund])
+        else
+            @portfolios = Portfolio.all
+        end
         respond_to do |format|
-            format.json {render json: @portfolios.to_json}
+            format.json {render json: @portfolios}
             format.html {render :index }
         end 
     end 
