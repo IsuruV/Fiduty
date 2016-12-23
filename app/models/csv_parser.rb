@@ -1,5 +1,4 @@
 class CsvParser
-
   def self.upload(params)
     CSV.foreach(params[:leads].path, headers: true) do |row|
       @advisor = Advisor.create(type_of_fund: row[1], name: row[2], address: row[4])
@@ -8,5 +7,4 @@ class CsvParser
                        fund_type: row[3], down_side_risk: row[28])
     end
   end
-
 end

@@ -1,10 +1,5 @@
 class PortfoliosController < ApplicationController
-  require "market_beat"
     before_action :authenticate_user!
-
-    def etf_return
-      MarketBeat.opening_price :AAPL
-    end
 
     def show
         @portfolio = Portfolio.find(params[:id])
