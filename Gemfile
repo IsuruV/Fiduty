@@ -17,6 +17,11 @@ gem 'coffee-rails', '~> 4.2'
 gem 'rb-readline', '~> 0.5.3'
 gem 'active_model_serializers'
 gem 'faker', '~> 1.6', '>= 1.6.6'
+## finance gems
+gem 'yahoo-finance'
+gem 'market_beat'
+##
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'devise'

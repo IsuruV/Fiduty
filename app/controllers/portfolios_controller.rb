@@ -1,43 +1,45 @@
 class PortfoliosController < ApplicationController
-    before_action :authenticate_user!
-    
-    def new
+  require "market_beat"
+    # before_action :authenticate_user!
+
+    def etf_return
+      binding.pry
+      MarketBeat.opening_price :AAPL
     end
-    
-    def show
-        @portfolio = Portfolio.find(params[:id])
-     if @portfolio
-        respond_to do |format|
-            format.json {render json: @portfolio}
-            format.html {render :show }
-        end
-     else
-                 respond_to do |format|
-            format.json {render json: {"error":"portfolio does not exist"} }
-        end
-     end 
-        
-    end
-    
+    # def show
+    #     @portfolio = Portfolio.find(params[:id])
+    #  if @portfolio
+    #     respond_to do |format|
+    #         format.json {render json: @portfolio}
+    #         format.html {render :show }
+    #     end
+    #  else
+    #              respond_to do |format|
+    #         format.json {render json: {"error":"portfolio does not exist"} }
+    #     end
+    #  end
+    #
+    # end
+
     def create
     end
-    
+
     def index
         @portfolios = Portfolio.all
         respond_to do |format|
             format.json {render json: @portfolios}
             format.html {render :index }
-        end 
-    end 
+        end
+    end
     def portfolios_by_type
         @portfolios = Portfolio.where(investment_type: params[:investment_type])
         # @portfolios = Portfolio.all
         respond_to do |format|
             format.json {render json: @portfolios.to_json}
             format.html {render :index }
-        end 
-    end 
-    
+        end
+    end
+
     def upload
         CSV.foreach(params[:leads].path, headers: true) do |row|
             @advisor = Advisor.create(type_of_fund: row[1], name: row[2], address: row[4])

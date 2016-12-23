@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/portfolios/etf_return' => 'portfolios#etf_return'
   resources :welcome
   resources :reviews
   resources :users
