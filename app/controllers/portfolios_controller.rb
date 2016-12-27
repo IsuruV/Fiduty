@@ -9,7 +9,7 @@ class PortfoliosController < ApplicationController
             format.html {render :show }
         end
      else
-                 respond_to do |format|
+         respond_to do |format|
             format.json {render json: {"error":"portfolio does not exist"} }
         end
      end
