@@ -6,7 +6,7 @@ class UsersController < ApplicationController
      respond_to do |format|
        format.json {render json: @user}
      end
-   end
+  end
 
   def add_user_info
     if current_user.id == params[:id].to_i

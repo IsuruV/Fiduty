@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
         content = params[:content]
         rating = params[:rating]
         @portfolio = Portfolio.find(params[:portfolio_id])
-        @portfolio.reviews.create(content: params[:content], rating: params[:rating], user: current_user)
+        @portfolio.reviews.create(content: content, rating: rating, user: current_user)
         respond_to do |format|
             format.json {render json: @portfolio}
         end
