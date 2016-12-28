@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161228005203) do
+ActiveRecord::Schema.define(version: 20161228221918) do
 
   create_table "advisors", force: :cascade do |t|
     t.string   "name"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20161228005203) do
     t.float    "treynorRatio"
     t.string   "name"
     t.string   "symbol"
+    t.float    "ytd_raw"
   end
 
   create_table "reviews", force: :cascade do |t|

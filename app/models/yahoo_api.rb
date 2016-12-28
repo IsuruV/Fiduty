@@ -23,10 +23,11 @@ class YahooApi
       sharpeRatio = risks["sharpeRatio"]["raw"]
       treynorRatio = risks["treynorRatio"]["raw"]
       ytd = response["quoteSummary"]["result"][0]["fundPerformance"]["performanceOverview"]["ytdReturnPct"]["fmt"]
+      ytd_raw = response["quoteSummary"]["result"][0]["fundPerformance"]["performanceOverview"]["ytdReturnPct"]["raw"]
 
       portfolio.update(description: description, alpha: alpha, beta: beta, meanAnnualReturn: meanAnnualReturn,
                                   rSquared: rSquared, stdDev: stdDev, sharpeRatio: sharpeRatio,
-                                  treynorRatio: treynorRatio, avg_1: ytd, ytd: ytd)
+                                  treynorRatio: treynorRatio, avg_1: ytd, ytd: ytd, ytd_raw: ytd_raw)
       portfolio.advisor = advisor
       portfolio.save
       else
