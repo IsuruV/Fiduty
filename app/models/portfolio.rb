@@ -31,7 +31,7 @@ class Portfolio < ApplicationRecord
        portfolios.each do |portfolio|
          portfolios_formatted.push({'portfolioID': portfolio.id, 'portfolioName': portfolio.name,
                                     'portfolioSymbol': portfolio.symbol, 'fundType': portfolio.fund_type,
-                                    'avg_1': portfolio.avg_1, 'ratingTotal': portfolio.reviews.average(:rating)
+                                    'roi': portfolio.ytd_raw, 'ratingTotal': portfolio.reviews.average(:rating)
                                     })
        end
        portfolios_formatted
