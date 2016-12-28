@@ -33,7 +33,7 @@ class PortfoliosController < ApplicationController
         if params[:investment_type] && params[:type_of_fund]
             @portfolios = Portfolio.search_portfolios_by_criteria(params[:investment_type], params[:type_of_fund])
         elsif  params[:investment_type] && !params[:type_of_fund]
-            @portfolios = Portfolio.search_portfolio_type_only(params[:investment_type])
+            @portfolios = Portfolio.portfolios_index_page_formated(params[:investment_type]).to_json
         elsif !params[:investment_type] && params[:type_of_fund]
             @portfolios =  Portfolio.search_fund_type_only(params[:type_of_fund])
         else

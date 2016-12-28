@@ -25,6 +25,18 @@ class Portfolio < ApplicationRecord
         portfolios_sorted
      end
 
+     def self.portfolios_index_page_formated(advisor_type)
+       portfolios = Portfolio.search_portfolio_type_only(advisor_type)
+       portfolios_formatted = []
+       portfolios.each do |portfolio|
+         portfolios_formatted.push({'portfolioID': portfolio.id, 'portfolioName': portfolio.name,
+                                    'portfolioSymbol': portfolio.symbol, 'fundType': portfolio.fund_type,
+                                    'avg_1': portfolio.avg_1, 'ratingTotal': portfolio.reviews.average(:rating)
+                                    })
+       end
+       portfolios_formatted
+     end
+
         #    def self.search_portfolio_type_only(portfolio_type)
         #     Portfolio.where(investment_type: portfolio_type)
         #  end
@@ -73,6 +85,5 @@ class Portfolio < ApplicationRecord
           portfolios.order('ytd_raw desc')
         end
       end
-
 
 end
