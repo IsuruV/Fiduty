@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206014436) do
+ActiveRecord::Schema.define(version: 20161228005203) do
 
   create_table "advisors", force: :cascade do |t|
     t.string   "name"
@@ -35,11 +35,19 @@ ActiveRecord::Schema.define(version: 20161206014436) do
     t.string   "p_e"
     t.float    "beta"
     t.text     "description"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "advisor_id"
     t.string   "investment_type"
     t.float    "down_side_risk"
+    t.float    "alpha"
+    t.float    "meanAnnualReturn"
+    t.float    "rSquared"
+    t.float    "stdDev"
+    t.float    "sharpeRatio"
+    t.float    "treynorRatio"
+    t.string   "name"
+    t.string   "symbol"
   end
 
   create_table "reviews", force: :cascade do |t|

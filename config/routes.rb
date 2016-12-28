@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   post 'user_portfolios/add_portfolio' => 'user_portfolios#create'
   post '/portfolios/portfolios_by_type' => 'portfolios#portfolios_by_type'
   post '/users/:id/add_user_info' => 'users#add_user_info'
+  get '/portfolios/fetch_stock_quote' => 'portfolios#fetch_stock_quote'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
