@@ -9,9 +9,9 @@ class CsvParser
   end
 
   def self.etf_parser
-      CSV.foreach('/Users/isuru/desktop/fiduty/fiduty/db/migrate/ETFList.csv', headers: true) do |row|
+      CSV.foreach('db/migrate/ETFList.csv', headers: true) do |row|
         @portfolio = Portfolio.find_or_create_by(symbol: row[0], name: row[1], fund_type: "ETF")
       end
   end
   end
-end
+
