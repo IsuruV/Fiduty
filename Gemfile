@@ -20,7 +20,9 @@ gem 'faker', '~> 1.6', '>= 1.6.6'
 ## finance gems
 gem 'yahoo-finance'
 gem 'market_beat'
+gem 'nas-yahoo_stock', '~> 1.0', '>= 1.0.8'
 ##
+gem 'faraday', '~> 0.9.2'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
