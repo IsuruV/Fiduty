@@ -37,7 +37,7 @@ class Portfolio < ApplicationRecord
       end
 
 
-      def self.saftey_net
+      def self.safety_net
         Portfolio.all.where('stdDev < 5')
       end
 
@@ -54,8 +54,8 @@ class Portfolio < ApplicationRecord
       end
 
       def self.search_portfolio_type_only(portfolio_type)
-          if portfolio_type == 'saftey_net'
-            Portfolio.saftey_net
+          if portfolio_type == 'safety_net'
+            Portfolio.safety_net
           elsif portfolio_type == 'conservative'
             Portfolio.conservative
           elsif portfolio_type == 'moderate'
