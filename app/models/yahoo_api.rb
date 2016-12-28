@@ -13,6 +13,7 @@ class YahooApi
           advisor = Advisor.find_or_create_by(name:'not available')
         end
 
+      description = response["quoteSummary"]["result"][0]["assetProfile"]["longBusinessSummary"]
       risks = response["quoteSummary"]["result"][0]["fundPerformance"]["riskOverviewStatistics"]["riskStatistics"][1]
       alpha = risks["alpha"]["raw"]
       beta = risks["beta"]["raw"]
@@ -22,7 +23,7 @@ class YahooApi
       sharpeRatio = risks["sharpeRatio"]["raw"]
       treynorRatio = risks["treynorRatio"]["raw"]
 
-      portfolio.update(alpha: alpha, beta: beta, meanAnnualReturn: meanAnnualReturn,
+      portfolio.update(description: description, alpha: alpha, beta: beta, meanAnnualReturn: meanAnnualReturn,
                                   rSquared: rSquared, stdDev: stdDev, sharpeRatio: sharpeRatio,
                                   treynorRatio: treynorRatio)
       portfolio.advisor = advisor
