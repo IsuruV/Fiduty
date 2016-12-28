@@ -66,7 +66,14 @@
 #### YAHOO API to get risks
 
 # CsvParser.etf_parser
-# Portfolio.all.each do |portfolio|
-#   YahooApi.update_portfolio_risk_ratios(portfolio)
-# end
+Portfolio.all.each do |portfolio|
+  YahooApi.update_portfolio_risk_ratios(portfolio)
+end
 #### /YAHOO API to get risks
+
+
+# Portfolio.all.each do |portfolio|
+#   yahoo_client = YahooFinance::Client.new
+#      data = yahoo_client.quotes([portfolio.symbol], [:annualized_gain ])
+#      portfolio.update(avg_1: data)
+# end
