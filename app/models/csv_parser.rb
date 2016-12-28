@@ -14,4 +14,3 @@ class CsvParser
       end
   end
   end
-
