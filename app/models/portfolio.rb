@@ -68,7 +68,9 @@ class Portfolio < ApplicationRecord
       def self.filter_by(portfolio_type, filter)
         portfolios = Portfolio.search_portfolio_type_only(portfolio_type)
         if filter == 'reviews'
-          portfolios.order()
+          portfolios.reviews.order('rating desc')
+        elsif filter == 'return'
+          portfolios.order('ytd_raw desc')
         end
       end
 

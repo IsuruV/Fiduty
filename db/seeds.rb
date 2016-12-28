@@ -66,9 +66,9 @@
 #### YAHOO API to get risks
 
 # CsvParser.etf_parser
-Portfolio.all.each do |portfolio|
-  YahooApi.update_portfolio_risk_ratios(portfolio)
-end
+# Portfolio.all.each do |portfolio|
+#   YahooApi.update_portfolio_risk_ratios(portfolio)
+# end
 #### /YAHOO API to get risks
 
 
