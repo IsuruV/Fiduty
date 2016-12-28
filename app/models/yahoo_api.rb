@@ -36,4 +36,9 @@ class YahooApi
 
   end
 
+  def self.real_time_quotes(ticker)
+    yahoo_client = YahooFinance::Client.new
+    data = yahoo_client.quotes([ticker], [:ask, :bid, :last_trade_date])
+  end
+
 end

@@ -25,9 +25,9 @@ class Portfolio < ApplicationRecord
         portfolios_sorted
      end
 
-           def self.search_portfolio_type_only(portfolio_type)
-            Portfolio.where(investment_type: portfolio_type)
-         end
+        #    def self.search_portfolio_type_only(portfolio_type)
+        #     Portfolio.where(investment_type: portfolio_type)
+        #  end
 
       def self.destroy_nil_risk_portfolios
         errors = Portfolio.where(stdDev: 0.0, fund_type: 'ETF')
@@ -35,4 +35,34 @@ class Portfolio < ApplicationRecord
           Portfolio.destroy(error)
         end
       end
+
+
+      def self.saftey_net
+        Portfolio.all.where('stdDev < 5')
+      end
+
+      def self.conservative
+        Portfolio.all.where(' stdDev >= 5 AND stdDev <= 10')
+      end
+
+      def self.moderate
+        Portfolio.all.where('stdDev > 10 AND std <= 30')
+      end
+
+      def self.aggressive
+        Portfolio.all.where('stdDev > 30')
+      end
+
+      def self.search_portfolio_type_only(portfolio_type)
+          if portfolio_type == 'saftey_net'
+            Portfolio.saftey_net
+          elsif portfolio_type == 'conservative'
+            Portfolio.conservative
+          elsif portfolio_type == 'moderate'
+            Portfolio.moderate
+          elsif portfolio_type == 'aggressive'
+            Portfolio.aggressive
+          end
+      end
+
 end
