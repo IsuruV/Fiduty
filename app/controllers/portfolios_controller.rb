@@ -58,9 +58,4 @@ class PortfoliosController < ApplicationController
         redirect_to portfolios_path
     end
 
-    def fetch_stock_quote
-      binding.pry
-      history = YahooStock::History.new(:stock_symbol => "yhoo", :start_date => Date.today-20, :end_date => Date.today-2)
-      quote = YahooStock::Quote.new(:stock_symbols => ["YHOO"])
-    end
 end
