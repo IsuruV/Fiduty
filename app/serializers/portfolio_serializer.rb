@@ -1,5 +1,5 @@
 class PortfolioSerializer < ActiveModel::Serializer
-  attributes :id, :fund_type, :investment_type, :name, :symbol, :description, :avg_1, :beta, :alpha, :meanAnnualReturn, :rSquared, :stdDev, :sharpeRatio, :treynorRatio, :user_portfolios, :reviews
+  attributes :id, :fund_type, :investment_type, :name, :symbol, :description, :ytd_raw, :ytd, :avg_1, :beta, :alpha, :meanAnnualReturn, :rSquared, :stdDev, :sharpeRatio, :treynorRatio, :user_portfolios, :reviews
   has_one :advisor
 end
 
