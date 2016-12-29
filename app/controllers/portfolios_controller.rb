@@ -58,4 +58,11 @@ class PortfoliosController < ApplicationController
         redirect_to portfolios_path
     end
 
+    def user_portfolios
+        @user = User.find(params[:id])
+        respond_to do |format|
+          format.json {render json: @user.user_portfolios_data.to_json}
+        end
+    end
+
 end
