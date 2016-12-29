@@ -16,6 +16,14 @@ class PortfoliosController < ApplicationController
 
     end
 
+    def real_time_quotes
+      @portfolio = Portfolio.find(params[:id])
+      respond_to do |format|
+          format.json {render json: @portfolio.real_time_quotes}
+          format.html {render :show }
+      end
+    end
+
     def create
     end
 
