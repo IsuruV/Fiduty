@@ -29,7 +29,7 @@ class Portfolio < ApplicationRecord
        portfolios = Portfolio.search_portfolio_type_only(advisor_type)
        portfolios_formatted = []
        portfolios.each do |portfolio|
-         portfolios_formatted.push({'advisor_id': portfolio.advisor.id,'symbol': portfolio.symbol, 'portfolioID': portfolio.id, 'portfolioName': portfolio.name,
+         portfolios_formatted.push({'advisor_id': portfolio.advisor_id,'symbol': portfolio.symbol, 'portfolioID': portfolio.id, 'portfolioName': portfolio.name,
                                     'portfolioSymbol': portfolio.symbol, 'fundType': portfolio.fund_type,
                                     'roi': portfolio.ytd_raw, 'ratingTotal': portfolio.reviews.average(:rating)
                                     })
