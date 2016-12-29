@@ -41,9 +41,18 @@ class YahooApi
 
   def self.real_time_quotes(ticker)
     yahoo_client = YahooFinance::Client.new
-    data = yahoo_client.quotes([ticker], [:last_trade_date,:last_trade_price,:high, :low, :volume, :change], { raw: false })
+    data = yahoo_client.quotes([ticker], [:last_trade_date,:last_trade_price, :previous_close, :high, :low, :volume, :change], { raw: false })
     data_formatted = data[0]
-    {"last_trade_date": data_formatted[:last_trade_date],"last_trade_price": data_formatted[:last_trade_price],"high": data_formatted[:high], "low": data_formatted[:low], "volume": data_formatted[:volume], "change": data_formatted[:change]}
+    {"last_trade_date": data_formatted[:last_trade_date],"last_trade_price": data_formatted[:last_trade_price],"previous_close": data_formatted[:previous_close],"high": data_formatted[:high], "low": data_formatted[:low], "volume": data_formatted[:volume], "change": data_formatted[:change]}
+  end
+
+  def self.update_ytd(portfolio)
+    con = Faraday.new
+    res = con.get "https://query2.finance.yahoo.com/v10/finance/quoteSummary/#{portfolio.symbol}?formatted=true&crumb=QtGhLQr%2FrgH&lang=en-US&region=US&modules=assetProfile%2CfundPerformance%2CdefaultKeyStatistics&corsDomain=finance.yahoo.com"
+    response = JSON.parse(res.body)
+    ytd = response["quoteSummary"]["result"][0]["fundPerformance"]["performanceOverview"]["ytdReturnPct"]["fmt"]
+    ytd_raw = response["quoteSummary"]["result"][0]["fundPerformance"]["performanceOverview"]["ytdReturnPct"]["raw"]
+    portfolio.update(ytd: ytd, ytd_raw: ytd_raw)
   end
 
 end

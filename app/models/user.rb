@@ -9,17 +9,56 @@ class User < ActiveRecord::Base
   has_many :reviews
 
   def calculate_total_investment
-    current_user.user_portfolios.each do |portfolio|
+    self.user_portfolios.each do |portfolio|
       sum += portfolio.inital_investment
     end
     sum
   end
 
-  def calculate_current_value
-    # current_val = []
-    # current_user.portfolios.each do |portfolio|
-    #   portfolio.real_time_quotes["last_trade_price"].to_i - portfolio.
-    # end
+  # def calculate_current_value
+  #   self.portfolios.each do |portfolio|
+  #     YahooApi.update_ytd(portfolio)
+  #   end
+  #   transactions = UserPortfolio.where(user_id: self.id)
+  #   transactions.map do |transaction|
+  #     portfolio = Portfolio.find_by_id(transaction.portfolio_id)
+  #     transaction.weight = (portfolio.ytd_raw - transaction.ytd) * transaction.inital_investment
+  #     transaction.save
+  #   end
+  #   transactions_by_portfolios = transactions.select('AVG(weight) as avg_return').group('portfolio_id').order('portfolio_id')
+  # end
+
+  def user_total_value
+    array = []
+    self.user_portfolios.each do |transaction|
+      transaction.calc_value
+      array.push(transaction.value)
+    end
+    array.inject(0){|sum,x| sum + x }
+  end
+
+  def user_gain
+    total_investment= self.calculate_total_investment
+    total_value = self.user_total_value
+    gain = total_value - total_investment
+    gain
+  end
+
+  def users_portfolios
+    self.users_portfolios.each do |transaction|
+      transaction.calc_holding_return
+      transaction.calc_value
+      transaction.calc_gain_loss
+    end
+
   end
 
 end
+
+
+# array = []
+# self.portfolios.each do |portfolio|
+#   array.push({"totalValue": portfoio.total_value(self), "holding_return": portfolio.holding_return(self),
+#     "ytd": portfolio.ytd_raw, "description": portfolio.description })
+# end
+# array

@@ -22,12 +22,12 @@ class UsersController < ApplicationController
     end
   end
 
-  
+
 
 
   private
   def user_params
     params.require(:user).permit(:id, :risk_level, :phone, :action,
-    :martial_status, :dependants, :citizenship, :dob, :ssn, :address)
+    :martial_status, :dependants, :citizenship, :dob, :ssn, :address, :fb_id, :email, :name, :password)
   end
 end
