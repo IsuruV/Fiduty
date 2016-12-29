@@ -29,17 +29,13 @@ class Portfolio < ApplicationRecord
        portfolios = Portfolio.search_portfolio_type_only(advisor_type)
        portfolios_formatted = []
        portfolios.each do |portfolio|
-         portfolios_formatted.push({'portfolioID': portfolio.id, 'portfolioName': portfolio.name,
+         portfolios_formatted.push({'symbol': portfolio.symbol, 'portfolioID': portfolio.id, 'portfolioName': portfolio.name,
                                     'portfolioSymbol': portfolio.symbol, 'fundType': portfolio.fund_type,
                                     'roi': portfolio.ytd_raw, 'ratingTotal': portfolio.reviews.average(:rating)
                                     })
        end
        portfolios_formatted
      end
-
-        #    def self.search_portfolio_type_only(portfolio_type)
-        #     Portfolio.where(investment_type: portfolio_type)
-        #  end
 
       def self.destroy_nil_risk_portfolios
         errors = Portfolio.where(stdDev: 0.0, fund_type: 'ETF')
@@ -84,6 +80,10 @@ class Portfolio < ApplicationRecord
         elsif filter == 'return'
           portfolios.order('ytd_raw desc')
         end
+      end
+
+      def real_time_quotes
+        YahooApi.real_time_quotes(self.symbol)
       end
 
 end
