@@ -41,7 +41,9 @@ class YahooApi
 
   def self.real_time_quotes(ticker)
     yahoo_client = YahooFinance::Client.new
-    data = yahoo_client.quotes([ticker], [:ask, :bid, :last_trade_date])
+    data = yahoo_client.quotes([ticker], [:last_trade_date, :high, :low, :volume, :change], { raw: false })
+    data_formatted = data[0]
+    {"last_trade_date": data_formatted[:last_trade_date],"high": data_formatted[:high], "low": data_formatted[:low], "volume": data_formatted[:volume], "change": data_formatted[:change]}
   end
 
 end
