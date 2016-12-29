@@ -19,7 +19,8 @@ class UserPortfoliosController < ApplicationController
     def create
       @portfolio = Portfolio.find(params[:portfolio_id])
       YahooApi.update_ytd(@portfolio)
-      UserPortfolio.create(portfolio: @portfolio, ytd: @portfolio.ytd_raw, user: current_user, inital_investment: params[:investment_amount], shares: params[:shares], investment_date: Time.now)
+      wei = params[:investment_amount].to_i / @portfolio.return_price.to_i
+      UserPortfolio.create(portfolio: @portfolio, ytd: @portfolio.ytd_raw, user: current_user, inital_investment: params[:investment_amount], shares: params[:shares], investment_date: Time.now, weight: wei )
       respond_to do |format|
           format.json {render json: current_user.portfolios}
       end
