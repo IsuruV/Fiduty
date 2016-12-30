@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161229201930) do
-
+ActiveRecord::Schema.define(version: 20161230045149) do
 
   create_table "advisors", force: :cascade do |t|
     t.string   "name"
@@ -50,6 +49,7 @@ ActiveRecord::Schema.define(version: 20161229201930) do
     t.string   "name"
     t.string   "symbol"
     t.float    "ytd_raw"
+    t.float    "yield"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -75,13 +75,11 @@ ActiveRecord::Schema.define(version: 20161229201930) do
     t.float    "transaction_fee"
     t.float    "fiduty_fee"
     t.float    "weight"
-<<<<<<< HEAD
-=======
     t.float    "trad_price"
     t.float    "ytd"
     t.float    "holding_return"
     t.float    "value"
->>>>>>> ab9241a3437298160a2f8bd501afb048b351a70e
+    t.float    "dividends"
   end
 
   create_table "users", force: :cascade do |t|
