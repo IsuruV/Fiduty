@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   #   transactions_by_portfolios = transactions.select('AVG(weight) as avg_return').group('portfolio_id').order('portfolio_id')
   # end
   def portfolio_with_vals
-    transactions_by_portfolios = self.user_portfolios.select('portfolios.name, portfolios.description, portfolios.ytd, portfolios.advisor_id, inital_investment, investment_date, portfolio_id, SUM(value) as port_value, SUM(holding_return) as holding_ret').joins('LEFT OUTER JOIN portfolios ON portfolios.id = user_portfolios.portfolio_id').group('portfolio_id').order('portfolio_id')
+    transactions_by_portfolios = self.user_portfolios.select('portfolio_id, portfolios.name, portfolios.description, portfolios.ytd, portfolios.advisor_id, inital_investment, investment_date').joins('LEFT OUTER JOIN portfolios ON portfolios.id = user_portfolios.portfolio_id').order('portfolio_id asc').group_by { |d| d[:portfolio_id] }
   end 
   
   def user_total_value
