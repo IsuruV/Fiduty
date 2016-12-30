@@ -42,5 +42,4 @@ class UserPortfolio < ApplicationRecord
     self.gain_loss = self.holding_return * self.inital_investment
     self.save
   end
-
 end
