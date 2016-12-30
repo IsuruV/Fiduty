@@ -34,6 +34,7 @@ class UserPortfoliosController < ApplicationController
     end
 
     def user_portfolios
+      require 'pry'; binding.pry
       current_user.users_portfolios
       respond_to do |format|
         format.json {render json: {"user_portfolios": current_user, "total_investment": current_user.calculate_total_investment, "total_value": current_user.user_total_value}}

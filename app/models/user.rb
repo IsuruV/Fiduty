@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :reviews
 
   def calculate_total_investment
+    sum = 0
     self.user_portfolios.each do |portfolio|
       sum += portfolio.inital_investment
     end
@@ -27,7 +28,10 @@ class User < ActiveRecord::Base
   #   end
   #   transactions_by_portfolios = transactions.select('AVG(weight) as avg_return').group('portfolio_id').order('portfolio_id')
   # end
-
+  def portfolio_with_vals
+    transactions_by_portfolios = self.user_portfolios.select('portfolios.name, portfolios.description, portfolios.ytd, portfolios.advisor_id, inital_investment, investment_date, portfolio_id, SUM(value) as port_value, SUM(holding_return) as holding_ret').joins('LEFT OUTER JOIN portfolios ON portfolios.id = user_portfolios.portfolio_id').group('portfolio_id').order('portfolio_id')
+  end 
+  
   def user_total_value
     array = []
     self.user_portfolios.each do |transaction|
@@ -40,12 +44,12 @@ class User < ActiveRecord::Base
   def user_gain
     total_investment= self.calculate_total_investment
     total_value = self.user_total_value
-    gain = total_value - total_investment
+    gain = total_value + total_investment
     gain
   end
 
   def users_portfolios
-    self.users_portfolios.each do |transaction|
+    self.user_portfolios.each do |transaction|
       transaction.calc_holding_return
       transaction.calc_value
       transaction.calc_gain_loss

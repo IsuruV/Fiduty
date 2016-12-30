@@ -53,13 +53,8 @@ class YahooApi
     ytd = response["quoteSummary"]["result"][0]["fundPerformance"]["performanceOverview"]["ytdReturnPct"]["fmt"]
     ytd_raw = response["quoteSummary"]["result"][0]["fundPerformance"]["performanceOverview"]["ytdReturnPct"]["raw"]
     portfolio.update(ytd: ytd, ytd_raw: ytd_raw)
+    return portfolio
   end
 
-  def return_price
-    yahoo_client = YahooFinance::Client.new
-    data = yahoo_client.quotes([ticker], [:last_trade_price], { raw: false })
-    data_formatted = data[0]
-    data_formatted[:last_trade_price]
-  end
 
 end
