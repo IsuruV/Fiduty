@@ -1,5 +1,5 @@
 # README
 
-FIDUTY - INVESTING FOR MILLENNIALS MADE COOL
+Fiduty- Investing for Millennials made cool
 
-RAILS backend api for ios frontend application
+RAILS backend API for IOS frontend application
