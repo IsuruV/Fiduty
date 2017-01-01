@@ -14,8 +14,10 @@ class UserPortfolio < ApplicationRecord
 
   def calc_holding_return
  ##error here
+     ###
     @portfolio = Portfolio.find(self.portfolio_id)
     @updated_portfolio = YahooApi.update_ytd(@portfolio)
+    ### Inefficient, must refactor.
     currentYTD = @portfolio.ytd_raw
     if self.ytd 
       holding_ret = currentYTD - self.ytd
