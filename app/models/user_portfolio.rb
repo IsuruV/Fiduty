@@ -20,7 +20,7 @@ class UserPortfolio < ApplicationRecord
     ### Inefficient, must refactor.
     currentYTD = @portfolio.ytd_raw
     if self.ytd 
-      holding_ret = currentYTD - self.ytd
+      holding_ret = self.ytd - currentYTD
     else
       holding_ret = currentYTD
     end
