@@ -13,8 +13,6 @@ class UserPortfolio < ApplicationRecord
   end
 
   def calc_holding_return
- ##error here
-     ###
     @portfolio = Portfolio.find(self.portfolio_id)
     @updated_portfolio = YahooApi.update_ytd(@portfolio)
     ### Inefficient, must refactor.
@@ -29,18 +27,12 @@ class UserPortfolio < ApplicationRecord
   end
 
   def calc_value
-    # self.calc_holding_return
-    # val = self.holding_return - self.inital_investment
-    # self.value = val
-    # self.save
     self.calc_gain_loss
     self.value = self.inital_investment + self.gain_loss
     self.save
   end
 
   def calc_gain_loss
-    # self.gain_loss = self.value - self.inital_investment
-    # self.save
     self.gain_loss = self.holding_return * self.inital_investment
     self.save
   end
