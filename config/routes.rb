@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   post '/portfolios/portfolios_by_type' => 'portfolios#portfolios_by_type'
   post '/users/:id/add_user_info' => 'users#add_user_info'
   get '/portfolios/fetch_stock_quote' => 'portfolios#fetch_stock_quote'
-  
+
   get '/portfolios/real_time_quotes' => 'portfolios#real_time_quotes'
   get '/user_portfolios/recent_investments' => 'user_portfolios#recent_investments'
   get '/users/:id/user_portfolios' => 'users#user_portfolios'

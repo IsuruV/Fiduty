@@ -111,5 +111,11 @@ class Portfolio < ApplicationRecord
       #   end
       #   sum
       # end
+      def return_price
+        yahoo_client = YahooFinance::Client.new
+        data = yahoo_client.quotes([self.symbol], [:last_trade_price], { raw: false })
+        data_formatted = data[0]
+        data_formatted[:last_trade_price]
+      end
 
 end
