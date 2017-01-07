@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def show
     @user = current_user
      respond_to do |format|
-       format.json {render json: @user}
+       format.json {render json: @user.portfolio_with_vals}
      end
   end
 
@@ -23,25 +23,22 @@ class UsersController < ApplicationController
   end
 
    def user_portfolios
-   
       current_user.users_portfolios
-      begin 
+      begin
       gain = current_user.calculate_total_investment - current_user.user_total_value
       respond_to do |format|
         format.json {render json: {"user_info": current_user, "total_investment": current_user.calculate_total_investment, "total_value": current_user.user_total_value, "gain": gain, "user_portfolios": current_user.portfolio_with_vals}}
       end
-      
       rescue
-      
           respond_to do |format|
             format.json {render json: {"user_portfolios": current_user.portfolio_with_vals, "total_investment": current_user.calculate_total_investment, "total_value": current_user.calculate_total_investment}}
         end
-        
-      end 
-    
+      end
     end
 
+    def find_friends
 
+    end
 
   private
   def user_params

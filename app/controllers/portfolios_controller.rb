@@ -10,7 +10,7 @@ class PortfoliosController < ApplicationController
         end
      else
          respond_to do |format|
-            format.json {render json: {"error":"portfolio does not exist"} }
+            format.json {render json: {"error": "portfolio does not exist"} }
         end
      end
 
