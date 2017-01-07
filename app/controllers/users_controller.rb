@@ -2,19 +2,26 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @user = params[:id]
+    @user = User.find(params[:id].to_i)
      respond_to do |format|
        format.json {render json: @user.portfolio_with_vals}
      end
+  end
+
+  def index
+    @users = User.portfolios_with_vals
+    respond_to do |format|
+      format.json {render json: @users}
+    end
   end
 
   def add_user_info
     if current_user.id == params[:id].to_i
       @user = User.find(params[:id])
       @user.update(user_params)
-      respond_to do |format|
-        format.json {render json: @user}
-      end
+      render json:{
+        user: @user.portfolio_with_vals
+      }
     else
       render json:{
         error: "Unauthorized access", status: 403
@@ -37,7 +44,11 @@ class UsersController < ApplicationController
     end
 
     def find_friends
-
+      fb_ids = params[:fb_ids]
+      @result = User.find_friends(current_user, fb_ids)
+      respond_to do |format|
+        format.json {render json: @result}
+      end
     end
 
   private

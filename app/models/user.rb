@@ -33,6 +33,14 @@ class User < ActiveRecord::Base
 
   end
 
+  def self.portfolios_with_vals
+    @users = []
+    User.all.each do |user|
+      @users.push(user.portfolio_with_vals)
+    end
+    @users.sort_by{|user| user[:total_gains]}.reverse!
+  end
+
   def user_total_value
     array = []
     self.user_portfolios.each do |transaction|
@@ -58,8 +66,11 @@ class User < ActiveRecord::Base
 
   end
 
-  def self.find_friends
-    # @users = User.find()
+  def self.find_friends(current_user, fb_ids)
+    fb_ids.each do |id|
+      @friends = User.where(fb_id: id)
+    end
+    {"user": current_user.to_json, "friends": @friends}
   end
 
 end
