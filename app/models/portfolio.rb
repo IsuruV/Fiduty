@@ -93,30 +93,4 @@ class Portfolio < ApplicationRecord
         data_formatted[:last_trade_price]
       end
 
-      # def total_value(current_user)
-      #   YahooApi.update_ytd(self)
-      #   transactions = UserPortfolio.where(user_id: current_user.id, portfolio_id: self.id)
-      #   transactions.map do |transaction|
-      #     transaction.weight = (self.ytd_raw - transaction.ytd) * transaction.inital_investment
-      #     transaction.save
-      #   end
-      #   transactions.each do |transaction|
-      #     sum += transaction.weight
-      #   end
-      #   sum
-      # end
-      #
-      # def holding_return(current_user)
-      #   YahooApi.update_ytd(self)
-      #   transactions = UserPortfolio.where(user_id: current_user.id, portfolio_id: self.id)
-      #   transactions.map do |transaction|
-      #     transaction.weight = (self.ytd_raw - transaction.ytd)
-      #     transaction.save
-      #   end
-      #   transactions.each do |transaction|
-      #     sum += transaction.weight
-      #   end
-      #   sum
-      # end
-
 end
