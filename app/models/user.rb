@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
                                   .order('portfolio_id asc').group_by { |d| d[:portfolio_id]}
     
     
-    # portfolio_sums = self.user_portfolios.select('portfolio_id, SUM(inital_investment)').group(:portfolio_id)
-    portfolio_sums = self.user_portfolios.select('portfolio_id, SUM(inital_investment) as total_investment, SUM(value) AS total_current_value, SUM(gain_loss) AS total_gain_loss').group(:portfolio_id)
+    portfolio_sums = self.user_portfolios.select('portfolio_id, SUM(inital_investment)').group(:portfolio_id)
+    # portfolio_sums = self.user_portfolios.select('portfolio_id, SUM(inital_investment) as total_investment, SUM(value) AS total_current_value, SUM(gain_loss) AS total_gain_loss').group(:portfolio_id)
     
     {"user_info": self, "total_gains": total_gains, "total_investments": total_investments, 
     "total_value": total_value, "portfolios": transactions_by_portfolios,"total_values_per_portfolio": portfolio_sums }
