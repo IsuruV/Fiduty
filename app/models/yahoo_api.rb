@@ -55,7 +55,6 @@ class YahooApi
     portfolio.update(ytd: ytd, ytd_raw: ytd_raw)
     return portfolio
   end
-  
   def self.update_yield(portfolio)
     con = Faraday.new
     res = con.get "https://query2.finance.yahoo.com/v10/finance/quoteSummary/#{portfolio.symbol}?formatted=true&crumb=QtGhLQr%2FrgH&lang=en-US&region=US&modules=defaultKeyStatistics%2CassetProfile%2CtopHoldings%2CfundPerformance%2CfundProfile&corsDomain=finance.yahoo.com"
@@ -63,4 +62,5 @@ class YahooApi
      dividend  = response["quoteSummary"]["result"][0]["defaultKeyStatistics"]["yield"]["raw"]
      portfolio.update(yield: dividend)
   end
+
 end
