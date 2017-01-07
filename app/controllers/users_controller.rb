@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @user = current_user
+    @user = params[:id]
      respond_to do |format|
        format.json {render json: @user.portfolio_with_vals}
      end
