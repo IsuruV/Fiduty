@@ -21,11 +21,11 @@ class UsersController < ApplicationController
       @user.update(user_params)
       render json:{
         user: @user.portfolio_with_vals
-      }
+       }
     else
       render json:{
         error: "Unauthorized access", status: 403
-      }
+        }
     end
   end
 

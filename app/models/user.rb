@@ -70,15 +70,17 @@ class User < ActiveRecord::Base
     @friends = []
      fb_ids.each do |id|
       friend = User.where(fb_id: id).first
-      begin
-      last_investment = friend.user_portfolios.last
-      portfolio = Portfolio.find(last_investment.portfolio_id)
-      @friends.push({'fb_id': friend.fb_id, 'user_id': friend.id, 'name': friend.name, 'last_portfolio_id': portfolio.id, 'last_portfolio_name': portfolio.name,
-                                'roi':last_investment.gain_loss})
-      rescue
-       @friends.push({'fb_id': friend.fb_id, 'user_id': friend.id, 'name': friend.name, 'last_portfolio_id': nil, 'last_portfolio_name': nil,
-                                'roi': nil})
-      end 
+      if friend
+        begin
+        last_investment = friend.user_portfolios.last
+        portfolio = Portfolio.find(last_investment.portfolio_id)
+        @friends.push({'fb_id': friend.fb_id, 'user_id': friend.id, 'name': friend.name, 'last_portfolio_id': portfolio.id, 'last_portfolio_name': portfolio.name,
+                                  'roi':last_investment.gain_loss})
+        rescue
+         @friends.push({'fb_id': friend.fb_id, 'user_id': friend.id, 'name': friend.name, 'last_portfolio_id': nil, 'last_portfolio_name': nil,
+                                  'roi': nil})
+        end 
+      end
     end
     @friends
   end
@@ -98,4 +100,4 @@ class User < ActiveRecord::Base
   
 
 end
-# User.recent_friend_investment(["10209468294638125", "10207796683019394"])
+# User.recent_friend_investment(["10209468294638125", "10207796683019394", "676779145826476"])
