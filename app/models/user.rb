@@ -21,7 +21,11 @@ class User < ActiveRecord::Base
     total_investments = self.calculate_total_investment
     total_gains = self.user_gain
     total_value = self.user_total_value
-    roi = (total_value - total_investments) / total_investments
+    begin
+      roi = (total_value - total_investments)/total_investments
+    rescue
+      roi = 0
+    end
     transactions_by_portfolios = self.user_portfolios.select('portfolio_id, portfolios.name, portfolios.description, portfolios.ytd, portfolios.yield,portfolios.advisor_id, inital_investment, investment_date, holding_return').joins('LEFT OUTER JOIN portfolios ON portfolios.id = user_portfolios.portfolio_id')
                                   .order('portfolio_id asc').group_by { |d| d[:portfolio_id]}
 
