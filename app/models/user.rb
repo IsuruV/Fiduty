@@ -66,25 +66,23 @@ class User < ActiveRecord::Base
 
   end
 
-  def self.recent_friend_investment(fb_ids)
-    @friends = []
-     fb_ids.each do |id|
-      friend = User.where(fb_id: id).first
-      if friend
-        begin
-        last_investment = friend.user_portfolios.last
-        portfolio = Portfolio.find(last_investment.portfolio_id)
-        @friends.push({'fb_id': friend.fb_id, 'user_id': friend.id, 'name': friend.name, 'last_portfolio_id': portfolio.id, 'last_portfolio_name': portfolio.name,
-                                  'roi':last_investment.gain_loss})
-        rescue
-         @friends.push({'fb_id': friend.fb_id, 'user_id': friend.id, 'name': friend.name, 'last_portfolio_id': nil, 'last_portfolio_name': nil,
-                                  'roi': nil})
-        end 
-      end
-    end
-    @friends
-  end
   
+  def self.recent_friend_investment(fb_ids)
+      friends = User.where(fb_id: [fb_ids])
+      transactions = []
+      friends.each do |friend|
+        if friend
+          friend.user_portfolios.each do |transaction|
+            portfolio = Portfolio.find(transaction.portfolio_id)
+            transactions.push({'fb_id': friend.fb_id, 'user_id': friend.id, 'name': friend.name, 'last_portfolio_id': portfolio.id, 'last_portfolio_name': portfolio.name, 
+                              'roi': transaction.gain_loss, 'investment_date': transaction.investment_date.to_datetime.to_i})
+          end
+      end
+      end
+      sorted_transactions = transactions.sort_by{ |transaction| transaction[:investment_date]}.reverse!
+      sorted_transactions
+  end
+
   def self.everyone_investment
     @everyone = []
     User.all.each do |user|
