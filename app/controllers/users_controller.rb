@@ -21,11 +21,11 @@ class UsersController < ApplicationController
       @user.update(user_params)
       render json:{
         user: @user.portfolio_with_vals
-      }
+       }
     else
       render json:{
         error: "Unauthorized access", status: 403
-      }
+        }
     end
 end
 
@@ -51,13 +51,22 @@ end
       end
     end
 
-    def find_friends
+    def recent_friend_investment
       fb_ids = params[:fb_ids]
-      @result = User.find_friends(current_user, fb_ids)
+      @users = User.recent_friend_investment(fb_ids)
       respond_to do |format|
-        format.json {render json: @result}
+        format.json {render json: @users}
       end
     end
+    
+    def recent_everyone_investment
+      @users = User.everyone_investment
+      respond_to do |format|
+        format.json {render json:  @users}
+      end
+    end
+    
+
 
   private
   def user_params
