@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230045149) do
+ActiveRecord::Schema.define(version: 20170108034313) do
 
   create_table "advisors", force: :cascade do |t|
     t.string   "name"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20161230045149) do
     t.string   "symbol"
     t.float    "ytd_raw"
     t.float    "yield"
+    t.float    "price"
   end
 
   create_table "reviews", force: :cascade do |t|

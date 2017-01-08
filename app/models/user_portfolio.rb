@@ -14,26 +14,29 @@ class UserPortfolio < ApplicationRecord
 
   def calc_holding_return
     @portfolio = Portfolio.find(self.portfolio_id)
-    @updated_portfolio = YahooApi.update_ytd(@portfolio)
+    YahooApi.fetch_recent_price(@portfolio)
     ### Inefficient, must refactor.
-    currentYTD = @portfolio.ytd_raw
-    if self.ytd 
-      holding_ret = self.ytd - currentYTD
+    current_price = @portfolio.price
+    if self.price
+      holding_return = self.price - current_price
     else
-      holding_ret = currentYTD
+      holding_ret = 0
     end
     self.holding_return = holding_ret
     self.save
   end
 
   def calc_value
-    self.calc_gain_loss
-    self.value = self.inital_investment + self.gain_loss
+    @portfolio = Portfolio.find(self.portfolio_id)
+    YahooApi.fetch_recent_price(@portfolio)
+    value = @portfolio.price * self.weight
+    self.value = value
     self.save
   end
 
   def calc_gain_loss
-    self.gain_loss = self.holding_return * self.inital_investment
+    gain_loss = self.value - self.inital_investment
+    self.gain_loss = gain_loss
     self.save
   end
 end
