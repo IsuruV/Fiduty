@@ -66,11 +66,36 @@ class User < ActiveRecord::Base
 
   end
 
-  def self.find_friends(current_user, fb_ids)
-    fb_ids.each do |id|
-      @friends = User.where(fb_id: id)
+  def self.recent_friend_investment(fb_ids)
+    @friends = []
+     fb_ids.each do |id|
+      friend = User.where(fb_id: id).first
+      begin
+      last_investment = friend.user_portfolios.last
+      portfolio = Portfolio.find(last_investment.portfolio_id)
+      @friends.push({'fb_id': friend.fb_id, 'user_id': friend.id, 'name': friend.name, 'last_portfolio_id': portfolio.id, 'last_portfolio_name': portfolio.name,
+                                'roi':last_investment.gain_loss})
+      rescue
+       @friends.push({'fb_id': friend.fb_id, 'user_id': friend.id, 'name': friend.name, 'last_portfolio_id': nil, 'last_portfolio_name': nil,
+                                'roi': nil})
+      end 
     end
-    {"user": current_user.to_json, "friends": @friends}
+    @friends
   end
+  
+  def self.everyone_investment
+    @everyone = []
+    User.all.each do |user|
+      if user.user_portfolios
+        last_investment = user.user_portfolios.last
+        portfolio = Portfolio.find(last_investment.portfolio_id)
+        @everyone.push({'fb_id': user.fb_id, 'user_id': user.id, 'name': user.name, 'last_portfolio_id': portfolio.id, 'last_portfolio_name': portfolio.name,
+                                'roi':last_investment.gain_loss})
+      end
+    end
+    @everyone
+  end
+  
 
 end
+# User.recent_friend_investment(["10209468294638125", "10207796683019394"])

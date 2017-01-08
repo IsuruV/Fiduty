@@ -17,10 +17,9 @@ class PortfoliosController < ApplicationController
     end
 
     def real_time_quotes
-      @portfolio = Portfolio.find(params[:id])
+      @portfolio = Portfolio.find(params[:id].to_i)
       respond_to do |format|
           format.json {render json: @portfolio.real_time_quotes}
-          format.html {render :show }
       end
     end
 
@@ -32,7 +31,6 @@ class PortfoliosController < ApplicationController
         respond_to do |format|
             format.json {render json: @portfolios}
             format.html {render :index }
-
         end
     end
 

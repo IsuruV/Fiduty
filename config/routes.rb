@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   get '/portfolios/real_time_quotes' => 'portfolios#real_time_quotes'
   get '/user_portfolios/recent_investments' => 'user_portfolios#recent_investments'
   get '/users/:id/user_portfolios' => 'users#user_portfolios'
+  
+  post '/users/recent_friend_investment' => 'users#recent_friend_investment'
+  get 'users/everyone_investment' => 'users#everyone_investment'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
