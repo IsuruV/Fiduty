@@ -26,7 +26,10 @@ class User < ActiveRecord::Base
     rescue
       roi = 0
     end
-    transactions_by_portfolios = self.user_portfolios.select('portfolio_id, portfolios.name, portfolios.description, portfolios.ytd, portfolios.yield,portfolios.advisor_id, inital_investment, investment_date, holding_return').joins('LEFT OUTER JOIN portfolios ON portfolios.id = user_portfolios.portfolio_id')
+    transactions_by_portfolios = self.user_portfolios.select('portfolio_id, portfolios.name, portfolios.description,
+                                                                portfolios.ytd, portfolios.yield,portfolios.advisor_id, inital_investment,
+                                                                  investment_date, holding_return').joins('LEFT OUTER JOIN portfolios ON
+                                                                    portfolios.id = user_portfolios.portfolio_id')
                                   .order('portfolio_id asc').group_by { |d| d[:portfolio_id]}
 
 
