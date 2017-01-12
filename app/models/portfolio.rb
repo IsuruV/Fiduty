@@ -85,7 +85,11 @@ class Portfolio < ApplicationRecord
       def real_time_quotes
         YahooApi.real_time_quotes(self.symbol)
       end
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 82d309bc77744bd1548961f3db31f601de211ed8
       def return_price
         yahoo_client = YahooFinance::Client.new
         data = yahoo_client.quotes([self.symbol], [:last_trade_price], { raw: false })

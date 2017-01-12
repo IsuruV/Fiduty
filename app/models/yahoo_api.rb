@@ -70,4 +70,14 @@ class YahooApi
     data_formatted[:last_trade_price]
   end
 
+  def self.fetch_recent_price(portfolio)
+      yahoo_client = YahooFinance::Client.new
+      price = yahoo_client.quotes([portfolio.symbol], [:last_trade_date,:last_trade_price], { raw: false })
+      price_formatted = price[0]
+      val = {"last_trade_date": price_formatted[:last_trade_date],"last_trade_price": price_formatted[:last_trade_price]}
+      portfolio.price = val[:last_trade_price]
+      portfolio.save
+      return portfolio
+  end
+
 end
