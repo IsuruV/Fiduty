@@ -21,7 +21,15 @@ class User < ActiveRecord::Base
     total_investments = self.calculate_total_investment
     total_gains = self.user_gain
     total_value = self.user_total_value
-    transactions_by_portfolios = self.user_portfolios.select('portfolio_id, portfolios.name, portfolios.description, portfolios.ytd, portfolios.yield,portfolios.advisor_id, inital_investment, investment_date, holding_return').joins('LEFT OUTER JOIN portfolios ON portfolios.id = user_portfolios.portfolio_id')
+    begin
+      roi = (total_value - total_investments)/total_investments
+    rescue
+      roi = 0
+    end
+    transactions_by_portfolios = self.user_portfolios.select('portfolio_id, portfolios.name, portfolios.description,
+                                                                portfolios.ytd, portfolios.yield,portfolios.advisor_id, inital_investment,
+                                                                  investment_date, holding_return').joins('LEFT OUTER JOIN portfolios ON
+                                                                    portfolios.id = user_portfolios.portfolio_id')
                                   .order('portfolio_id asc').group_by { |d| d[:portfolio_id]}
 
 
@@ -29,7 +37,7 @@ class User < ActiveRecord::Base
     # portfolio_sums = self.user_portfolios.select('portfolio_id, SUM(inital_investment) as total_investment, SUM(value) AS total_current_value, SUM(gain_loss) AS total_gain_loss').group(:portfolio_id)
 
     {"user_info": self, "total_gains": total_gains, "total_investments": total_investments,
-    "total_value": total_value, "portfolios": transactions_by_portfolios,"total_values_per_portfolio": portfolio_sums }
+    "total_value": total_value, "portfolios": transactions_by_portfolios,"total_values_per_portfolio": portfolio_sums, "roi": roi }
 
   end
 
@@ -52,10 +60,13 @@ class User < ActiveRecord::Base
   end
 
   def user_gain
-    total_investment= self.calculate_total_investment
-    total_value = self.user_total_value
-    gain = total_value - total_investment
-    gain
+    # total_investment= self.calculate_total_investment
+    # total_value = self.user_total_value
+    # gain = total_value - total_investment
+    # gain
+    self.users_portfolios.each do |transaction|
+      transaction.calc_gain_loss
+    end
   end
 
   def users_portfolios
@@ -79,12 +90,12 @@ class User < ActiveRecord::Base
         rescue
          @friends.push({'fb_id': friend.fb_id, 'user_id': friend.id, 'name': friend.name, 'last_portfolio_id': nil, 'last_portfolio_name': nil,
                                   'roi': nil})
-        end 
+        end
       end
     end
     @friends
   end
-  
+
   def self.everyone_investment
     @everyone = []
     User.all.each do |user|
@@ -97,7 +108,7 @@ class User < ActiveRecord::Base
     end
     @everyone
   end
-  
+
 
 end
 # User.recent_friend_investment(["10209468294638125", "10207796683019394", "676779145826476"])

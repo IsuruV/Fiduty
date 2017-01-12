@@ -27,7 +27,7 @@ class UsersController < ApplicationController
         error: "Unauthorized access", status: 403
         }
     end
-  end
+end
 
    def user_portfolios
       current_user.users_portfolios
