@@ -11,6 +11,7 @@ class CsvParser
   def self.etf_parser
       CSV.foreach('db/migrate/ETFList.csv', headers: true) do |row|
         @portfolio = Portfolio.find_or_create_by(symbol: row[0], name: row[1], fund_type: "ETF")
+        # require 'pry'; binding.pry
       end
   end
   end
