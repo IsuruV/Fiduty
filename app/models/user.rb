@@ -21,11 +21,7 @@ class User < ActiveRecord::Base
     total_investments = self.calculate_total_investment
     total_gains = self.user_gain
     total_value = self.user_total_value
-    begin
-      roi = (total_value - total_investments)/total_investments
-    rescue
-      roi = 0
-    end
+    roi = self.roi(total_value, total_investments)
     transactions_by_portfolios = self.user_portfolios.select('portfolio_id, portfolios.name, portfolios.description,
                                                                 portfolios.ytd, portfolios.yield,portfolios.advisor_id, inital_investment,
                                                                   investment_date, holding_return').joins('LEFT OUTER JOIN portfolios ON
@@ -40,6 +36,15 @@ class User < ActiveRecord::Base
     "total_value": total_value, "portfolios": transactions_by_portfolios,"total_values_per_portfolio": portfolio_sums, "roi": roi }
 
   end
+  
+  def roi(t_value, t_investment)
+    begin
+      ret_investment = (t_value - t_investment)/t_investment
+    rescue
+      ret_investment = 0
+    end
+    ret_investment
+  end 
 
   def self.portfolios_with_vals
     @users = []
@@ -52,7 +57,7 @@ class User < ActiveRecord::Base
   def user_total_value
     array = []
     self.user_portfolios.each do |transaction|
-      transaction.calc_holding_return
+      # transaction.calc_holding_return
       transaction.calc_value
       array.push(transaction.value)
     end
@@ -64,9 +69,12 @@ class User < ActiveRecord::Base
     # total_value = self.user_total_value
     # gain = total_value - total_investment
     # gain
+    total = 0
     self.users_portfolios.each do |transaction|
       transaction.calc_gain_loss
+      total += transaction.gain_loss
     end
+    total
   end
 
   def users_portfolios

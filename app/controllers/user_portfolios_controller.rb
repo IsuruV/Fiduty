@@ -3,12 +3,14 @@ class UserPortfoliosController < ApplicationController
 
 
     def create
+      # require 'pry'; binding.pry
       investment_amount = params[:investment_amount].to_f
       @portfolio = Portfolio.find(params[:portfolio_id].to_i)
-      YahooApi.update_ytd(@portfolio)
+      # YahooApi.update_ytd(@portfolio)
       YahooApi.fetch_recent_price(@portfolio)
       weight = investment_amount / @portfolio.price
-      UserPortfolio.create(portfolio: @portfolio, trad_price: @portfolio.price, weight: weight, ytd: @portfolio.ytd_raw, inital_investment: investment_amount, user: current_user, investment_date: Time.now)
+      # UserPortfolio.create(portfolio: @portfolio, trad_price: @portfolio.price, weight: weight, ytd: @portfolio.ytd_raw, inital_investment: investment_amount, user: current_user, investment_date: Time.now)
+      current_user.user_portfolios.create(portfolio: @portfolio, trad_price: @portfolio.price, weight: weight, ytd: @portfolio.ytd_raw, inital_investment: investment_amount, investment_date: Time.now)
       respond_to do |format|
           format.json {render json: current_user.portfolios}
       end

@@ -17,8 +17,8 @@ class UserPortfolio < ApplicationRecord
     YahooApi.fetch_recent_price(@portfolio)
     ### Inefficient, must refactor.
     current_price = @portfolio.price
-    if self.price
-      holding_return = self.price - current_price
+    if self.trad_price
+      holding_ret = (current_price - self.trad_price)/self.trad_price
     else
       holding_ret = 0
     end
@@ -35,14 +35,9 @@ class UserPortfolio < ApplicationRecord
   end
 
   def calc_gain_loss
-
-    @portfolio = Portfolio.find(self.portfolio_id)
-    updated_portfolio_price = YahooApi.update_price(@portfolio)
-    self.gain_loss = updated_portfolio_price.to_f - self.inital_investment
-    return self.gain_loss
-   
-    # gain_loss = self.value - self.inital_investment
-    # self.gain_loss = gain_loss
-    # self.save
+    self.calc_value
+    gain_loss = self.value - self.inital_investment
+    self.gain_loss = gain_loss
+    self.save
   end
 end

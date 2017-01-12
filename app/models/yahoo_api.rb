@@ -27,14 +27,14 @@ class YahooApi
 
       portfolio.update(description: description, alpha: alpha, beta: beta, meanAnnualReturn: meanAnnualReturn,
                                   rSquared: rSquared, stdDev: stdDev, sharpeRatio: sharpeRatio,
-                                  treynorRatio: treynorRatio, avg_1: ytd, ytd: ytd, ytd_raw: ytd_raw)
-      portfolio.advisor = advisor
+                                  treynorRatio: treynorRatio, avg_1: ytd, ytd: ytd, ytd_raw: ytd_raw, advisor: advisor)
+      # portfolio.advisor = advisor
       portfolio.save
       else
         Portfolio.destroy(portfolio)
       end
     rescue
-        Portfolio.destroy(portfolio)
+        # Portfolio.destroy(portfolio)
     end
 
   end
