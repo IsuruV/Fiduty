@@ -5,7 +5,7 @@ class UserPortfoliosController < ApplicationController
     def create
       investment_amount = params[:investment_amount].to_f
       @portfolio = Portfolio.find(params[:portfolio_id].to_i)
-      YahooApi.update_ytd(@portfolio)
+      # YahooApi.update_ytd(@portfolio)
       YahooApi.fetch_recent_price(@portfolio)
       weight = investment_amount / @portfolio.price
       UserPortfolio.create(portfolio: @portfolio, trad_price: @portfolio.price, weight: weight, ytd: @portfolio.ytd_raw, inital_investment: investment_amount, user: current_user, investment_date: Time.now)

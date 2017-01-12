@@ -62,7 +62,7 @@ class YahooApi
      dividend  = response["quoteSummary"]["result"][0]["defaultKeyStatistics"]["yield"]["raw"]
      portfolio.update(yield: dividend)
   end
-  
+
   def self.update_price(portfolio)
     yahoo_client = YahooFinance::Client.new
     data = yahoo_client.quotes([portfolio.symbol], [:last_trade_date,:last_trade_price, :previous_close, :high, :low, :volume, :change], { raw: false })
@@ -77,7 +77,7 @@ class YahooApi
       val = {"last_trade_date": price_formatted[:last_trade_date],"last_trade_price": price_formatted[:last_trade_price]}
       portfolio.price = val[:last_trade_price]
       portfolio.save
-      return portfolio
+      # return portfolio
   end
 
 end
