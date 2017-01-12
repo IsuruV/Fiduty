@@ -35,8 +35,14 @@ class UserPortfolio < ApplicationRecord
   end
 
   def calc_gain_loss
-    gain_loss = self.value - self.inital_investment
-    self.gain_loss = gain_loss
-    self.save
+
+    @portfolio = Portfolio.find(self.portfolio_id)
+    updated_portfolio_price = YahooApi.update_price(@portfolio)
+    self.gain_loss = updated_portfolio_price.to_f - self.inital_investment
+    return self.gain_loss
+   
+    # gain_loss = self.value - self.inital_investment
+    # self.gain_loss = gain_loss
+    # self.save
   end
 end
