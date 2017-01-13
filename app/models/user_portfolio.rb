@@ -40,4 +40,5 @@ class UserPortfolio < ApplicationRecord
     self.gain_loss = gain_loss
     self.save
   end
+
 end

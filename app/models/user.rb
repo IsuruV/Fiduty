@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
     "total_value": total_value, "portfolios": transactions_by_portfolios,"total_values_per_portfolio": portfolio_sums, "roi": roi }
 
   end
-  
+
   def roi(t_value, t_investment)
     begin
       ret_investment = (t_value - t_investment)/t_investment
@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
       ret_investment = 0
     end
     ret_investment
-  end 
+  end
 
   def self.portfolios_with_vals
     @users = []
@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
 
   end
 
-  
+
   def self.recent_friend_investment(fb_ids)
       friends = User.where(fb_id: [fb_ids])
       transactions = []
@@ -93,7 +93,7 @@ class User < ActiveRecord::Base
         if friend
           friend.user_portfolios.each do |transaction|
             portfolio = Portfolio.find(transaction.portfolio_id)
-            transactions.push({'fb_id': friend.fb_id, 'user_id': friend.id, 'name': friend.name, 'last_portfolio_id': portfolio.id, 'last_portfolio_name': portfolio.name, 
+            transactions.push({'fb_id': friend.fb_id, 'user_id': friend.id, 'name': friend.name, 'last_portfolio_id': portfolio.id, 'last_portfolio_name': portfolio.name,
                               'roi': transaction.gain_loss, 'investment_date': transaction.investment_date.to_datetime.to_i})
           end
 
@@ -110,7 +110,7 @@ class User < ActiveRecord::Base
         if friend
           friend.user_portfolios.each do |transaction|
             portfolio = Portfolio.find(transaction.portfolio_id)
-            transactions.push({'fb_id': friend.fb_id, 'user_id': friend.id, 'name': friend.name, 'last_portfolio_id': portfolio.id, 'last_portfolio_name': portfolio.name, 
+            transactions.push({'fb_id': friend.fb_id, 'user_id': friend.id, 'name': friend.name, 'last_portfolio_id': portfolio.id, 'last_portfolio_name': portfolio.name,
                               'roi': transaction.gain_loss, 'investment_date': transaction.investment_date.to_datetime.to_i})
           end
 
@@ -120,6 +120,11 @@ class User < ActiveRecord::Base
       sorted_transactions
   end
 
+  def subtract_from_funds(params)
+    amount = params[:funds].to_f
+    self.funds = self.funds - amount
+    self.save
+  end
 
 end
 # User.recent_friend_investment(["10209468294638125", "10207796683019394", "676779145826476"])

@@ -5,6 +5,7 @@ class UserPortfoliosController < ApplicationController
     def create
       # require 'pry'; binding.pry
       investment_amount = params[:investment_amount].to_f
+      current_user.subtract_from_funds(params)
       @portfolio = Portfolio.find(params[:portfolio_id].to_i)
       # YahooApi.update_ytd(@portfolio)
       YahooApi.fetch_recent_price(@portfolio)
