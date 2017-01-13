@@ -44,7 +44,7 @@ gem 'rack-cors', :require => 'rack/cors'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  gem 'pg'
+  gem 'sqlite3'
 end
 
 group :production do
