@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170113030504) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "advisors", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
@@ -119,9 +122,9 @@ ActiveRecord::Schema.define(version: 20170113030504) do
     t.float    "total_investments"
     t.string   "fb_id"
     t.float    "funds"
-    t.index ["email"], name: "index_users_on_email"
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
+    t.index ["email"], name: "index_users_on_email", using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
 end
