@@ -26,6 +26,7 @@ class Portfolio < ApplicationRecord
      end
 
      def self.portfolios_index_page_formated(advisor_type)
+       
        portfolios = Portfolio.search_portfolio_type_only(advisor_type)
        portfolios_formatted = []
        portfolios.each do |portfolio|
@@ -46,19 +47,19 @@ class Portfolio < ApplicationRecord
 
 
       def self.safety_net
-        Portfolio.all.where('stdDev < 5')
+        Portfolio.all.where('"stdDev" < 5')
       end
 
       def self.conservative
-        Portfolio.all.where(' stdDev >= 5 AND stdDev <= 10')
+        Portfolio.all.where(' "stdDev" >= 5 AND "stdDev" <= 10')
       end
 
       def self.moderate
-        Portfolio.all.where('stdDev > 10 AND std <= 30')
+        Portfolio.all.where(' "stdDev" > 10 AND "stdDev" <= 30')
       end
 
       def self.aggressive
-        Portfolio.all.where('stdDev > 30')
+        Portfolio.all.where(' "stdDev" > 30')
       end
 
       def self.search_portfolio_type_only(portfolio_type)
