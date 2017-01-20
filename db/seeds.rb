@@ -77,3 +77,20 @@
 #      data = yahoo_client.quotes([portfolio.symbol], [:annualized_gain ])
 #      portfolio.update(avg_1: data)
 # end
+
+
+# Task.create(level_id: 1, task: 'What is investing?')
+# Task.create(level_id: 1, task: 'Make one investment')
+# Task.create(level_id: 1, task: 'Level one: 1 question quiz')
+
+# Task.create(level_id: 2, task: 'What is ...')
+# Task.create(level_id: 2, task: 'Invite 1 friend')
+# Task.create(level_id: 2, task: 'Level two: 2 question quiz')
+
+# Task.create(level_id: 3, task: 'What is diversificaton?')
+# Task.create(level_id: 3, task: 'Make additonal Investment to the same fund')
+# Task.create(level_id: 3, task: 'Level three: Answer a quiz')
+
+# Task.create(level_id: 4, task: 'Invest in a portfolio of your risk level')
+# Task.create(level_id: 4, task: 'Invite 10 friends')
+# Task.create(level_id: 4, task: 'Invest in one of the social feed portfolios')

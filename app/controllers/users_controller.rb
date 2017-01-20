@@ -19,6 +19,10 @@ class UsersController < ApplicationController
     if current_user.id == params[:id].to_i
       @user = User.find(params[:id])
       @user.update(user_params)
+      if !!@user.level
+        @user.level = Level.all.first
+        @user.save
+      end
       render json:{
         user: @user.portfolio_with_vals
        }
@@ -79,6 +83,6 @@ end
   private
   def user_params
     params.require(:user).permit(:id, :risk_level, :phone, :action,
-    :martial_status, :dependants, :citizenship, :dob, :ssn, :address, :fb_id, :email, :name, :password, :funds)
+    :martial_status, :dependants, :citizenship, :dob, :ssn, :address, :fb_id, :email, :name, :password, :funds, :level_id)
   end
 end

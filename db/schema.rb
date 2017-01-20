@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170113030504) do
+ActiveRecord::Schema.define(version: 20170120221725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,11 @@ ActiveRecord::Schema.define(version: 20170113030504) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "type_of_fund"
+  end
+
+  create_table "levels", force: :cascade do |t|
+    t.integer "level"
+    t.string  "name"
   end
 
   create_table "portfolios", force: :cascade do |t|
@@ -65,6 +70,11 @@ ActiveRecord::Schema.define(version: 20170113030504) do
     t.integer  "user_id"
   end
 
+  create_table "tasks", force: :cascade do |t|
+    t.integer "level_id"
+    t.string  "task"
+  end
+
   create_table "user_portfolios", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "portfolio_id"
@@ -84,6 +94,12 @@ ActiveRecord::Schema.define(version: 20170113030504) do
     t.float    "holding_return"
     t.float    "value"
     t.float    "dividends"
+  end
+
+  create_table "user_tasks", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "task_id"
+    t.boolean "completed", default: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -121,7 +137,8 @@ ActiveRecord::Schema.define(version: 20170113030504) do
     t.string   "address"
     t.float    "total_investments"
     t.string   "fb_id"
-    t.float    "funds"
+    t.integer  "funds",                  default: 1000
+    t.integer  "level_id",               default: 1
     t.index ["email"], name: "index_users_on_email", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
