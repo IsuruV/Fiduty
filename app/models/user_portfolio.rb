@@ -14,7 +14,7 @@ class UserPortfolio < ApplicationRecord
 
   def calc_holding_return
     @portfolio = Portfolio.find(self.portfolio_id)
-    YahooApi.fetch_recent_price(@portfolio)
+    # YahooApi.fetch_recent_price(@portfolio)
     ### Inefficient, must refactor.
     current_price = @portfolio.price
     if self.trad_price
@@ -28,7 +28,7 @@ class UserPortfolio < ApplicationRecord
 
   def calc_value
     @portfolio = Portfolio.find(self.portfolio_id)
-    YahooApi.fetch_recent_price(@portfolio)
+    # YahooApi.fetch_recent_price(@portfolio)
     value = @portfolio.price * self.weight
     self.value = value
     self.save

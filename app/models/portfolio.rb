@@ -1,5 +1,5 @@
 class Portfolio < ApplicationRecord
-    belongs_to :advisor
+    belongs_to :advisor, required: false
     # has_one :advisor
     has_many :user_portfolios
     has_many :users, :through => :user_portfolios
@@ -84,7 +84,7 @@ class Portfolio < ApplicationRecord
       end
 
       def real_time_quotes
-        YahooApi.real_time_quotes(self.symbol)
+        # YahooApi.real_time_quotes(self.symbol)
       end
 
       def return_price

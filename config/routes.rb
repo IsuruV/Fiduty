@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   get '/portfolios/etf_return' => 'portfolios#etf_return'
+  
+  get '/users/recent_everyone_investment' => 'users#recent_everyone_investment'
+  
   resources :welcome
   resources :reviews
   resources :users
@@ -20,7 +23,6 @@ Rails.application.routes.draw do
   get '/users/:id/user_portfolios' => 'users#user_portfolios'
 
   post '/users/recent_friend_investment' => 'users#recent_friend_investment'
-  get '/users/everyone_investment' => 'users#everyone_investment'
   post '/users/:id/add_funds' => 'users#add_funds'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

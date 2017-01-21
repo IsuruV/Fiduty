@@ -79,5 +79,13 @@ class YahooApi
       portfolio.save
       # return portfolio
   end
+  
+  def self.update_all_etfs
+    Portfolio.all.each do |etf|
+      self.fetch_recent_price(etf)
+      self.fetch_recent_price(etf)
+      self.real_time_quotes(etf.symbol)
+    end
+  end 
 
 end

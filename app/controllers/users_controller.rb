@@ -8,6 +8,7 @@ class UsersController < ApplicationController
      end
   end
 
+
   def index
     @users = User.portfolios_with_vals
     respond_to do |format|
@@ -62,13 +63,14 @@ end
         format.json {render json: @users}
       end
     end
-
-    def recent_everyone_investment
+    
+     def recent_everyone_investment
       @users = User.everyone_investment
       respond_to do |format|
-        format.json {render json:  @users}
+        format.json {render json: @users.last(25)}
       end
     end
+
 
     def add_funds
       amount = params[:funds].to_f
