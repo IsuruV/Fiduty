@@ -158,15 +158,19 @@ class User < ActiveRecord::Base
      self.create_new_level_tasks(updated_level)
      self.level
    else
-      'User has not completed all the tasks to reach next level'
+    tasks = []
+    self.user_tasks.each do |task|
+      if task.completed
+        tasks.push(task)
+      end
+    end 
+      "User has #{tasks.count}tasks remaning to reach next level"
     end 
   end
-  
-  
-  def complete_task(task)
+    def complete_task(task)
     completed_task = self.user_tasks.where(task_id: task).first
     completed_task.update(completed: true)
+    self.level_up
   end
-  
 end
 # User.recent_friend_investment(["10209468294638125", "10207796683019394", "676779145826476"])

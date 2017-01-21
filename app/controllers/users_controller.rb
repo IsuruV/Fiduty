@@ -80,18 +80,11 @@ end
       end
     end
     
-    def level_user_up
-      lvl_up = current_user.level_up
-      render json:{
-        user: lvl_up.to_json
-        }
-    end
-    
-    def completed_task
-      task_id = params[:task]
+    def complete_task
+      task_completed = params[:task].to_i
       current_user.complete_task(task_id)
       render json:{
-        user: current_user
+        user: task_completed
       }
     end
 

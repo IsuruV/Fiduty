@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :portfolios do
     resources :reviews
   end
+  resources :tasks
+  
   mount_devise_token_auth_for 'User', at: 'auth'
   post '/portfolios/upload', to: 'portfolios#upload'
   post '/user_portfolios/add_portfolio' => 'user_portfolios#create'
@@ -24,6 +26,10 @@ Rails.application.routes.draw do
 
   post '/users/recent_friend_investment' => 'users#recent_friend_investment'
   post '/users/:id/add_funds' => 'users#add_funds'
+  
+  post '/tasks/complete_task' => 'tasks#complete_task'
+  get '/tasks/user_tasks' => 'tasks#users_tasks'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
+
