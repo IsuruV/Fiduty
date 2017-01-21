@@ -22,6 +22,8 @@ gem 'nas-yahoo_stock', '~> 1.0', '>= 1.0.8'
 ##
 gem 'faraday', '~> 0.9.2'
 
+gem 'whenever', :require => false
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'devise'

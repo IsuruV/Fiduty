@@ -3,7 +3,6 @@ class CreateAdvisors < ActiveRecord::Migration[5.0]
     create_table :advisors do |t|
       t.string :name
       t.string :address
-
       t.timestamps
     end
   end

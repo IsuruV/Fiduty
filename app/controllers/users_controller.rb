@@ -8,6 +8,7 @@ class UsersController < ApplicationController
      end
   end
 
+
   def index
     @users = User.portfolios_with_vals
     respond_to do |format|
@@ -19,6 +20,9 @@ class UsersController < ApplicationController
     if current_user.id == params[:id].to_i
       @user = User.find(params[:id])
       @user.update(user_params)
+      if @user.user_tasks.empty?
+       @user.add_inital_tasks
+      end
       render json:{
         user: @user.portfolio_with_vals
        }
@@ -58,13 +62,14 @@ end
         format.json {render json: @users}
       end
     end
-
-    def recent_everyone_investment
+    
+     def recent_everyone_investment
       @users = User.everyone_investment
       respond_to do |format|
-        format.json {render json:  @users}
+        format.json {render json: @users.last(25)}
       end
     end
+
 
     def add_funds
       amount = params[:funds].to_f
@@ -74,11 +79,19 @@ end
         format.json {render json: current_user}
       end
     end
+    
+    def complete_task
+      task_completed = params[:task].to_i
+      current_user.complete_task(task_id)
+      render json:{
+        user: task_completed
+      }
+    end
 
 
   private
   def user_params
     params.require(:user).permit(:id, :risk_level, :phone, :action,
-    :martial_status, :dependants, :citizenship, :dob, :ssn, :address, :fb_id, :email, :name, :password, :funds)
+    :martial_status, :dependants, :citizenship, :dob, :ssn, :address, :fb_id, :email, :name, :password, :funds, :level_id, :task)
   end
 end
