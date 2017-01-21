@@ -20,7 +20,7 @@ class Mailer
     end 
     
     def respond_to_email
-        case self.read_body
+      case self.read_body
         when '1'
           self.compose_email('subject 1', 'Response to 1')
         when '2'

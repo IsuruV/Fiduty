@@ -1,6 +1,7 @@
 class UserPortfolio < ApplicationRecord
     belongs_to :user
     belongs_to :portfolio
+    default_scope { where(active: true) }
 
   def self.recent_investments
     investments = UserPortfolio.find(:all, :order => "id desc", :limit => 25).reverse

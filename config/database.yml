@@ -22,3 +22,5 @@ production:
   adapter: postgresql
   encoding: unicode
   database: app_development
+
+#restart server : sudo service postgresql restart

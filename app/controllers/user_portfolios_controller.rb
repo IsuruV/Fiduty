@@ -15,6 +15,11 @@ class UserPortfoliosController < ApplicationController
           format.json {render json: current_user.portfolios}
       end
     end
+    
+    def sell
+      sell_amount = params[:sell_amount].to_f
+      etf = params[:etf_id].to_i
+    end 
 
     def recent_investments
       investments = UserPortfolio.recent_investments
@@ -29,4 +34,5 @@ class UserPortfoliosController < ApplicationController
         format.json {render json: {"user_portfolios": current_user, "total_investment": current_user.calculate_total_investment, "total_value": current_user.user_total_value}}
       end
     end
+    
 end

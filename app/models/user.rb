@@ -167,10 +167,48 @@ class User < ActiveRecord::Base
       "User has #{tasks.count}tasks remaning to reach next level"
     end 
   end
-    def complete_task(task)
+  
+  def complete_task(task)
     completed_task = self.user_tasks.where(task_id: task).first
     completed_task.update(completed: true)
     self.level_up
   end
+  
+  def check_valid_transactions(portfolio_id)
+    transactions = self.user_portfolios.where(portfolio_id: portfolio_id)
+    transactions.each do |transaction|
+      if transaction.inital_investment == 0
+        transaction.active = false
+        transaction.save
+      else
+        transaction
+      end
+    end
+  end
+  
+  def sell_investment(amount, portfolio_id)
+    transactions = self.user_portfolios.where(portfolio_id: portfolio_id)
+    transactions.each do |transaction|
+      if transaction.inital_investment < amount
+        # require 'pry'; binding.pry
+        transaction.very_inital_investment = transaction.inital_investment
+        transaction.inital_investment = 0
+        transaction.active = false
+        transaction.save
+        amount = amount - transaction.inital_investment
+      else
+        # require 'pry'; binding.pry
+        transaction.very_inital_investment = transaction.inital_investment
+        transaction.inital_investment = transaction.inital_investment - amount
+        transaction.save
+      end
+    end
+    self.check_valid_transactions(portfolio_id)
+  end
+  
 end
 # User.recent_friend_investment(["10209468294638125", "10207796683019394", "676779145826476"])
+# very_inital_investment, active
+
+# add_column :user_portfolios, :active, :boolean, :default => true
+# add_column :user_portfolios, :very_inital_investment, :float, :default => 0.00
