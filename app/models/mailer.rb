@@ -1,19 +1,22 @@
 class Mailer
-    attr_accessor :gmail, :body, :send_to
-    def initialize(username, password)
-        @gmail = Gmail.connect(username, password)
+    attr_accessor :body, :send_to, :email
+    def initialize(email)
+        self.email = email
+        self.set_recipient
+        self.respond_to_email
     end
   
-    def self.read_and_reply(un,pw)
-      new_mail = self.new(un,pw)
-      new_mail.gmail.inbox.find(:unread).each do |email|
-            email.set_recipient
-            email.respond_to_email
+    def self.read_and_reply(username, password)
+      @@gmail = Gmail.connect(username, password)
+      @@gmail.inbox.find(:unread).each do |email|
+            Mailer.new(email)
+            email.read!
         end
     end
     
     def read_body
-        self.text_part.body.decoded.strip
+        # self.email.text_part.body.decoded.strip
+        self.email.text_part.body.as_json["raw_source"].first
     end 
     
     def respond_to_email
@@ -28,15 +31,16 @@ class Mailer
     end
     
     def set_recipient
-        sender = JSON.parse(self.from.to_json).first
+        sender = JSON.parse(self.email.from.to_json).first
         email = sender["host"]
         user_name = sender["mailbox"]
-        @send_to = sender+"@"+email
+        self.send_to = "#{user_name}@#{email}"
     end
     
     def compose_email(subj, bod)
-        email = @gmail.compose do
-         to self.send_to
+        sender = self.send_to
+        email = @@gmail.compose do
+         to sender
          subject subj
         body bod
         end
