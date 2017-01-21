@@ -22,5 +22,5 @@ class TasksController < ApplicationController
         status: complete
       }
     end
-  
+    
 end

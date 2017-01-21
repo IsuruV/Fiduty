@@ -79,15 +79,6 @@ end
         format.json {render json: current_user}
       end
     end
-    
-    def complete_task
-      task_completed = params[:task].to_i
-      current_user.complete_task(task_id)
-      render json:{
-        user: task_completed
-      }
-    end
-
 
   private
   def user_params
