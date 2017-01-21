@@ -124,9 +124,14 @@ class User < ActiveRecord::Base
   end
 
   def subtract_from_funds(amt)
-    
     amount = amt * 100
     self.funds = self.funds - amount 
+    self.save
+  end
+  
+  def add_to_funds(amt)
+    amount = amt * 100
+    self.funds = self.funds + amount 
     self.save
   end
   
@@ -187,23 +192,36 @@ class User < ActiveRecord::Base
   end
   
   def sell_investment(amount, portfolio_id)
+    realized_gains = 0
     transactions = self.user_portfolios.where(portfolio_id: portfolio_id)
+  if transactions.sum(&:inital_investment) >= amount
     transactions.each do |transaction|
-      if transaction.inital_investment < amount
-        # require 'pry'; binding.pry
-        transaction.very_inital_investment = transaction.inital_investment
-        transaction.inital_investment = 0
+      if transaction.value <= amount
+        realized_gains += transaction.value
+        # transaction.very_inital_investment = transaction.inital_investment
+        # transaction.inital_investment = 0
         transaction.active = false
         transaction.save
-        amount = amount - transaction.inital_investment
+        # amount = amount - transaction.inital_investment
+        amount -= transaction.value
       else
-        # require 'pry'; binding.pry
+        require 'pry'; binding.pry
+        realized_gains += amount
         transaction.very_inital_investment = transaction.inital_investment
-        transaction.inital_investment = transaction.inital_investment - amount
+        # transaction.inital_investment = transaction.inital_investment - amount
+        transaction.inital_investment = transaction.value - amount
         transaction.save
+        transaction.calc_weight
+        transaction.calc_value
+        transaction.calc_gain_loss 
+        break
       end
     end
+    self.add_to_funds(realized_gains)
     self.check_valid_transactions(portfolio_id)
+  else
+    'Amount exceeds investments in portfolio'
+  end
   end
   
 end

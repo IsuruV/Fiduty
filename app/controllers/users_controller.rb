@@ -73,7 +73,7 @@ end
 
     def add_funds
       amount = params[:funds].to_f
-      current_user.funds = amount
+      current_user.add_to_funds(amount)
       current_user.save
       respond_to do |format|
         format.json {render json: current_user}
