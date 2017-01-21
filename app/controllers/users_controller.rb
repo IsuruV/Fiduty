@@ -20,9 +20,8 @@ class UsersController < ApplicationController
     if current_user.id == params[:id].to_i
       @user = User.find(params[:id])
       @user.update(user_params)
-      if !!@user.level
-        @user.level = Level.all.first
-        @user.save
+      if @user.user_tasks.empty?
+       @user.add_inital_tasks
       end
       render json:{
         user: @user.portfolio_with_vals
@@ -80,11 +79,26 @@ end
         format.json {render json: current_user}
       end
     end
+    
+    def level_user_up
+      lvl_up = current_user.level_up
+      render json:{
+        user: lvl_up.to_json
+        }
+    end
+    
+    def completed_task
+      task_id = params[:task]
+      current_user.complete_task(task_id)
+      render json:{
+        user: current_user
+      }
+    end
 
 
   private
   def user_params
     params.require(:user).permit(:id, :risk_level, :phone, :action,
-    :martial_status, :dependants, :citizenship, :dob, :ssn, :address, :fb_id, :email, :name, :password, :funds, :level_id)
+    :martial_status, :dependants, :citizenship, :dob, :ssn, :address, :fb_id, :email, :name, :password, :funds, :level_id, :task)
   end
 end
