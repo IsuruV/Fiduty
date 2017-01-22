@@ -1,6 +1,8 @@
 class UserPortfolio < ApplicationRecord
     belongs_to :user
     belongs_to :portfolio
+    has_many :user_portfolio_sales
+    has_many :sales, :through => :user_portfolio_sales
     default_scope { where(active: true) }
 
   def self.recent_investments
