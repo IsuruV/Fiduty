@@ -124,9 +124,14 @@ class User < ActiveRecord::Base
   end
 
   def subtract_from_funds(amt)
-    
     amount = amt * 100
     self.funds = self.funds - amount 
+    self.save
+  end
+  
+  def add_to_funds(amt)
+    amount = amt * 100
+    self.funds = self.funds + amount 
     self.save
   end
   
@@ -167,10 +172,68 @@ class User < ActiveRecord::Base
       "User has #{tasks.count}tasks remaning to reach next level"
     end 
   end
-    def complete_task(task)
+  
+  def complete_task(task)
     completed_task = self.user_tasks.where(task_id: task).first
     completed_task.update(completed: true)
     self.level_up
   end
+  
+  def check_valid_transactions(portfolio_id)
+    transactions = self.user_portfolios.where(portfolio_id: portfolio_id)
+    transactions.each do |transaction|
+      if transaction.inital_investment == 0
+        transaction.active = false
+        transaction.save
+      else
+        transaction
+      end
+    end
+  end
+  
+  def sell_investment(amount, portfolio_id)
+    portfolio = Portfolio.find(portfolio_id)
+    YahooApi.update_ytd(portfolio)
+    
+    realized_gains = 0
+    transactions = self.user_portfolios.where(portfolio_id: portfolio_id)
+  if transactions.sum(&:inital_investment) >= amount
+    @sale = Sale.create(amount: amount)
+    transactions.each do |transaction|
+      if transaction.value <= amount
+        realized_gains += transaction.value
+        # transaction.very_inital_investment = transaction.inital_investment
+        # transaction.inital_investment = 0
+        transaction.active = false
+        transaction.save
+        @sale.user_portfolios << transaction
+        # amount = amount - transaction.inital_investment
+        amount -= transaction.value
+      else
+      
+        realized_gains += amount
+        transaction.very_inital_investment = transaction.inital_investment
+        # transaction.inital_investment = transaction.inital_investment - amount
+        transaction.inital_investment = transaction.value - amount
+        transaction.save
+        transaction.calc_weight
+        transaction.calc_value
+        transaction.calc_gain_loss 
+       @sale.user_portfolios << transaction
+        break
+      end
+    end
+    @sale.save
+    self.add_to_funds(realized_gains)
+    self.check_valid_transactions(portfolio_id)
+  else
+    'Amount exceeds investments in portfolio'
+  end
+  end
+  
 end
 # User.recent_friend_investment(["10209468294638125", "10207796683019394", "676779145826476"])
+# very_inital_investment, active
+
+# add_column :user_portfolios, :active, :boolean, :default => true
+# add_column :user_portfolios, :very_inital_investment, :float, :default => 0.00

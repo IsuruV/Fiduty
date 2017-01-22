@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170120221725) do
+ActiveRecord::Schema.define(version: 20170122014129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,9 +70,22 @@ ActiveRecord::Schema.define(version: 20170120221725) do
     t.integer  "user_id"
   end
 
+  create_table "sales", force: :cascade do |t|
+    t.float    "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.integer "level_id"
     t.string  "task"
+  end
+
+  create_table "user_portfolio_sales", force: :cascade do |t|
+    t.integer  "sale_id"
+    t.integer  "user_portfolio_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "user_portfolios", force: :cascade do |t|
@@ -84,8 +97,8 @@ ActiveRecord::Schema.define(version: 20170120221725) do
     t.float    "account_value"
     t.string   "investment_date"
     t.string   "datetime"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.float    "transaction_fee"
     t.float    "fiduty_fee"
     t.float    "weight"
@@ -94,6 +107,8 @@ ActiveRecord::Schema.define(version: 20170120221725) do
     t.float    "holding_return"
     t.float    "value"
     t.float    "dividends"
+    t.boolean  "active",                 default: true
+    t.float    "very_inital_investment", default: 0.0
   end
 
   create_table "user_tasks", force: :cascade do |t|
