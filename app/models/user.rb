@@ -193,7 +193,7 @@ class User < ActiveRecord::Base
   
   def sell_investment(amount, portfolio_id)
     portfolio = Portfolio.find(portfolio_id)
-    YahooApi.update_ytd(portfolio)
+    YahooApi.update_price(portfolio)
     
     realized_gains = 0
     transactions = self.user_portfolios.where(portfolio_id: portfolio_id)
@@ -234,6 +234,3 @@ class User < ActiveRecord::Base
 end
 # User.recent_friend_investment(["10209468294638125", "10207796683019394", "676779145826476"])
 # very_inital_investment, active
-
-# add_column :user_portfolios, :active, :boolean, :default => true
-# add_column :user_portfolios, :very_inital_investment, :float, :default => 0.00
