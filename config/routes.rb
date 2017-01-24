@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :reviews
   end
   resources :tasks
+  resources :sales
   
   mount_devise_token_auth_for 'User', at: 'auth'
   post '/portfolios/upload', to: 'portfolios#upload'

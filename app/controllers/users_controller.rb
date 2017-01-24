@@ -79,6 +79,10 @@ end
         format.json {render json: current_user}
       end
     end
+    
+    def dash_board
+      
+    end
 
   private
   def user_params
