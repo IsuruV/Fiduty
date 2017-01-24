@@ -22,6 +22,7 @@ class UserPortfoliosController < ApplicationController
       if current_user.sell_investment(sell_amount, etf)
         respond_to do |format|
           format.json{ render json: 'sold' }
+        end 
         else
           respond_to do |format|
             format.json{ render json: 'error' }
