@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  get '/portfolios/etf_return' => 'portfolios#etf_return'
   
+  get '/welcome/index' => 'welcome#index'
+  get '/users/dashboard' => 'users#dashboard' 
+  get '/portfolios/etf_return' => 'portfolios#etf_return'
   get '/users/recent_everyone_investment' => 'users#recent_everyone_investment'
   
   resources :welcome
