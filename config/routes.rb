@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  
+  devise_for :users
+  root :to => 'welcome#index'
   get '/welcome/index' => 'welcome#index'
-  get '/users/dashboard' => 'users#dashboard' 
-  get '/portfolios/etf_return' => 'portfolios#etf_return'
-  get '/users/recent_everyone_investment' => 'users#recent_everyone_investment'
-  
-  resources :welcome
+  get '/users/dashboard' => 'users#dashboard'
+
+namespace :api do
   resources :reviews
   resources :users
   resources :user_portfolios
@@ -15,8 +14,12 @@ Rails.application.routes.draw do
   end
   resources :tasks
   resources :sales
-  
+
   mount_devise_token_auth_for 'User', at: 'auth'
+
+  get '/portfolios/etf_return' => 'portfolios#etf_return'
+  get '/users/recent_everyone_investment' => 'users#recent_everyone_investment'
+
   post '/portfolios/upload', to: 'portfolios#upload'
   post '/user_portfolios/add_portfolio' => 'user_portfolios#create'
   post '/portfolios/portfolios_by_type' => 'portfolios#portfolios_by_type'
@@ -29,10 +32,11 @@ Rails.application.routes.draw do
 
   post '/users/recent_friend_investment' => 'users#recent_friend_investment'
   post '/users/:id/add_funds' => 'users#add_funds'
-  
+
   post '/tasks/complete_task' => 'tasks#complete_task'
   get '/tasks/user_tasks' => 'tasks#users_tasks'
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
 
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+end

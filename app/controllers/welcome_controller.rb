@@ -1,8 +1,9 @@
 class WelcomeController < ApplicationController
+
     def index
-        respond_to do |format|
-            format.html {render :index}
-            format.json {render json: {"status":"works"} }
-        end
+      if current_user
+        redirect_to users_dashboard_url
+      end
     end
+    
 end

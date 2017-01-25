@@ -1,4 +1,4 @@
-class ReviewsController < ApiApplicationController
+class Api::ReviewsController < Api::ApiApplicationController
     before_action :authenticate_user!
     def index
         @portfolio = Portfolio.find(params[:portfolio_id])

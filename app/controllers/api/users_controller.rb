@@ -1,4 +1,4 @@
-class UsersController < ApiApplicationController
+class Api::UsersController < Api::ApiApplicationController
   # before_action :authenticate_user!
 
    def dashboard

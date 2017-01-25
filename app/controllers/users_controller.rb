@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   # before_action :authenticate_user!
-   
+
    def dashboard
       render 'users/dashboard.html.erb'
     end
-    
+
   def show
     @user = User.find(params[:id].to_i)
      respond_to do |format|
@@ -66,7 +66,7 @@ end
         format.json {render json: @users}
       end
     end
-    
+
      def recent_everyone_investment
       @users = User.everyone_investment
       respond_to do |format|
@@ -83,7 +83,7 @@ end
         format.json {render json: current_user}
       end
     end
-    
+
 
 
   private
@@ -92,4 +92,3 @@ end
     :martial_status, :dependants, :citizenship, :dob, :ssn, :address, :fb_id, :email, :name, :password, :funds, :level_id, :task)
   end
 end
-

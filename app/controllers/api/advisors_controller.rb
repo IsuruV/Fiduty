@@ -1,4 +1,4 @@
-class AdvisorsController < ApiApplicationController
+class Api::AdvisorsController < Api::ApiApplicationController
 
     def show
         @advisor = Advisor.find(params[:id])
