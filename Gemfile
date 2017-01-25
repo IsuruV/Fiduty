@@ -24,6 +24,7 @@ gem 'yahoo-finance'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'thin'
+gem 'bootswatch-rails'
 
 
 gem 'market_beat'
