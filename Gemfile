@@ -19,6 +19,13 @@ gem 'active_model_serializers'
 gem 'faker', '~> 1.6', '>= 1.6.6'
 ## finance gems
 gem 'yahoo-finance'
+
+
+gem 'bootstrap-sass'
+gem 'font-awesome-sass'
+gem 'thin'
+
+
 gem 'market_beat'
 gem 'nas-yahoo_stock', '~> 1.0', '>= 1.0.8'
 ##

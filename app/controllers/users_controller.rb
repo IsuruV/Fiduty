@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
-
+  # before_action :authenticate_user!
+   
+   def dashboard
+      render 'users/dashboard.html.erb'
+    end
+    
   def show
     @user = User.find(params[:id].to_i)
      respond_to do |format|
@@ -80,9 +84,7 @@ end
       end
     end
     
-    def dash_board
-      
-    end
+
 
   private
   def user_params
@@ -90,3 +92,4 @@ end
     :martial_status, :dependants, :citizenship, :dob, :ssn, :address, :fb_id, :email, :name, :password, :funds, :level_id, :task)
   end
 end
+
