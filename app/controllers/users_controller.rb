@@ -1,12 +1,17 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
-
+  # before_action :authenticate_user!
+   
+   def dashboard
+      render 'users/dashboard.html.erb'
+    end
+    
   def show
     @user = User.find(params[:id].to_i)
      respond_to do |format|
        format.json {render json: @user.portfolio_with_vals}
      end
   end
+
 
   def index
     @users = User.portfolios_with_vals
@@ -19,6 +24,9 @@ class UsersController < ApplicationController
     if current_user.id == params[:id].to_i
       @user = User.find(params[:id])
       @user.update(user_params)
+      if @user.user_tasks.empty?
+       @user.add_inital_tasks
+      end
       render json:{
         user: @user.portfolio_with_vals
        }
@@ -58,27 +66,30 @@ end
         format.json {render json: @users}
       end
     end
-
-    def recent_everyone_investment
+    
+     def recent_everyone_investment
       @users = User.everyone_investment
       respond_to do |format|
-        format.json {render json:  @users}
+        format.json {render json: @users.last(25)}
       end
     end
 
+
     def add_funds
       amount = params[:funds].to_f
-      current_user.funds = amount
+      current_user.add_to_funds(amount)
       current_user.save
       respond_to do |format|
         format.json {render json: current_user}
       end
     end
+    
 
 
   private
   def user_params
     params.require(:user).permit(:id, :risk_level, :phone, :action,
-    :martial_status, :dependants, :citizenship, :dob, :ssn, :address, :fb_id, :email, :name, :password, :funds)
+    :martial_status, :dependants, :citizenship, :dob, :ssn, :address, :fb_id, :email, :name, :password, :funds, :level_id, :task)
   end
 end
+

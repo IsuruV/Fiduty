@@ -1,6 +1,9 @@
 class UserPortfolio < ApplicationRecord
     belongs_to :user
     belongs_to :portfolio
+    has_many :user_portfolio_sales
+    has_many :sales, :through => :user_portfolio_sales
+    default_scope { where(active: true) }
 
   def self.recent_investments
     investments = UserPortfolio.find(:all, :order => "id desc", :limit => 25).reverse
@@ -14,7 +17,7 @@ class UserPortfolio < ApplicationRecord
 
   def calc_holding_return
     @portfolio = Portfolio.find(self.portfolio_id)
-    YahooApi.fetch_recent_price(@portfolio)
+    # YahooApi.fetch_recent_price(@portfolio)
     ### Inefficient, must refactor.
     current_price = @portfolio.price
     if self.trad_price
@@ -25,10 +28,15 @@ class UserPortfolio < ApplicationRecord
     self.holding_return = holding_ret
     self.save
   end
-
+  
+  def calc_weight
+    new_weight = self.inital_investment / self.portfolio.price
+    self.weight = new_weight
+    self.save
+  end
   def calc_value
     @portfolio = Portfolio.find(self.portfolio_id)
-    YahooApi.fetch_recent_price(@portfolio)
+    # YahooApi.fetch_recent_price(@portfolio)
     value = @portfolio.price * self.weight
     self.value = value
     self.save

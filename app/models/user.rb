@@ -7,7 +7,10 @@ class User < ActiveRecord::Base
   has_many :user_portfolios
   has_many :portfolios, :through => :user_portfolios
   has_many :reviews
-
+  has_many :user_tasks
+  has_many :tasks, :through => :user_tasks
+  belongs_to :level, required: false
+  
   def calculate_total_investment
     sum = 0
     self.user_portfolios.each do |portfolio|
@@ -120,11 +123,114 @@ class User < ActiveRecord::Base
       sorted_transactions
   end
 
-  def subtract_from_funds(params)
-    amount = params[:funds].to_f
-    self.funds = self.funds - amount
+  def subtract_from_funds(amt)
+    amount = amt * 100
+    self.funds = self.funds - amount 
     self.save
   end
-
+  
+  def add_to_funds(amt)
+    amount = amt * 100
+    self.funds = self.funds + amount 
+    self.save
+  end
+  
+  def create_new_level_tasks(updated_level)
+    new_tasks = Task.where(level_id: updated_level)
+    new_tasks.each do |task|
+      task.user_tasks.create(user: self, completed: false)
+    end
+  end
+  
+  def add_inital_tasks
+    level_one_tasks = Task.where(level_id: 1)
+    level_one_tasks.each do |task|
+      task.user_tasks.create(user: self, completed: false)
+    end
+  end 
+  
+  def level_up
+    bools = []
+    self.user_tasks.each do |task|
+      bools.push(task.completed)
+    end 
+    if !bools.include?(false) && !bools.empty?
+     update_level = self.level.level + 1
+     
+     updated_level = Level.where(id: update_level).first
+      self.level = updated_level
+      self.save
+     self.create_new_level_tasks(updated_level)
+     self.level
+   else
+    tasks = []
+    self.user_tasks.each do |task|
+      if task.completed
+        tasks.push(task)
+      end
+    end 
+      "User has #{tasks.count}tasks remaning to reach next level"
+    end 
+  end
+  
+  def complete_task(task)
+    completed_task = self.user_tasks.where(task_id: task).first
+    completed_task.update(completed: true)
+    self.level_up
+  end
+  
+  def check_valid_transactions(portfolio_id)
+    transactions = self.user_portfolios.where(portfolio_id: portfolio_id)
+    transactions.each do |transaction|
+      if transaction.inital_investment == 0
+        transaction.active = false
+        transaction.save
+      else
+        transaction
+      end
+    end
+  end
+  
+  def sell_investment(amount, portfolio_id)
+    portfolio = Portfolio.find(portfolio_id)
+    YahooApi.update_price(portfolio)
+    
+    realized_gains = 0
+    transactions = self.user_portfolios.where(portfolio_id: portfolio_id)
+  if transactions.sum(&:inital_investment) >= amount
+    @sale = Sale.create(amount: amount)
+    transactions.each do |transaction|
+      if transaction.value <= amount
+        realized_gains += transaction.value
+        # transaction.very_inital_investment = transaction.inital_investment
+        # transaction.inital_investment = 0
+        transaction.active = false
+        transaction.save
+        @sale.user_portfolios << transaction
+        # amount = amount - transaction.inital_investment
+        amount -= transaction.value
+      else
+      
+        realized_gains += amount
+        transaction.very_inital_investment = transaction.inital_investment
+        # transaction.inital_investment = transaction.inital_investment - amount
+        transaction.inital_investment = transaction.value - amount
+        transaction.save
+        transaction.calc_weight
+        transaction.calc_value
+        transaction.calc_gain_loss 
+       @sale.user_portfolios << transaction
+        break
+      end
+    end
+    @sale.save
+    self.add_to_funds(realized_gains)
+    self.check_valid_transactions(portfolio_id)
+  else
+    'Amount exceeds investments in portfolio'
+  end
+  end
+  
 end
 # User.recent_friend_investment(["10209468294638125", "10207796683019394", "676779145826476"])
+# very_inital_investment, active
