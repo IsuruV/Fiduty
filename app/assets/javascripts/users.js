@@ -57,10 +57,10 @@ var socialContent = `  <div class="main-dashboard">
 		</div>
 		</div>`
 
-var mainDashBoardContent =`  <div class="main-dashboard">
+var mainDashBoardContent =`    <div class="main-dashboard">
 		<div class="content-mid">
-			<div class="col-md-6">
-				<div class="middle-content">
+			<div class="col-md-8">
+				<div class="middle-content" style="height:400px; border-style:none; box-shadow:none">
 					<h2 style="text-align:center;">Tasks</h2>
 				<div class="table-responsive">
   	<table class="table table-hover">
@@ -96,8 +96,45 @@ var mainDashBoardContent =`  <div class="main-dashboard">
 	</table>
 </div>				
 </div>
-			</div><!----><div class="col-md-6">
-				<div class="middle-content">
+			</div><!----><div class="col-md-4">
+			  <div class="middle-content" style="height:400px; background:rgba(51, 153, 204, 1);border-style:none;border-radius:0px ">
+				<div style="color:white; padding-right:auto; padding-top:auto; padding-bottom:auto; padding-left:auto">
+		      <br>
+		      <p><h2 class="featurette-heading">Next Step:</p><br>I would start with getting some basic knowledge about finance</h2>
+		      
+		    </div>
+				</div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		
+ <!----------------End Content Mid
+					---------------------->	
+
+ <!----------------Content Bottom
+					---------------------->					
+
+	<div class="content-bottom">
+			<div class="col-md-7 post-top">
+			<div class="middle-content" style="margin-bottom:15px;height:500px;">
+				<h2 style="text-align:center;">Coming up features</h2><br>
+				<span style="font-family:'Roboto'; color:#666666;">
+					<div class="list-group">
+  						<a href="#" class="list-group-item active">
+    					Cras justo odio
+  						</a>
+  						<a href="#" class="list-group-item">Dapibus ac facilisis in
+  						</a>
+  						<a href="#" class="list-group-item">Morbi leo risus
+  						</a>
+    					<a href="#" class="list-group-item">Morbi leo risus
+  						</a>
+    					<a href="#" class="list-group-item">Morbi leo risus
+  						</a>
+					</div>
+			</div>
+			</div><!----><div class="col-md-5 post-top">
+			  <div class="middle-content" style="height:500px; margin-right:15px">
 				<h2 style="text-align:center;">Personal Advice</h2>
 				<div class="table-responsive">
   				<table class="table table-hover">
@@ -133,38 +170,6 @@ var mainDashBoardContent =`  <div class="main-dashboard">
   </tbody>
 				</table>
 				</div>
-				</div>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-		
- <!----------------End Content Mid
-					---------------------->	
-
- <!----------------Content Bottom
-					---------------------->					
-
-	<div class="content-bottom">
-			<div class="col-md-7 post-top">
-			<div class="middle-content" style="margin-bottom:15px;">
-				<h2 style="text-align:center;">Coming up features</h2><br>
-				<span style="font-family:'Roboto'; color:#666666;">
-					<div class="list-group">
-  						<a href="#" class="list-group-item active">
-    					Cras justo odio
-  						</a>
-  						<a href="#" class="list-group-item">Dapibus ac facilisis in
-  						</a>
-  						<a href="#" class="list-group-item">Morbi leo risus
-  						</a>
-    					<a href="#" class="list-group-item">Morbi leo risus
-  						</a>
-    					<a href="#" class="list-group-item">Morbi leo risus
-  						</a>
-					</div>
-			</div>
-			</div><!----><div class="col-md-5 post-top">
-				<div class="middle-content" style="margin-right:15px; height:400px">
 				</div>
 			</div>
 			<div class="clearfix"></div>
