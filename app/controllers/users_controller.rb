@@ -5,6 +5,19 @@ class UsersController < ApplicationController
       render 'users/dashboard.html.erb'
     end
     
+    def experience
+      render 'users/experience.html.erb'
+    end
+    
+    def social
+      render 'users/social.html.erb'
+    end
+    
+    def knowledge
+      render 'users/knowledge.html.erb'
+    end
+    
+    
   def show
     @user = User.find(params[:id].to_i)
      respond_to do |format|
@@ -67,20 +80,29 @@ end
       end
     end
     
+    def friends_roi
+      fb_ids = params[:fb_ids]
+      @friends = User.top_friends_roi(fb_ids)
+      respond_to do |format|
+        format.json { render json: @friends }
+      end
+    end
+    
      def recent_everyone_investment
       @users = User.everyone_investment
       respond_to do |format|
         format.json {render json: @users.last(25)}
       end
     end
-
+    
 
     def add_funds
-      amount = params[:funds].to_f
+      amount = params[:funds].to_i
       current_user.add_to_funds(amount)
       current_user.save
+
       respond_to do |format|
-        format.json {render json: current_user}
+        format.json {render json: current_user.funds.to_json}
       end
     end
     

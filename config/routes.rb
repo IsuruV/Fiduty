@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   
   get '/welcome/index' => 'welcome#index'
-  get '/users/dashboard' => 'users#dashboard' 
+  get '/users/dashboard' => 'users#dashboard'
+  get '/users/experience' => 'users#experience'
+  get '/users/knowledge'=> 'users#knowledge'
+  get '/users/social' => 'users#social'
   get '/portfolios/etf_return' => 'portfolios#etf_return'
   get '/users/recent_everyone_investment' => 'users#recent_everyone_investment'
   
@@ -13,7 +16,9 @@ Rails.application.routes.draw do
   resources :portfolios do
     resources :reviews
   end
-  resources :tasks
+  # resources :tasks
+  post '/tasks/complete_task' => 'tasks#complete_task'
+  get '/tasks/user_tasks' => 'tasks#users_tasks'
   resources :sales
   
   mount_devise_token_auth_for 'User', at: 'auth'
@@ -28,10 +33,11 @@ Rails.application.routes.draw do
   get '/users/:id/user_portfolios' => 'users#user_portfolios'
 
   post '/users/recent_friend_investment' => 'users#recent_friend_investment'
+  post '/users/friends_top_roi' => 'users#friends_roi'
+  
   post '/users/:id/add_funds' => 'users#add_funds'
   
-  post '/tasks/complete_task' => 'tasks#complete_task'
-  get '/tasks/user_tasks' => 'tasks#users_tasks'
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

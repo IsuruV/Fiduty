@@ -37,6 +37,7 @@ gem 'whenever', :require => false
 gem 'sms-easy'
 gem 'gmail'
 gem 'mail'
+gem 'sprockets'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

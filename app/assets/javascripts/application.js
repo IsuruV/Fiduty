@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= typed
+//= require users
 //= require_tree .
 //= require_tree ./js

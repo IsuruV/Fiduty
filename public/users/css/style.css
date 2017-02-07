@@ -220,7 +220,7 @@ h1 a.navbar-brand {
 	font-size: 30px;
 	font-weight: 500;
     padding: 20px 0px;
-    background: #d95459;
+    background: rgba(255,255,255,.15);
     text-align: center;
 	width:248px;
 	height: 60px;
