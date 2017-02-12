@@ -26,7 +26,6 @@ gem 'font-awesome-sass'
 gem 'thin'
 gem 'bootswatch-rails'
 
-
 gem 'market_beat'
 gem 'nas-yahoo_stock', '~> 1.0', '>= 1.0.8'
 ##
@@ -43,6 +42,8 @@ gem 'sprockets'
 # gem 'therubyracer', platforms: :ruby
 gem 'devise'
 gem 'omniauth'
+gem 'omniauth-facebook'
+
 gem 'devise_token_auth'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -50,7 +51,7 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
-
+gem 'koala'
 gem 'rack-cors', :require => 'rack/cors'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'

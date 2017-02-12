@@ -1,4 +1,4 @@
-class PortfoliosController < ApplicationController
+class PortfoliosController < Api::ApiApplicationController
     before_action :authenticate_user!
 
     def show

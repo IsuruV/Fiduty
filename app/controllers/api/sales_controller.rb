@@ -1,4 +1,4 @@
-class SalesController < ApplicationController
+class SalesController < Api::ApiApplicationController
     def create
         portfolio_id = params[:portfolio_id]
         amount = params[:amount]

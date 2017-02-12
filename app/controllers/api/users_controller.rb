@@ -1,42 +1,21 @@
-class UsersController < ApplicationController
+class UsersController < Api::ApiApplicationController
   # before_action :authenticate_user!
    layout 'users'
    
    def dashboard
-
-     if current_user.tasks.empty?
-       current_user.add_inital_tasks
-     end
-      @user = current_user
+      render 'users/dashboard.html.erb'
     end
     
     def experience
-     
+      render 'users/experience.html.erb'
     end
     
     def social
-      choice = params[:choice]
-      fb_ids = params[:fb_ids]
-      case choice
-      when "everyone"
-        @users = User.everyone_investment
-      when "friends"
-        @users = User.recent_friend_investment(fb_ids)
-      when "social"
-        @users = 'something'
-      end
-      respond_to do |format|
-        format.json{render json: @users}
-        format.html{}
-      end
+      render 'users/social.html.erb'
     end
     
     def knowledge
-      
-    end
-    
-    def profile
-      
+      render 'users/knowledge.html.erb'
     end
     
     
@@ -128,18 +107,12 @@ end
       end
     end
     
-  def log_out
-    # require 'pry'; binding.pry
-    sign_out current_user
-    redirect_to root_path
+
+
+  private
+  def user_params
+    params.require(:user).permit(:id, :risk_level, :phone, :action,
+    :martial_status, :dependants, :citizenship, :dob, :ssn, :address, :fb_id, :email, :name, :password, :funds, :level_id, :task)
   end
-    
-
-
-  # private
-  # def user_params
-  #   params.require(:user, :choice).permit(:id, :risk_level, :phone, :action,
-  #   :martial_status, :dependants, :citizenship, :dob, :ssn, :address, :fb_id, :email, :name, :password, :funds, :level_id, :task)
-  # end
 end
 

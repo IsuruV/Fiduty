@@ -1,141 +1,27 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-<title>Fiduty - Dashboard</title>
-
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-<!-- Custom Theme files -->
-
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-<link href="css/style.css" rel='stylesheet' type='text/css' />
-<link href="css/font-awesome.css" rel="stylesheet">
-<script src="js/jquery.min.js"> </script>
-
-<!-- Mainly scripts -->
-<script src="js/jquery.metisMenu.js"></script>
-<script src="js/jquery.slimscroll.min.js"></script>
-
-<script src="/assets/users.js"></script>
-
-<!-- Custom and plugin javascript -->
-<link href="css/custom.css" rel="stylesheet">
-<link href="/assets/users.css"></link>
-<script src="js/custom.js"></script>
-<script src="js/screenfull.js"></script>
-		<script>
-		$(function () {
-			$('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
-
-			if (!screenfull.enabled) {
-				return false;
-			}
-
-			$('#toggle').click(function () {
-				screenfull.toggle($('#container')[0]);
-			});
-			});
-		</script>
-
-<!----->
-
-<!--pie-chart--->
-<script src="js/pie-chart.js" type="text/javascript"></script>
- <script type="text/javascript">
-
-        $(document).ready(function () {
-            $('#demo-pie-1').pieChart({
-                barColor: '#3bb2d0',
-                trackColor: '#eee',
-                lineCap: 'round',
-                lineWidth: 8,
-                onStep: function (from, to, percent) {
-                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-                }
-            });
-
-            $('#demo-pie-2').pieChart({
-                barColor: '#fbb03b',
-                trackColor: '#eee',
-                lineCap: 'butt',
-                lineWidth: 8,
-                onStep: function (from, to, percent) {
-                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-                }
-            });
-
-            $('#demo-pie-3').pieChart({
-                barColor: '#ed6498',
-                trackColor: '#eee',
-                lineCap: 'square',
-                lineWidth: 8,
-                onStep: function (from, to, percent) {
-                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-                }
-            });
-        });
-
-    </script>
-<!--skycons-icons-->
-<script src="js/skycons.js"></script>
-<!--//skycons-icons-->
-
-</head>
-
-
-<!----------------Body
-					---------------------->
-
-<body style="font-family:'Roboto'; color:#666666;">
-
-<%= render partial: '/layouts/header' %>
-  <%= render partial: '/layouts/nav' %>
-
-
-<!----------------Content
-					---------------------->
-					
-	<div id="wrapper">
-	<div id="page-wrapper">
-		
-   	<div class="content-main" style="background:white">
- 
- <!----------------Content Top Boxes
-					---------------------->
- 
- 
-		<div class="content-top">
-			<div class="row" style="text-align:center;">
-				
-				<div class="col-sm-3 top-content1">
-					<div class="content-top-1" style="margin-left:20px; border-style:solid; border-color:black; border-radius:0px">	   
-					<h4>Level</h4><br>
-					<h1 style="font-size:72px;">1</h1><br>
-					<div class="clearfix"></div></div>
-				</div><!----><div class="col-sm-3 top-content1"><div class="content-top-1" style="border-style:solid; border-color:black;margin-left:10px; margin-right:5px; border-radius:0px">	   
-					<h4>Knowledge</h4><br>
-				<div id="demo-pie-1" class="pie-title-center" data-percent="25"> <span class="pie-value"></span> </div>
-				<div class="clearfix"></div></div>
-				</div><!----><div class="col-sm-3 top-content1"><div class="content-top-1" style="border-style:solid; border-color:black;margin-left:5px; margin-right:10px;border-radius:0px">	   
-					<h4>Experience</h4><br>
-					<div id="demo-pie-2" class="pie-title-center" data-percent="50"> <span class="pie-value"></span> </div>
-					<div class="clearfix"></div></div>
-				</div><!----><div class="col-sm-3 top-content1"><div class="content-top-1" style="border-style:solid; border-color:black;margin-right:20px;border-radius:0px">	   
-					<h4>Companionship</h4><br>
-					<div id="demo-pie-3" class="pie-title-center" data-percent="75"> <span class="pie-value"></span> </div>
-					<div class="clearfix"></div></div>
-				</div>
-			</div>
-		</div>
-
- <!----------------End Content Top Boxes
-					---------------------->	
-					
+<style>
+				  div.panel,p.flip
+{
+    margin:0px;
+    padding:5px;
+    text-align:center;
+    background:#e5eecc;
+    border:solid 1px #c3c3c3;
+}
+div.panel
+{
+    height:120px;
+    display:none;
+    position:absolute;
+}
+				</style>
  <!----------------Content Mid
 					---------------------->				
   <div class="main-dashboard">
+    
 		<div class="content-mid">
-			<div class="col-md-8">
+			<div class="col-md-6">
 				<div class="middle-content" style="height:400px; border-style:none; box-shadow:none">
 					<h2 style="text-align:center;">Tasks</h2>
 				<div class="table-responsive">
@@ -148,31 +34,17 @@
     </tr>
   	</thead>
   	<tbody>
-    <tr>
-      <td>1</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
-    <tr class="info">
-      <td>3</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>Column content</td>
-      <td>Column content</td>
-    </tr>
+  	  <% @user.tasks.each do |task| %>
+  	  <tr>
+  	    <td><%=task.id%></td>
+  	    <td><%=task.task%></td>
+  	 </tr>
+  	  <% end %>
   	</tbody>
 	</table>
 </div>				
 </div>
-			</div><!----><div class="col-md-4">
+			</div><!----><div class="col-md-6">
 			  <div class="middle-content" style="height:400px; background:rgba(51, 153, 204, 1);border-style:none;border-radius:0px ">
 				<div style="color:white; padding-right:auto; padding-top:auto; padding-bottom:auto; padding-left:auto">
 		      <br>
@@ -248,6 +120,7 @@
 				</div>
 				</div>
 			</div>
+			
 			<div class="clearfix"></div>
 	</div></span>
 	</div>
@@ -255,15 +128,57 @@
 					---------------------->	
 
 
-	 
-		<!---->
-	<div class="copy" style="text-align:right; padding-right:15px;">
-    	<p>2017 Fiduty - all rights reserved</p>
-	<div class="clearfix"> </div>
-	</div>
-</div>
-
 <!---->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="form-control-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="form-control-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
+
+    <!--<tr>-->
+    <!--  <td>1</td>-->
+    <!--  <td>Column content</td>-->
+    <!--  <td>Column content</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--  <td>2</td>-->
+    <!--  <td>Column content</td>-->
+    <!--  <td>Column content</td>-->
+    <!--</tr>-->
+    <!--<tr class="info">-->
+    <!--  <td>3</td>-->
+    <!--  <td>Column content</td>-->
+    <!--  <td>Column content</td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+    <!--  <td>4</td>-->
+    <!--  <td>Column content</td>-->
+    <!--  <td>Column content</td>-->
+    <!--</tr>-->

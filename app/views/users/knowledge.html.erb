@@ -1,150 +1,87 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-<title>Fiduty - Dashboard</title>
 
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
-<!-- Custom Theme files -->
-
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-<link href="css/style.css" rel='stylesheet' type='text/css' />
-<link href="css/font-awesome.css" rel="stylesheet">
-<script src="js/jquery.min.js"> </script>
-<meta property="og:url" content="https://v4-alpha.getbootstrap.com/utilities/flexbox/">
-<!-- Mainly scripts -->
-<script src="js/jquery.metisMenu.js"></script>
-<script src="js/jquery.slimscroll.min.js"></script>
-
-<script src="/assets/users.js"></script>
-
-<!-- Custom and plugin javascript -->
-<link href="css/custom.css" rel="stylesheet">
-<script src="js/custom.js"></script>
-<script src="js/screenfull.js"></script>
-		<script>
-		$(function () {
-			$('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
-
-			if (!screenfull.enabled) {
-				return false;
-			}
-
-			$('#toggle').click(function () {
-				screenfull.toggle($('#container')[0]);
-			});
-			});
-		</script>
-
-<!----->
-
-<!--pie-chart--->
-<script src="js/pie-chart.js" type="text/javascript"></script>
- <script type="text/javascript">
-
-        $(document).ready(function () {
-            $('#demo-pie-1').pieChart({
-                barColor: '#3bb2d0',
-                trackColor: '#eee',
-                lineCap: 'round',
-                lineWidth: 8,
-                onStep: function (from, to, percent) {
-                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-                }
-            });
-
-            $('#demo-pie-2').pieChart({
-                barColor: '#fbb03b',
-                trackColor: '#eee',
-                lineCap: 'butt',
-                lineWidth: 8,
-                onStep: function (from, to, percent) {
-                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-                }
-            });
-
-            $('#demo-pie-3').pieChart({
-                barColor: '#ed6498',
-                trackColor: '#eee',
-                lineCap: 'square',
-                lineWidth: 8,
-                onStep: function (from, to, percent) {
-                    $(this.element).find('.pie-value').text(Math.round(percent) + '%');
-                }
-            });
-        });
-
-    </script>
-<!--skycons-icons-->
-<script src="js/skycons.js"></script>
-<!--//skycons-icons-->
-<!--users folder js-->
-</head>
-
-
-<!----------------Body
-					---------------------->
-
-<body style="font-family:'Roboto'; color:#666666;">
-
-<%= render partial: '/layouts/header' %>
-  <%= render partial: '/layouts/nav' %>
-
-
-<!----------------Content
-					---------------------->
-					
-	<div id="wrapper">
-	<div id="page-wrapper">
-		
-   	<div class="content-main" style="background:white">
- 
- <!----------------Content Top Boxes
-					---------------------->
- 
- 
-		<div class="content-top">
-			<div class="row" style="text-align:center;">
-				
-				<div class="col-sm-3 top-content1">
-					<div class="content-top-1" style="margin-left:20px; border-style:solid; border-color:black;border-radius:0px">	   
-					<h4>Level</h4><br>
-					<h1 style="font-size:72px;">1</h1><br>
-					<div class="clearfix"></div></div>
-				</div><!----><div class="col-sm-3 top-content1"><div class="content-top-1" style="border-style:solid; border-color:black;margin-left:10px; margin-right:5px;border-radius:0px">	   
-					<h4>Knowledge</h4><br>
-				<div id="demo-pie-1" class="pie-title-center" data-percent="25"> <span class="pie-value"></span> </div>
-				<div class="clearfix"></div></div>
-				</div><!----><div class="col-sm-3 top-content1"><div class="content-top-1" style="border-style:solid; border-color:black;margin-left:5px; margin-right:10px;border-radius:0px">	   
-					<h4>Experience</h4><br>
-					<div id="demo-pie-2" class="pie-title-center" data-percent="50"> <span class="pie-value"></span> </div>
-					<div class="clearfix"></div></div>
-				</div><!----><div class="col-sm-3 top-content1"><div class="content-top-1" style="border-style:solid; border-color:black;margin-right:20px;border-radius:0px">	   
-					<h4>Companionship</h4><br>
-					<div id="demo-pie-3" class="pie-title-center" data-percent="75"> <span class="pie-value"></span> </div>
-					<div class="clearfix"></div></div>
-				</div>
-			</div>
-		</div>
-
- <!----------------End Content Top Boxes
-					---------------------->	
-					
  <!----------------Content Mid
 					---------------------->	
 
-		  <div class="content-mid">
-            </div>		    
-		  <div class="clearfix"></div>
-		  </div>
+<div class="content-mid">
+	<div class="middle-content" style="margin-top:0px; margin-bottom:10px; margin-left:10px; margin-right:10px;border-style:none; box-shadow:none " >
 		
-<div class="copy" style="text-align:right; padding-right:15px;">
-    	<p>2017 Fiduty - all rights reserved</p>
-	<div class="clearfix"> </div>
+	<!------------Content title------------->	
+	
+		<div class="row-fluid" style="height:100px">
+		<div class="col-sm-12" style="text-align:center"><p><h1>Here you get knowledge to understand finance</h1></p>
+    </div>
+    </div>
+    
+  <!------------------------->
+
+    <div class="row-fluid">
+    <div class="btn-group btn-group-justified" style="height:400px;">
+      <a href="#" class="btn btn-warning btn-lg" style="white-space: normal">Learn basic finance concepts and understand them</a>
+      <a href="#" class="btn btn-success btn-lg" style="white-space: normal;">Take a quiz, check that you got the topic and earn 10 virtual $ to invest</a>
+      <a href="#" class="btn btn-primary btn-lg" style="white-space: normal;">Get some tips as you go to improve your investments</a>
+    </div>
+    </div>
+    <br>
+        
+ <!----------------Cards---------------------->
+        
+    <div class="list-group" style="font-family:'Roboto'; font-size:14px; color:#666666;">
+    
+    
+      <a href="#" class="list-group-item clearfix list-group-item-action align-items-start" style="border-radius:0px">
+        <div class="row">
+          <div class="col-sm-3">
+          <div style="height:140;border:0px solid #000">
+          <img src="/assets/Isuruprofile.jpg" class="img img-fluid" alt="Cinque Terre" width="100" height-max="100" style="margin-top:20px">
+          </div></div><!----><div class="col-sm-7 vcenter" style="margin-top:30px">
+          <div style="height:80;border:0px solid #F00"><h2>What is investment?</h2><small class="text-muted">3 days ago</small>
+          </div>
+          </div>
+        </div>
+      </a>
+      
+      <a href="#" class="list-group-item clearfix list-group-item-action flex-column align-items-start" style="border-radius:0px">
+        <div class="row">
+          <div class="col-sm-3">
+          <div style="height:140;border:0px solid #000"><img src="/assets/Rashidprofile.jpg" class="img img-fluid" alt="Cinque Terre" width="100" height-max="100" style="margin-top:20px">
+          </div></div><!----><div class="col-sm-7 vcenter" style="margin-top:30px">
+          <div style="height:80;border:0px solid #F00"><h2>Stocks explained</h2><small class="text-muted">3 days ago</small>
+          </div>
+          </div>
+        </div>
+      </a>
+      
+      <a href="#" class="list-group-item clearfix list-group-item-action align-items-start" style="border-radius:0px">
+        <div class="row">
+          <div class="col-sm-3">
+          <div style="height:140;border:0px solid #000">
+          <img src="/assets/Isuruprofile.jpg" class="img img-fluid" alt="Cinque Terre" width="100" height-max="100" style="margin-top:20px">
+          </div></div><!----><div class="col-sm-7 vcenter" style="margin-top:30px">
+          <div style="height:80;border:0px solid #F00"><h2>What is investment?</h2><small class="text-muted">3 days ago</small>
+          </div>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="list-group-item clearfix list-group-item-action flex-column align-items-start" style="border-radius:0px">
+        <div class="row">
+          <div class="col-sm-3">
+          <div style="height:140;border:0px solid #000"><img src="/assets/Rashidprofile.jpg" class="img img-fluid" alt="Cinque Terre" width="100" height-max="100" style="margin-top:20px">
+          </div></div><!----><div class="col-sm-7 vcenter" style="margin-top:30px">
+          <div style="height:80;border:0px solid #F00"><h2>Stocks explained</h2><small class="text-muted">3 days ago</small>
+          </div>
+          </div>
+        </div>
+      </a>
+  
+  </div>
+  
+  <!----------------Cards---------------------->
+  
+	<div class="clearfix"></div>
 	</div>
-</div>
-
-<!---->
-
-</body>
+	</div>
+		
 </html>

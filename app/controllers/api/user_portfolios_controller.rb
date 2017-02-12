@@ -1,4 +1,4 @@
-class UserPortfoliosController < ApplicationController
+class UserPortfoliosController < Api::ApiApplicationController
     before_action :authenticate_user!
 
 

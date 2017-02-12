@@ -1,4 +1,4 @@
-class TasksController < ApplicationController
+class TasksController < Api::ApiApplicationController
     before_action :authenticate_user!
     
     def users_tasks
