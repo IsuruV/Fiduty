@@ -1,20 +1,46 @@
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :trackable, :validatable
+  :recoverable, :rememberable, :trackable, :validatable,
+  :omniauthable, :omniauth_providers => [:facebook]
           # :confirmable, :omniauthable
   include DeviseTokenAuth::Concerns::User
+  devise :omniauthable, :omniauth_providers => [:facebook]
   has_many :user_portfolios
   has_many :portfolios, :through => :user_portfolios
   has_many :reviews
   has_many :user_tasks
   has_many :tasks, :through => :user_tasks
   belongs_to :level, required: false
+ 
+  def self.from_omniauth(auth)
+  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    user.email = auth.info.email
+    user.password = Devise.friendly_token[0,20]
+    user.name = auth.info.name   # assuming the user model has a name
+    user.image = auth.info.image # assuming the user model has an image
+    user.fb_id = auth.uid
+    # If you are using confirmable and the provider(s) you use validate emails, 
+    # uncomment the line below to skip the confirmation emails.
+    # user.skip_confirmation!
+  end
+end
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
+  end
+
   
   def calculate_total_investment
     sum = 0
     self.user_portfolios.each do |portfolio|
-      sum += portfolio.inital_investment
+      sum += portfolio.inital_investment.round(2)
     end
     sum
   end
@@ -48,6 +74,18 @@ class User < ActiveRecord::Base
     end
     ret_investment
   end
+  
+  def self.top_friends_roi(fb_ids)
+    array = []
+    friends = User.where(fb_id: [fb_ids])
+    friends.each do |friend|
+      total_investments = friend.calculate_total_investment
+      total_value = friend.user_total_value
+      total_roi = friend.roi(total_value, total_investments)
+      array.push({"name":friend.name, "fb_id": friend.fb_id, "total_roi": total_roi })
+    end
+   array.sort_by{|friend| friend["total_roi"]}[0,5]
+  end
 
   def self.portfolios_with_vals
     @users = []
@@ -74,10 +112,12 @@ class User < ActiveRecord::Base
     # gain
     total = 0
     self.users_portfolios.each do |transaction|
-      transaction.calc_gain_loss
-      total += transaction.gain_loss
+      if transaction.active
+         transaction.calc_gain_loss
+        total += transaction.gain_loss.round(2)
+      end
     end
-    total
+    total.round(2)
   end
 
   def users_portfolios
@@ -105,7 +145,9 @@ class User < ActiveRecord::Base
       sorted_transactions = transactions.sort_by{ |transaction| transaction[:investment_date]}.reverse!
       sorted_transactions
   end
-
+  
+  
+  
   def self.everyone_investment
     friends = User.all
       transactions = []
@@ -124,13 +166,13 @@ class User < ActiveRecord::Base
   end
 
   def subtract_from_funds(amt)
-    amount = amt * 100
+    amount = amt
     self.funds = self.funds - amount 
     self.save
   end
   
   def add_to_funds(amt)
-    amount = amt * 100
+    amount = amt
     self.funds = self.funds + amount 
     self.save
   end
@@ -143,6 +185,8 @@ class User < ActiveRecord::Base
   end
   
   def add_inital_tasks
+    self.level_id = 1
+    self.save
     level_one_tasks = Task.where(level_id: 1)
     level_one_tasks.each do |task|
       task.user_tasks.create(user: self, completed: false)
@@ -157,7 +201,7 @@ class User < ActiveRecord::Base
     if !bools.include?(false) && !bools.empty?
      update_level = self.level.level + 1
      
-     updated_level = Level.where(id: update_level).first
+     updated_level = Level.where(level: update_level).first
       self.level = updated_level
       self.save
      self.create_new_level_tasks(updated_level)
@@ -165,11 +209,15 @@ class User < ActiveRecord::Base
    else
     tasks = []
     self.user_tasks.each do |task|
-      if task.completed
+      if !task.completed
         tasks.push(task)
       end
-    end 
-      "User has #{tasks.count}tasks remaning to reach next level"
+    end
+    if tasks
+      "User has #{tasks.count} tasks remaning to reach next level"
+    else
+      "All tasks complete for #{self.level.level - 1}, User is now at level #{self.level.leve}"
+    end
     end 
   end
   

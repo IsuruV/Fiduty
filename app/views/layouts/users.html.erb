@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Fiduty - Dashboard</title>
+
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<!-- Custom Theme files -->
+
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<link href="css/font-awesome.css" rel="stylesheet">
+<script src="js/jquery.min.js"> </script>
+
+<!-- Mainly scripts -->
+<script src="js/jquery.metisMenu.js"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
+
+<script src="/assets/users.js"></script>
+
+<!-- Custom and plugin javascript -->
+<link href="css/custom.css" rel="stylesheet">
+<link href="/assets/users.css"></link>
+<script src="js/custom.js"></script>
+<script src="js/screenfull.js"></script>
+		<script>
+		$(function () {
+			$('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
+
+			if (!screenfull.enabled) {
+				return false;
+			}
+
+			$('#toggle').click(function () {
+				screenfull.toggle($('#container')[0]);
+			});
+			});
+		</script>
+
+<!--skycons-icons-->
+<script src="js/skycons.js"></script>
+<!--//skycons-icons-->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<!--Slider links-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/unslider/2.0.3/js/unslider-min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/unslider/2.0.3/css/unslider-dots.css"></link>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/unslider/2.0.3/css/unslider.css"></link>
+<!---->
+
+</head>
+
+
+<!----------------Body
+					---------------------->
+
+<body style="font-family:'Roboto'; font-size: 20px; color:#666666;">
+	
+	<div id="toggle" class="container-fluid" style="background-color:rgba(51, 153, 204, 1);height:500px">
+		
+	</div>
+
+  <%= render partial: '/layouts/header' %>
+  <%= render partial: '/layouts/nav' %>
+
+
+	<div id="wrapper">
+		
+<!------------Rules Button------------->
+		
+		<a class="btn btn-default btn-lg" style="white-space: normal; margin-top:500px; margin-left:70px; margin-bottom:40px; position:fixed;">
+		<h4>Check rules</h4>	
+		</a>
+<!------------------------->
+	
+	<div id="page-wrapper">
+	<div class="content-main" style="background:white">
+
+ 
+  <%= render partial: '/layouts/progressboxes' %>
+  <%= yield %>
+
+	 
+<!---->
+
+<!------------Footer------------->
+
+	<div class="copy" style="text-align:right; padding-right:15px;">
+    <p>2017 Fiduty - all rights reserved</p>
+	<div class="clearfix"> </div>
+<!------------------------->
+	
+</div>
+</div>
+</div>
+<!---->
+
+</body>
+</html>

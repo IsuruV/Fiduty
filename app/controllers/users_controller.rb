@@ -1,9 +1,44 @@
 class UsersController < ApplicationController
   # before_action :authenticate_user!
+   layout 'users'
    
    def dashboard
-      render 'users/dashboard.html.erb'
+
+     if current_user.tasks.empty?
+       current_user.add_inital_tasks
+     end
+      @user = current_user
     end
+    
+    def experience
+     
+    end
+    
+    def social
+      choice = params[:choice]
+      fb_ids = params[:fb_ids]
+      case choice
+      when "everyone"
+        @users = User.everyone_investment
+      when "friends"
+        @users = User.recent_friend_investment(fb_ids)
+      when "social"
+        @users = 'something'
+      end
+      respond_to do |format|
+        format.json{render json: @users}
+        format.html{}
+      end
+    end
+    
+    def knowledge
+      
+    end
+    
+    def profile
+      
+    end
+    
     
   def show
     @user = User.find(params[:id].to_i)
@@ -67,29 +102,44 @@ end
       end
     end
     
+    def friends_roi
+      fb_ids = params[:fb_ids]
+      @friends = User.top_friends_roi(fb_ids)
+      respond_to do |format|
+        format.json { render json: @friends }
+      end
+    end
+    
      def recent_everyone_investment
       @users = User.everyone_investment
       respond_to do |format|
         format.json {render json: @users.last(25)}
       end
     end
-
+    
 
     def add_funds
-      amount = params[:funds].to_f
+      amount = params[:funds].to_i
       current_user.add_to_funds(amount)
       current_user.save
+
       respond_to do |format|
-        format.json {render json: current_user}
+        format.json {render json: current_user.funds.to_json}
       end
     end
     
-
-
-  private
-  def user_params
-    params.require(:user).permit(:id, :risk_level, :phone, :action,
-    :martial_status, :dependants, :citizenship, :dob, :ssn, :address, :fb_id, :email, :name, :password, :funds, :level_id, :task)
+  def log_out
+    # require 'pry'; binding.pry
+    sign_out current_user
+    redirect_to root_path
   end
+    
+
+
+  # private
+  # def user_params
+  #   params.require(:user, :choice).permit(:id, :risk_level, :phone, :action,
+  #   :martial_status, :dependants, :citizenship, :dob, :ssn, :address, :fb_id, :email, :name, :password, :funds, :level_id, :task)
+  # end
 end
 
