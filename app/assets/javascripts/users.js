@@ -252,7 +252,7 @@ var knowledgeContent = `<div class="main-dashboard">
   </div>`
   
   
-  var experienceContent = `	<div class="main-dashboard" style="margin-top:0px; margin-bottom:10px; margin-left:10px; margin-right:10px;border-style:none; box-shadow:none " >
+  var experienceContent = `		<div class="main-dashboard" style="margin-top:0px; margin-bottom:10px; margin-left:10px; margin-right:10px;border-style:none; box-shadow:none " >
 	
 	<!------------Content title------------->   
 		<div class="row-fluid" style="height:80px">
@@ -276,41 +276,80 @@ var knowledgeContent = `<div class="main-dashboard">
 		    
     <div class="list-group" style="font-family:'Roboto'; font-size:14px; color:#666666;" >
     
-      <a href="#" class="list-group-item clearfix list-group-item-action align-items-start" style="border-radius:0px">
+      <a id="etf" href="#" class="list-group-item clearfix list-group-item-action align-items-start"  style="border-radius:0px">
         <div class="row">
           <div class="col-md-3">
           <div style="height:140;border:0px solid #000">
-          <img src="/assets/Isuruprofile.jpg" class="img img-fluid" alt="Cinque Terre" width="100" height-max="100" style="margin-top:10px;margin-bottom:10px">
-          </div></div><!----><div class="col-md-7 vcenter" style="margin-top:30px"><div style="height:80;border:0px solid #F00"><h3>Bob chipped in SPYDR POOP index</h3><small class="text-muted">3 days ago</small>
+          <img src="/assets/SPDR.jpg" class="img img-fluid" alt="Cinque Terre" width="100" height-max="100" style="margin-top:30px;margin-bottom:10px">
+          </div></div><!----><div class="col-md-7 vcenter" style="margin-top:30px"><div style="height:80;border:0px solid #F00"><h3>American Jumbo Companies</h3><small class="text-muted">Underlying Asset: SPDR S&P 500</small>
           </div>
-          </div><!----><div class="col-md-2" style="margin-top:70px;text-align:right"><button type="button" class="btn btn-success btn-lg">Invest</button></div>
+          </div><!----><div class="col-md-2" style="margin-top:20px;text-align:right"><h2 style="color:green">17.5%</h2><br><button type="button" class="btn btn-success btn-lg">Invest</button></div>
+        </div>
+        <div id="etf_detail" class="row" style="display:none;">
+          <div class="col-md-3">
+          </div><!----><div class="col-md-7 vcenter"><div style="height:80;border:0px solid #F00"><h4 style="color:green">Details:</h4><br>Imagine all the tech companies in the United States. This portfolio represents little portion of each of them. Apple, Amazon and Google and all of them.
+          <br><br><span style="color:grey">
+          ----> Here --- how many friends have invested or smth</span></div>
+          </div><!----><div class="col-md-2" style="margin-top:20px;text-align:right"></div>
         </div>
       </a>
       
       
-      <a href="#" class="list-group-item clearfix list-group-item-action flex-column align-items-start" style="border-radius:0px">
+      <a href="#" id="etf" class="list-group-item clearfix list-group-item-action align-items-start" style="border-radius:0px; border-style:solid; border-color:black; border-width:thin;">
         <div class="row">
           <div class="col-md-3">
-          <div style="height:140;border:0px solid #000"><img src="/assets/Rashidprofile.jpg" class="img img-fluid" alt="Cinque Terre" width="100" height-max="100" style="margin-top:10px;margin-bottom:10px">
-          </div></div><!----><div class="col-md-7 vcenter" style="margin-top:30px"><div style="height:80;border:0px solid #F00"><h3>Trump chipped in The Wall Fund</h3><small class="text-muted">3 days ago</small> </div>
-          </div><!----><div class="col-md-2" style="margin-top:70px;text-align:right"><button type="button" class="btn btn-success btn-lg">Invest</button></div>
+          <div style="height:140;border:0px solid #000">
+          <img src="/assets/ishares_logo.jpg" class="img img-fluid" alt="Cinque Terre" width="100" height-max="100" style="margin-top:30px;margin-bottom:10px">
+          </div></div><!----><div class="col-md-7 vcenter" style="margin-top:30px"><div style="height:80;border:0px solid #F00"><h3>Techno Giants</h3><small class="text-muted">Underlying Asset: iShares U.S. Technology ETF</small>
+          </div>
+          </div><!----><div class="col-md-2" style="margin-top:20px;text-align:right"><h2 style="color:green">7.84%</h2><br><button type="button" class="btn btn-success btn-lg">Invest</button></div>
         </div>
-      </a>
         
-      <a href="#" class="list-group-item clearfix list-group-item-action align-items-start" style="border-radius:0px">
-        <div class="row">
-          <div class="col-md-3"><div style="height:140;border:0px solid #000">
-          <img src="/assets/Isuruprofile.jpg" class="img img-fluid" alt="Cinque Terre" width="100" height-max="100" style="margin-top:10px;margin-bottom:10px">
-          </div></div><!----><div class="col-md-7 vcenter" style="margin-top:30px"><div style="height:80;border:0px solid #F00"><h3>Bob chipped in SPYDR POOP index</h3><small class="text-muted">3 days ago</small> </div>
-          </div><!----><div class="col-md-2" style="margin-top:70px;text-align:right"><button type="button" class="btn btn-success btn-lg">Invest</button></div>
+<!--------------------------More details when clicked on a portfolio------>
+        <div id="etf_detail" class="row" style="display:none;">
+          <div class="col-md-3">
+          </div><!----><div class="col-md-7 vcenter"><div style="height:80;border:0px solid #F00"><h4 style="color:green">Details:</h4><br>Imagine all the tech companies in the United States. This portfolio represents little portion of each of them. Apple, Amazon and Google and all of them.
+          <br><br><span style="color:grey">
+          ----> Here --- how many friends have invested or smth</span></div>
+          </div><!----><div class="col-md-2" style="margin-top:20px;text-align:right"></div>
         </div>
       </a>
       
-      <a href="#" class="list-group-item clearfix list-group-item-action flex-column align-items-start" style="border-radius:0px">
+<!-------------------------------->
+        
+      <a href="#" id="etf" class="list-group-item clearfix list-group-item-action align-items-start" style="border-radius:0px;border-top-style:solid; border-top-color:black; border-top-width:thin">
         <div class="row">
-          <div class="col-md-3"><div style="height:140;border:0px solid #000"><img src="/assets/Rashidprofile.jpg" class="img img-fluid" alt="Cinque Terre" width="100" height-max="100" style="margin-top:10px;margin-bottom:10px">
-          </div></div><!----><div class="col-md-7 vcenter" style="margin-top:30px"><div style="height:80;border:0px solid #F00"><h3>Trump chipped in The Wall Fund</h3><small class="text-muted">3 days ago</small> </div>
-          </div><!----><div class="col-md-2" style="margin-top:70px;text-align:right"><button type="button" class="btn btn-success btn-lg">Invest</button></div>
+          <div class="col-md-3">
+          <div style="height:140;border:0px solid #000">
+          <img src="/assets/SPDR.jpg" class="img img-fluid" alt="Cinque Terre" width="100" height-max="100" style="margin-top:10px;margin-bottom:10px">
+          </div></div><!----><div class="col-md-7 vcenter" style="margin-top:30px"><div style="height:80;border:0px solid #F00"><h3>Wall Street Companies</h3><small class="text-muted">Underlying Asset: Financial Select Sector SPDR Fund</small>
+          </div>
+          </div><!----><div class="col-md-2" style="margin-top:20px;text-align:right"><h2 style="color:green">0.27%</h2><br><button type="button" class="btn btn-success btn-lg">Invest</button></div>
+        </div>
+      <div id="etf_detail" class="row" style="display:none;">
+          <div class="col-md-3">
+          </div><!----><div class="col-md-7 vcenter"><div style="height:80;border:0px solid #F00"><h4 style="color:green">Details:</h4><br>Imagine all the tech companies in the United States. This portfolio represents little portion of each of them. Apple, Amazon and Google and all of them.
+          <br><br><span style="color:grey">
+          ----> Here --- how many friends have invested or smth</span></div>
+          </div><!----><div class="col-md-2" style="margin-top:20px;text-align:right"></div>
+        </div>
+      </a>
+      
+      <a href="#" id="etf" class="list-group-item clearfix list-group-item-action align-items-start"  style="border-radius:0px">
+        <div class="row">
+          <div class="col-md-3">
+          <div style="height:140;border:0px solid #000">
+          <img src="/assets/ishares_logo.jpg" class="img img-fluid" alt="Cinque Terre" width="100" height-max="100" style="margin-top:30px;margin-bottom:10px">
+          </div></div><!----><div class="col-md-7 vcenter" style="margin-top:30px"><div style="height:80;border:0px solid #F00"><h3>Oil and Gas companies</h3><small class="text-muted">Underlying Asset: U.S. Oil & Gas Exploration & Production ETF</small>
+          </div>
+          </div><!----><div class="col-md-2" style="margin-top:20px;text-align:right"><h2 style="color:red">-1.39%</h2><br><button type="button" class="btn btn-success btn-lg">Invest</button></div>
+        </div>
+         <div id="etf_detail" class="row" style="display:none;">
+          <div class="col-md-3">
+          </div><!----><div class="col-md-7 vcenter"><div style="height:80;border:0px solid #F00"><h4 style="color:green">Details:</h4><br>Imagine all the tech companies in the United States. This portfolio represents little portion of each of them. Apple, Amazon and Google and all of them.
+          <br><br><span style="color:grey">
+          ----> Here --- how many friends have invested or smth</span></div>
+          </div><!----><div class="col-md-2" style="margin-top:20px;text-align:right"></div>
         </div>
       </a>
     </div>
@@ -429,6 +468,19 @@ function scoreBoardBtn(){
     })
 }
 
+const onClickETF = ()=>{
+  $(document).on('click','#etf', (ev)=>{
+    ev.preventDefault();
+    const childDiv = $(ev.currentTarget).context.lastElementChild;
+    // debugger;
+    if ($(childDiv).is(':visible')){
+      $(childDiv).slideUp();
+    }else{
+      $(childDiv).slideDown();
+    }
+  })
+}
+
 $(document).ready(function(){
     clickSocial();
     clickDashBoard();
@@ -437,6 +489,7 @@ $(document).ready(function(){
     everyoneBtn();
     clickKnowledge();
     clickExperience();
+    onClickETF();
     $('#toggle').toggle('slow');
 })
 
