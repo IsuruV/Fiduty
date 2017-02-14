@@ -52,16 +52,16 @@
             <li><a href="https://fiduty-api-isuruv.c9users.io"><img src="/assets/Logo4.svg" height="50"></a></li>
           </ul>
 
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right" style="color:rgba(51, 153, 204, 1)">
             <li>
-              <a href="https://fiduty-api-isuruv.c9users.io/help/">HELP</a>
+              <a href="https://fiduty-api-isuruv.c9users.io/help/" style="color:rgba(51, 153, 204, 1)">HELP</a>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if current_user %>
-             <li><a href="/users/dashboard"><%= current_user.name%></a></li>
+             <li><a href="/users/dashboard" style="color:rgba(51, 153, 204, 1)"><%= current_user.name%></a></li>
              <% else %>
-             <li><a href="/users/sign_in">LOGIN</a></li>
+             <li><a href="/users/sign_in" style="color:rgba(51, 153, 204, 1)">LOGIN</a></li>
              <% end %>
           </ul>
           

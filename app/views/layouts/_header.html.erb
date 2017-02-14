@@ -8,28 +8,27 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 </button>
-	<a class="nav" href="/home/index" style="margin-left:100px;margin-right:80px;text-align:center"><img src="/assets/Logo4.svg" height="40"></a>
+	<a class="nav" href="/home" style="margin-left:100px;margin-right:80px;text-align:center"><img src="/assets/Logo4.svg" height="40"></a>
 	</div>
 
-	<div class="border-bottom">
-    <div class="full-left">
+	<div class="border-bottom" style="border-bottom-style:solid; border-bottom-color:gray;border-bottom-width:thin">
+    <div class="full-left" style="margin-top:2em">
        	<h4>Total investment: <span style="color:green">$<%=current_user.calculate_total_investment%></span> | Cash: <span style="color:green">$<%=current_user.funds/100%></span></h4>
         <div class="clearfix"></div>
     </div>
             <!-- Brand and toggle get grouped for better mobile display -->
 		 
 		   <!-- Collect the nav links, forms, and other content for toggling -->
-		    
-		<div class="dropdown drop-men">
-  		<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><a href="#" class="" data-toggle=""><span class=""><%=@user.name if @user%><i class=""></i></span></a>
-  		<span class="caret"></span></button>
-  		<ul class="dropdown-menu dropdown-menu-right">
-    	<li><a href="/users/profile">Profile</a></li>
-    	<li><a href="/users/sign_out">Sign Out</a></li>
-    	<li></li>
-  		</ul>
-  		<img src=<%=@user.image+"?type=large" if @user%> style="height:60px">
+        <div class="drop-men">
+		<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><h4><%=@user.name if @user%><span class="caret"></span></h4></a>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li><a href="/users/profile">Profile</a></li>
+    	    <li><a href="/users/sign_out">Sign Out</a></li>
+          </ul></li>
+  		<img src=<%=@user.image+"?type=large" if @user%> style="height:96px">
 		</div><div class="clearfix"></div>
+    
     </div>
      
         </header>

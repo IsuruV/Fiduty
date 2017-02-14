@@ -14,8 +14,6 @@ Devise.setup do |config|
   #   :port => 587,
   #   :domain => "gmail.com",
   #   :authentication => :login,
-  #   :user_name => "isuru260@gmail.com",
-  #   :password => "isuru491725"
   # }
 
   # If using rails-api, you may want to tell devise to not use ActionDispatch::Flash
