@@ -6,8 +6,9 @@ Devise.setup do |config|
   config.omniauth :facebook, '228025157667481', '5ae25ba5ef16d8cb69112d051933cb90', :strategy_class => OmniAuth::Strategies::Facebook
  # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
+    config.secret_key = '8e04459f383316c2bb5c75ffa8d010234b0a46637119f42dc15592f115a35736bfe2defe9b68163080765c501eb8d1af9cbcc5406152ef49f1366cc6be0c0fb1'
   # config.action_mailer.delivery_method = :smtp
-
+graph = Koala::Facebook::API.new('228025157667481') 
   # config.action_mailer.smtp_settings = {
   #   :enable_starttls_auto => true,
   #   :address => "smtp.gmail.com",

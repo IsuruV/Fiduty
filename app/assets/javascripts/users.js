@@ -372,9 +372,18 @@ function clickSocial(){
     $(document).on('click',"#social-tab",function(ev){
         ev.preventDefault();
         fader(socialContent, '.main-dashboard');
+    $('.box p').replaceWith(`<p>This is the coolest thing in our app. We believe that you will get far when surrounded by your friends</p>`)
+ 
     })
+    
 }
 
+function clickAmount(){
+  $(document).on('click', '#amount', function(ev){
+    ev.preventDefault();
+     $('.box p').replaceWith(`<p>Would you really invest $100,000 in the next 5 years? I wouldn't, and probably you wouldn't too, so $10 is what I would really start with, and you get 10$ to invest. Guess what, even it is a virtual money, you gotta earn it. Click on it to see how you can do it. </p>`)
+  })
+}
 
 function clickDashBoard(){
     $(document).on('click',"#dashboard-tab",function(ev){
@@ -387,6 +396,7 @@ function clickKnowledge(){
   $(document).on('click',"#knowledge-tab",function(ev){
     ev.preventDefault();
     fader(knowledgeContent,'.main-dashboard');
+     $('.box p').replaceWith(`<p>I never quite understood all the apps that don't explain you finance. How can you invest if you do not have a clue what you are doing. We have made some basic cards for you that help you understand and learn finance. And its not for 'hedge Fund' kids, its for everyone</p>`)
   })
 }
 
@@ -395,6 +405,7 @@ function clickExperience(){
     ev.preventDefault();
 
     fader(experienceContent, '.main-dashboard');
+     $('.box p').replaceWith(`<p>OMG there are only three portfolios to invest, but its just for now. As you progress and achieve new levels more portfolios will be available for you. Just keep swimming. </p>`)
   })
 }
 
@@ -481,6 +492,130 @@ const onClickETF = ()=>{
   })
 }
 
+const openModal = ()=>{
+  let signInCount = parseInt($('#sign_in_count').val());
+  if (signInCount <= 1 && window.localStorage.count !="1"){
+    $('#myModal').modal('toggle');
+    window.localStorage.count="1";
+  }
+}
+const updateInfo = ()=>{
+        $(document).on('click','#update_user_info',(ev)=>{
+        let name = $('#myModal #recipient-name').val();
+        let email = $('#myModal #recipient-email').val();
+        let phone = $('#myModal #recipient-phone').val();
+         $.ajax({
+            type: 'post',
+            url: `/users/update`,
+            dataType: 'json',
+            data: {
+              "user":{
+              "name": name,
+              "email": email,
+              "phone": phone
+            }
+              
+            }
+          }).done(function(data) {
+            alert("Info updated!")
+             $('#myModal').modal('toggle');
+             location.reload();
+          });
+  })
+}
+var counter = 0;
+const clickNext = () =>{
+  $(document).on('click', '#next', (ev)=>{
+    ev.preventDefault(); 
+    if(counter == 0){
+       $('.box p').replaceWith(`<p>We think starting is already a big step forward, so we give you 3% in each skill. Hooray! </p>`)
+       counter +=1;
+       window.localStorage.box=1;
+    }else if(counter == 1){
+      $('.box p').replaceWith(`<p>Check the app and see where everything is located (each of the tasks is linked to a particular skill, you can see it by pointing on the feature it will show you what skill that feature increases)</p>`)
+      counter +=1;
+      window.localStorage.box=2;
+    }else if(counter ==2){
+       $('.box p').replaceWith(`<p>So lets just kick it. Ive created few tasks for you, as you finish them you will get to the second level and get more perks opened for you</p>`)
+    }
+  })
+}
+
+const defaultBox = () =>{
+      if(window.localStorage.box == 0){
+       $('.box p').replaceWith(`<p>We think starting is already a big step forward, so we give you 3% in each skill. Hooray! </p>`)
+    }else if(window.localStorage.box == 1){
+      $('.box p').replaceWith(`<p>Check the app and see where everything is located (each of the tasks is linked to a particular skill, you can see it by pointing on the feature it will show you what skill that feature increases)</p>`)
+    }else if(window.localStorage.box ==2){
+       $('.box p').replaceWith(`<p>So lets just kick it. Ive created few tasks for you, as you finish them you will get to the second level and get more perks opened for you</p>`)
+    }
+}
+
+const sliderIntro = ()=>{
+		jQuery(document).ready(function($) {
+			$('.my-slider').unslider();
+		});
+}
+
+const chartExample = ()=>{
+  var calories = new RadialProgressChart('.calories', {
+  diameter: 200,
+  max: 800,
+  round: true,
+  series: [{
+    labelStart: '\uF105',
+    value: 500,
+    color: {
+      linearGradient: {
+        x1: '0%',
+        y1: '100%',
+        x2: '50%',
+        y2: '0%',
+        spreadMethod: 'pad'
+      },
+      stops: [{
+        offset: '0%',
+        'stop-color': '#fe08b5',
+        'stop-opacity': 1
+      }, {
+        offset: '100%',
+        'stop-color': '#ff1410',
+        'stop-opacity': 1
+      }]
+    }
+  }],
+  center: {
+    content: [function(value) {
+      return value
+    }, ' OF 800 CALS'],
+    y: 25
+  }
+});
+
+var gpa = new RadialProgressChart('.gpa', {
+  diameter: 200,
+  max: 4,
+  round: false,
+  series: [{
+    value: 3.75,
+    color: ['red', '#7CFC00']
+  }],
+  center: function(d) {
+    return d.toFixed(2) + ' GPA'
+  }
+});
+
+function getRandom(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+(function loop() {
+  calories.update(Math.round(getRandom(50, 800)));
+  gpa.update(getRandom(0.5, 3.8));
+  setTimeout(loop, 3000);
+})();
+}
+
 $(document).ready(function(){
     clickSocial();
     clickDashBoard();
@@ -490,6 +625,13 @@ $(document).ready(function(){
     clickKnowledge();
     clickExperience();
     onClickETF();
+    updateInfo();
+    openModal();
+    clickAmount();
+    clickNext();
+     defaultBox();
+     sliderIntro();
+     chartExample();
     $('#toggle').toggle('slow');
 })
 

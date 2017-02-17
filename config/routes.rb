@@ -4,7 +4,6 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
   get '/home' => "home#home"
-  
   get '/home/index' => 'home#index'
   get '/users/profile' => 'users#profile'
   get '/users/dashboard' => 'users#dashboard'
@@ -15,7 +14,7 @@ Rails.application.routes.draw do
   get '/portfolios/etf_return' => 'portfolios#etf_return'
   get '/users/recent_everyone_investment' => 'users#recent_everyone_investment'
   get '/users/sign_out' => "users#log_out"
-  
+  post '/users/update' => "users#update"
   # devise_scope :user do
   #   get '/signout', to: 'devise/sessions#destroy', as: :signout
   # end
