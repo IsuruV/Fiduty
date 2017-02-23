@@ -15,9 +15,14 @@ Rails.application.routes.draw do
   get '/users/recent_everyone_investment' => 'users#recent_everyone_investment'
   get '/users/sign_out' => "users#log_out"
   post '/users/update' => "users#update"
+  
+  get '/portfolios/ten_portfolios' => "portfolios#ten_portfolios"
+  resources :user_portfolios
+  
   # devise_scope :user do
   #   get '/signout', to: 'devise/sessions#destroy', as: :signout
   # end
+  
   namespace :api do
   # resources :reviews
   resources :users

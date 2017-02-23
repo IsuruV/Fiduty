@@ -1,7 +1,10 @@
 <!DOCTYPE HTML>
 <html>
+    
+    
 <style>
-				  div.panel,p.flip
+
+div.panel,p.flip
 {
     margin:0px;
     padding:5px;
@@ -48,116 +51,291 @@ div.panel
  .gpa .rbc-center-text-line0 {
    font-size: 30px;
  }
-				</style>
+ 
+
+</style>
+
  <!----------------Content Mid
 					---------------------->				
   <div class="main-dashboard">
-    
-		
-		
-		<div class="content-mid">
-			<div class="col-md-6">
-				<div class="middle-content" style="height:500px; border-style:none; box-shadow:none">
-					<h2 style="text-align:center;">Tasks</h2>
-				<div class="table-responsive">
-  	<table class="table table-hover">
-  	<thead>
-    <tr>
-      <th>#</th>
-      <th style="font:Roboto; color:#666666">Column heading</th>
-      <th style="font:Roboto; color:#666666">Column heading</th>
-    </tr>
-  	</thead>
-  	<tbody>
-  	  <% @user.tasks.each do |task| %>
-  	  <tr>
-  	    <td><%=task.id%></td>
-  	    <td><%=task.task%></td>
-  	 </tr>
-  	  <% end %>
-  	</tbody>
-	</table>
-</div></div>
-			</div><!----><div class="col-md-6">
-				<div class="middle-content" style="padding-right:auto; padding-top:auto; padding-bottom:auto; padding-left:auto; margin-right:20px;border-style:none; box-shadow:none">
-		      <p><h2 class="featurette-heading">Upcoming Features</h2><br>
-				<span style="font-family:'Roboto'; color:Black">
-					<div class="list-group">
-  						<a href="#" class="list-group-item active">
-    					Cras justo odio
+    	
+    	
+    	<div class="col-md-6">
+		<div class="middle-content" style="height:400px; border-style:none; box-shadow:none;padding-top:10px; padding-left:20px; padding-right:20px">
+		    
+		    <h2 style="text-align:center;">Tasks</h2><br>
+	        <div class="row-fluid">
+            <div class="btn-group btn-group-justified" style="height:80px;">
+              <a href="#" class="btn btn-warning btn-lg" style="white-space: normal">Completed</a>
+              <a href="#" class="btn btn-success btn-lg" style="white-space: normal;">Current tasks</a>
+              <a href="#" class="btn btn-primary btn-lg" style="white-space: normal;">Upcoming tasks</a>
+            </div>
+            </div>
+        
+ <!----------------Cards---------------------->
+        
+            <div class="list-group" style="font-family:'Roboto'; font-size:16px; color:#666666; padding-top:1em"><% @user.tasks.each do |task| %>
+
+                <a href="#" class="list-group-item clearfix list-group-item-action flex-column align-items-start" style="border-radius:0px">
+                <div class="row">
+                    
+                    <div class="col-md-1"><h4 style="color:green"><i class="fa fa-check" aria-hidden="true"></i></h4>
+                    </div><!----><div class="col-md-8 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;"><h4><%=task.task%></h4>
+                </div><!----><div class="col-md-3 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;color:green"><h4>+0.5% Try</h4>
+                </div>
+                </div>
+                </a>
+                <% end %>
+            </div>
+</div></div><!----><div class="col-md-6">
+				<div class="middle-content" style="padding-top:10px; padding-bottom:auto; padding-top:10px; padding-left:20px; padding-right:20px; margin-right:0px;border-style:none; box-shadow:none; border-radius:0px">
+		      <p><h2 class="featurette-heading" style="text-align:center">Upcoming Features</h2><br>
+				<span style="font-family:'Roboto'; color:Black; font-size:16px">
+					<div class="list-group" style="border-radius:0px">
+  						<a href="#" class="list-group-item active"  style="border-radius:0px">
+    					Group investing - March 1st, 2017
   						</a>
-  						<a href="#" class="list-group-item">Dapibus ac facilisis in
+  						<a href="#" class="list-group-item"  style="border-radius:0px">Levels in the social feed - March 15th, 2017
   						</a>
-  						<a href="#" class="list-group-item">Morbi leo risus
+  						<a href="#" class="list-group-item"  style="border-radius:0px">IOS application - March 31st, 2017
   						</a>
-    					<a href="#" class="list-group-item">Morbi leo risus
-  						</a>
-    					<a href="#" class="list-group-item">Morbi leo risus
+    					<a href="#" class="list-group-item"  style="border-radius:0px">Real money investment - August 1st, 2017
   						</a>
 					</div>
 		      
 		    </div>
-				</div>
 			</div>
-			<div class="clearfix"> </div>
-		</div>
-		
+			</div>
+
+		    </div>
  <!----------------End Content Mid
 					---------------------->	
 
 
 <!---->
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="form-control-label">Recipient:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="form-group">
-            <label for="message-text" class="form-control-label">Message:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
-      </div>
-    </div>
-  </div>
-</div>
+<!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--  <div class="modal-dialog" role="document">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title" id="exampleModalLabel">New message</h5>-->
+<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--          <span aria-hidden="true">&times;</span>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <form>-->
+<!--          <div class="form-group">-->
+<!--            <label for="recipient-name" class="form-control-label">Recipient:</label>-->
+<!--            <input type="text" class="form-control" id="recipient-name">-->
+<!--          </div>-->
+<!--          <div class="form-group">-->
+<!--            <label for="message-text" class="form-control-label">Message:</label>-->
+<!--            <textarea class="form-control" id="message-text"></textarea>-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--        <button type="button" class="btn btn-primary">Send message</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
 
+    <div class="clearfix"></div>
+  	     
+  	     
+<!-----------Invest Modal---->
+  	     
+  	 <div class="modal fade" id="investModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="max-width:50%; margin-left:25%;margin-top:10%;margin-rigt:auto; position:fixed">
+  	     <div class="modal-content" 
+        <div>
+            
+            <ul class="nav nav-tabs nav-justified" style="font-size:2em">
+  		    <li class="active" style="color:green"><a data-toggle="tab" href="#Invest" >Invest</a></li>
+  		    <h4 id="modalETFName" class="muted" style="text-align:center;color:green"></h4>
+  		    
+          		<!--<li ><a data-toggle="tab" href="#Cash" >Invest</a></li>-->
+		    </ul>
+        		
+        <div class="tab-content" >
+        <div id="Cash" class="tab-pane fade in active">
+        	
+        	<div class="row">
+        		<div class="col-xs-5 col-md-offset-1" style="height:150px;border-right-style:solid;border-right-color:#dcdcdc; border-right-width:thin;border-bottom-style:solid;border-bottom-color:#dcdcdc; border-bottom-width:thin;text-align:center">
+        			<p style="padding-top:10px; font-size:1em">Available cash<br>
+        			<span style="color:green;font-size:4em; padding-top:25px">$<%=current_user.funds/100%></span></p>
+        		</div><!---><div class="col-xs-5" style="height:150px;text-align:center;border-bottom-style:solid;border-bottom-color:#dcdcdc; border-bottom-width:thin">
+        		<p style="padding-top:10px;font-size:1em">How much do you want to invest?<br><br>
+        			<span><input id="amountInvested" class="form-control form-control-lg" type="text" placeholder="Enter here"></span></p>
+        		</div>
+        	</div>
+        		
+            <div class="modal-body">
+                <h4 style="text-align:center">To get more cash follow this link <i class="fa fa-angle-double-right" aria-hidden="true"></i></h4>
+      		</div>
+      			
+      		<div class="modal-footer">
+      	    	<input type="hidden" id="etfID" value=""></input>
+      			<button id="makeInvestment" type="button" class="btn btn-success" style="width:80px;">Invest</button>
+        		<button type="button" class="btn btn-default" data-dismiss="modal" style="width:80px;">Close</button>
+      		</div>
+      	
+      	</div>
+        </div>
+        </div>
+        </div>
+        </div>
+        
+<!-----------Invest Modal End---->
+
+
+
+<!-----------Cash Modal End---->
+    <div id="cashModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="max-width:50%; margin-left:25%;margin-top:5%;margin-rigt:auto; position:fixed">
+  	<div class="modal-content" 
+    <div>
+            
+            <ul class="nav nav-tabs nav-justified" style="font-size:2em">
+  		    <li class="active" style="color:green"><a data-toggle="tab" href="#Invest" >Available Cash</a></li>
+<!--<li ><a data-toggle="tab" href="#Cash" >Invest</a></li>-->
+		    </ul>
+    
+        <div class="tab-content" >
+        <div id="Cash" class="tab-pane fade in active">
+        	
+        	<div class="row">
+        		<div class="col-xs-6 col-xs-offset-3" style="height:120px;border-bottom-style:solid;border-bottom-color:#dcdcdc; border-bottom-width:thin;text-align:center">
+        			<span style="color:green;font-size:4em; padding-top:15px">$<%=current_user.funds/100%></span></p>
+        		</div>
+        	</div>
+        		
+    <div class="modal-body">
+<h3 style="text-align:center">This is how you can get more cash to invest</h3>    
+<br>
+    <div class="list-group" style="font-family:'Roboto'; font-size:14px; color:#666666;" >
+          
+        <a href="#" class="list-group-item clearfix list-group-item-action align-items-start" style="border-radius:0px">
+            <div class="row">
+                <div class="col-xs-10"><p style="font-family:'Roboto'; font-size:1em; color:#666666;" >Take a quiz and earn $10</p>
+            </div><!----><div class="col-xs-2"><button type="button" class="btn btn-default">Go</button></div>
+            </div>
+        </a>
+      		
+        <a href="#" class="list-group-item clearfix list-group-item-action align-items-start" style="border-radius:0px">
+            <div class="row">
+                <div class="col-xs-10"><p style="font-family:'Roboto'; font-size:1em; color:#666666;" >Share on facebook and earn $30</p>
+            </div><!----><div class="col-xs-2"><button type="button" class="btn btn-default">Go</button></div>
+            </div>
+        </a>
+      		
+        <a href="#" class="list-group-item clearfix list-group-item-action align-items-start" style="border-radius:0px">
+            <div class="row">
+                <div class="col-xs-10"><p style="font-family:'Roboto'; font-size:1em; color:#666666;" >Invite a friend and earn $10</p>
+            </div><!----><div class="col-xs-2"><button type="button" class="btn btn-default">Go</button></div>
+            </div>
+        </a>
+
+     
+    </div></div>
+      			
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal" style="width:80px;">Close</button>
+      		</div>
+      	
+      	</div>
+        </div>
+        </div>
+        </div>
+        </div>
+			
+<!------------Chatbot Modal------------->
+
+    <div id="chatbotModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="max-width:50%; max-height:60%; margin-left:25%;margin-top:5%;margin-rigt:auto; position:fixed">
+  	<div class="modal-content">
+    <div>
+            
+            <ul class="nav nav-tabs nav-justified" style="font-size:2em">
+  		    <li class="active" style="color:green"><a data-toggle="tab" href="#Invest" ><h4 style="color:rgba(51, 153, 204, 1); text-align:center;padding-top:5px"><i class="fa fa-comments-o" aria-hidden="true"></i>
+Richie the Bot</h4></a></li>
+<!--<li ><a data-toggle="tab" href="#Cash" >Invest</a></li>-->
+		    </ul>
+    
+        <div class="tab-content" >
+        <div id="Cash" class="tab-pane fade in active">
+        	
+        	<div class="row">
+        		<div class="col-xs-6 col-xs-offset-3" style="height:70px;border-bottom-style:solid;border-bottom-color:#dcdcdc; border-bottom-width:thin;text-align:center">
+        			
+        		</div>
+        	</div>
+
+
+
+      		
+    <div class="modal-body" style="overflow-y: auto">
+                <ul class="chat">
+                <li class="left clearfix" style="padding:0px">
+                <div class="chat-body clearfix" style="padding:0px">
+                <div class="header">
+                <strong class="primary-font" style="color:rgba(51, 153, 204, 1)">Richie</strong> <small class="pull-right text-muted">
+                <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
+                </div>
+                        <p>
+                            Hey there, this is Richie im a bot. I'm created to guide you through this process. Feel free to ask me questions anytime, I'm powered by Artificial Intelligence.
+                        </p>
+                </div>
+                </li>
+                              
+                <li class="right clearfix" style="padding:0px">
+                <div class="chat-body clearfix" style="padding:0px">
+                <div class="header">
+                <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>10 mins ago</small>
+                <strong class="pull-right primary-font" style="color:rgba(51, 153, 204, 1)"><%=@user.name if @user%></strong>
+                </div>
+                     <p>
+                        #next
+                     </p>
+                </div>
+                </li>
+                
+                
+                                <li class="left clearfix" style="padding:0px">
+                <div class="chat-body clearfix" style="padding:0px">
+                <div class="header">
+                <strong class="primary-font" style="color:rgba(51, 153, 204, 1)">Richie</strong> <small class="pull-right text-muted">
+                <span class="glyphicon glyphicon-time"></span>10 mins ago</small>
+                </div>
+                        <p>
+                            We think starting is already a big step forward, so we give you 3% in each skill. Hooray!
+                        </p>
+                </div>
+                </li>
+            </ul>
+            </div></div>
+      			
+      		<div class="modal-footer">
+      		    <div class="input-group">
+                <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                <button class="btn btn-default" id="btn-chat" style="width:80px;">
+                Send</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="width:80px;">Close</button>
+      		
+      		</div>
+      	
+      	</div>
+        </div>
+        </div>
+        </div>
+        </div>
+
+
+<!------------------------->
+			
+			
+			
+			
 </body>
 </html>
-
-    <!--<tr>-->
-    <!--  <td>1</td>-->
-    <!--  <td>Column content</td>-->
-    <!--  <td>Column content</td>-->
-    <!--</tr>-->
-    <!--<tr>-->
-    <!--  <td>2</td>-->
-    <!--  <td>Column content</td>-->
-    <!--  <td>Column content</td>-->
-    <!--</tr>-->
-    <!--<tr class="info">-->
-    <!--  <td>3</td>-->
-    <!--  <td>Column content</td>-->
-    <!--  <td>Column content</td>-->
-    <!--</tr>-->
-    <!--<tr>-->
-    <!--  <td>4</td>-->
-    <!--  <td>Column content</td>-->
-    <!--  <td>Column content</td>-->
-    <!--</tr>-->

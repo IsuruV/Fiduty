@@ -62,9 +62,10 @@
             <% if current_user %>
              <li><a href="/users/dashboard" style="color:rgba(51, 153, 204, 1)"><%= current_user.name%></a></li>
              <% else %>
-             <li><a href="/users/sign_in" style="color:rgba(51, 153, 204, 1)">LOGIN</a></li>
+             <li><a href="/omniauth/facebook" style="color:rgba(51, 153, 204, 1)">LOGIN WITH <i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
              <% end %>
           </ul>
+          
           
         </div>
       </div>
@@ -96,7 +97,7 @@
   </h1></span>
             <p class="lead">Investing for Millennials Made Cool</p>
             <p class="lead">
-              <a href="#" class="btn btn-lg btn-secondary">Join Today</a>
+              <a href="/omniauth/facebook" class="btn btn-lg btn-secondary">Join Today</a>
             </p>
           </div>
 
@@ -196,7 +197,7 @@
             <div style="height:20%;border:0px solid #F00">
           <p class="lead">Investing for Millennials Made Cool</p>
             <p class="lead">
-              <a href="#" class="btn btn-lg btn-secondary">Join Today</a>
+              <a href="/omniauth/facebook" class="btn btn-lg btn-secondary">Join Today</a>
             </p>
             </div>
           </div></div>
