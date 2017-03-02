@@ -3,8 +3,8 @@
 <head>
 <title>Fiduty - Dashboard</title>
 
+<meta name="viewport" content="width=device-width, user-scalable=no">
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
 <!-- Custom Theme files -->
 
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -16,6 +16,8 @@
 <script src="js/jquery.metisMenu.js"></script>
 <script src="js/jquery.slimscroll.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.js"></script>
+<script src="/assets/radial-progress-chart.min.js"></script>
 <script src="/assets/users.js"></script>
 
 <!-- Custom and plugin javascript -->
@@ -23,6 +25,7 @@
 <link href="/assets/users.css"></link>
 <script src="js/custom.js"></script>
 <script src="js/screenfull.js"></script>
+
 		<script>
 		$(function () {
 			$('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -42,14 +45,21 @@
 <!--//skycons-icons-->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 
 <!--Slider links-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/unslider/2.0.3/js/unslider-min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/unslider/2.0.3/css/unslider-dots.css"></link>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/unslider/2.0.3/css/unslider.css"></link>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"></link>
 <!---->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/unslider/2.0.3/css/unslider-dots.css"></link>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/unslider/2.0.3/css/unslider.css"></link>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/unslider/2.0.3/js/unslider-min.js"></script> 
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 
 
@@ -58,22 +68,84 @@
 
 <body style="font-family:'Roboto'; font-size: 20px; color:#666666;">
 	
-	<div id="toggle" class="container-fluid" style="background-color:rgba(51, 153, 204, 1);height:500px">
-		
-	</div>
+<!----Onboarding render a Partial _onboarding.html.erb---->
 
-  <%= render partial: '/layouts/header' %>
-  <%= render partial: '/layouts/nav' %>
+
+
+<!----End Onboarding---->
+
+
+<%= render partial: '/layouts/header' %>
+<%= render partial: '/layouts/nav' %>
 
 
 	<div id="wrapper">
 		
-<!------------Rules Button------------->
-		
-		<a class="btn btn-default btn-lg" style="white-space: normal; margin-top:500px; margin-left:70px; margin-bottom:40px; position:fixed;">
-		<h4>Check rules</h4>	
-		</a>
-<!------------------------->
+<!------------Chatbot Button------------->
+
+		<!--<div class="box" style="height:250px;width:220px; border-style:solid; border-color:black;border-width:thin; margin-top:260px; margin-left:20px; margin-bottom:40px; position:fixed;overflow:scroll;">-->
+		<!--<p id ="writing" style="font-size:1em; color:rgba(51, 153, 204, 1);">Hey there, this is Richie im a bot. I'm created to guide you through this process. Feel free to ask me questions anytime, I'm powered by Artificial Intelligence.</p>-->
+	<div class="col-md-3">
+	   <div class="box" style="min-height:310px;width:240px; margin-top:260px; margin-left:0px; margin-bottom:40px; position:fixed; font-size:16px; border-style:solid; border-color:black;border-width:thin;">
+	       <div class="row"><div class="col-xs-12"><h4 style="color:rgba(51, 153, 204, 1); text-align:center;padding-top:5px"><i class="fa fa-comments-o" aria-hidden="true"></i>
+Richie the Bot</h4></div></div>
+
+	       <div class="panel-body" style="overflow-y: scroll; padding:5px; max-height:180px">
+            <ul class="chat">
+
+                <li class="left clearfix" style="padding:0px">
+                <div class="chat-body clearfix" style="padding:0px">
+                <div class="header">
+                <strong class="primary-font" style="color:rgba(51, 153, 204, 1)">Richie</strong> <small class="pull-right text-muted">
+                <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
+                </div>
+                        <p>
+                            Hey there, this is Richie im a bot. I'm created to guide you through this process. Feel free to ask me questions anytime, I'm powered by Artificial Intelligence.
+                        </p>
+                </div>
+                </li>
+                              
+                <li class="right clearfix" style="padding:0px">
+                <div class="chat-body clearfix" style="padding:0px">
+                <div class="header">
+                <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>10 mins ago</small>
+                <strong class="pull-right primary-font" style="color:rgba(51, 153, 204, 1)"><%=@user.name if @user%></strong>
+                </div>
+                     <p>
+                        #next
+                     </p>
+                </div>
+                </li>
+                
+                
+                                <li class="left clearfix" style="padding:0px">
+                <div class="chat-body clearfix" style="padding:0px">
+                <div class="header">
+                <strong class="primary-font" style="color:rgba(51, 153, 204, 1)">Richie</strong> <small class="pull-right text-muted">
+                <span class="glyphicon glyphicon-time"></span>10 mins ago</small>
+                </div>
+                        <p>
+                            We think starting is already a big step forward, so we give you 3% in each skill. Hooray!
+                        </p>
+                </div>
+                </li>
+            </ul>
+            </div>
+            
+            <div class="panel-footer">
+                <div class="input-group">
+                     <form id="watson">
+                        <input id="user-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+                        <span class="input-group-btn">
+                           <input type="submit" class="btn btn-primary btn-sm" id="btn-chat"value="Send"></input>
+                       </span>
+                     </form>
+                </div>
+            </div>
+        </div></div>
+
+		<!--<a id="next" class="btn btn-default btn-lg" style="white-space: normal; margin-top:520px; margin-left:170px; margin-bottom:40px; position:fixed;"><h4>Next</h4></a>-->
+
 	
 	<div id="page-wrapper">
 	<div class="content-main" style="background:white">
@@ -87,13 +159,14 @@
 
 <!------------Footer------------->
 
-	<div class="copy" style="text-align:right; padding-right:15px;">
-    <p>2017 Fiduty - all rights reserved</p>
-	<div class="clearfix"> </div>
+
 <!------------------------->
 	
 </div>
 </div>
+	<footer class="copy" style="text-align:right; padding-right:45px;">
+    <p>2017 Fiduty - all rights reserved</p>
+	<div class="clearfix"> </footer>
 </div>
 <!---->
 

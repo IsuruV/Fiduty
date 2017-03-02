@@ -1,68 +1,200 @@
 <html>
 <body>
 
- 	 <!--gallery-->
  	 <div class=" profile">
 
-		<div class="profile-bottom">
-			<h3><i class="fa fa-user"></i>Profile</h3>
+		<div class="profile-bottom" style="width:96%; border-style:none;font-family:'Roboto'">
+			<h3><i class="fa fa-user" aria-hidden="true"></i>Profile</h3>
 			<div class="profile-bottom-top">
-			<div class="col-md-4 profile-bottom-img">
-				<img src="images/pr.jpg" alt="">
+			<div class="col-md-4 profile-bottom-img" style="padding-left:70px;padding-top:45px">
+				<img src="/assets/ErmekProfile.jpg" style="height:200px">
 			</div>
-			<div class="col-md-8 profile-text">
-				<h6>Jack Dorsey</h6>
-				<table>
-				<tr><td>Department</td>  
+			<div class="col-md-8 profile-text" style="font-family:'Roboto'">
+				<h6 style="padding-left:15px">Name: <%=@user.name if @user%></h6>
+				<table style="font-family:'Roboto'; text-align:left">
+				<tr><td>Phone number</td>  
 				<td>:</td>  
-				<td>Web Designer</td></tr>
+				<td>+1(917)650-5607</td></tr>
 				
 				<tr>
 				<td>Email</td>
 				<td> :</td>
-				<td><a href="info@gmail.com">info@lorem.com</a></td>
+				<td>ermekrysbekuulu@gmail.com</a></td>
 				</tr>
 				<tr>
-				<td>Skills</td>
+				<td>Password</td>
 				<td> :</td>
-				<td> HTML, CSS,Jqury, Bootstrap</td>
+				<td>*********</td>
+				</tr>
+				<tr><td>SSN</td>  
+				<td>:</td>  
+				<td>***-**-4633</td></tr>
+				
+				<tr>
+				<td>Address</td>
+				<td> :</td>
+				<td>1589 Ocean avenue, apt 1G, Brooklyn, NY 11230</a></td>
 				</tr>
 				<tr>
-				<td>Country </td>
-				<td>:</td>
-				<td> United Arab Emirates</td>
+				<td>Occupation</td>
+				<td> :</td>
+				<td>Student</td>
 				</tr>
 				</table>
 			</div>
 			<div class="clearfix"></div>
 			</div>
-			<div class="profile-bottom-bottom">
-			<div class="col-md-4 profile-fo">
-				<h4>23,5k</h4>
-				<p>Followers</p>
-				<a href="#" class="pro"><i class="fa fa-plus-circle"></i>Follow</a>
-			</div>
-			<div class="col-md-4 profile-fo">
-				<h4>348</h4>
-				<p>Following</p>
-				<a href="#" class="pro1"><i class="fa fa-user"></i>View Profile</a>
-			</div>
-			<div class="col-md-4 profile-fo">
-				<h4>23,5k</h4>
-				<p>Snippets</p>
-				<a href="#"><i class="fa fa-cog"></i>Options</a>
-			</div>
-			<div class="clearfix"></div>
-			</div>
-			<div class="profile-btn">
+			<br>
+			<div class="profile-btn" >
 
-                <button type="button" href="#" class="btn bg-red">Save changes</button>
+                <button type="button" href="#" class="btn bg-red" style="border-radius:0px">Edit</button>
            <div class="clearfix"></div>
 			</div>
-			 
-			
 		</div>
 	</div>
+	
+			
+      
+      
+    
 
+
+      
+      	<div id="Invest" class="tab-pane fade">
+    		<div class="row">
+        		<div class="col-md-6" style="height:150px;border-right-style:solid;border-right-color:#dcdcdc; border-right-width:thin;border-bottom-style:solid;border-bottom-color:#dcdcdc; border-bottom-width:thin;text-align:center">
+        			<p style="padding-top:10px; font-size:1em">Available cash<br>
+        			<span style="color:green;font-size:4em; padding-top:25px">$<%=current_user.funds/100%></span></p>
+        		</div><!---><div class="col-md-6" style="height:150px;text-align:center;border-bottom-style:solid;border-bottom-color:#dcdcdc; border-bottom-width:thin">
+        		<p style="padding-top:10px;font-size:1em">How much do you want to invest?<br><br>
+        			<span><input class="form-control form-control-lg" type="text" placeholder="Enter here"></span></p>
+        		</div>
+        		</div>
+        		<br>
+        		
+            <div class="modal-body">
+ <br>
+            
+            <div class="list-group" style="font-family:'Roboto'; font-size:16px; color:#666666; padding-top:0px">
+                
+                <a href="#" class="list-group-item clearfix list-group-item-action flex-column align-items-start" style="border-radius:0px">
+                <div class="row">
+                    <div class="col-md-4 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;"><h4>Name</h4>
+                	</div><!----><div class="col-md-8 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;color:green"><h4>American 500</h4>
+                	</div>
+                </div>
+                </a>
+            
+                <a href="#" class="list-group-item clearfix list-group-item-action flex-column align-items-start" style="border-radius:0px">
+                <div class="row">
+                    <div class="col-md-4 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;"><h4>Underlying asset</h4>
+                	</div><!----><div class="col-md-8 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;color:green"><h4>SPY SPDR S&P 500</h4>
+                	</div>
+                </div>
+                </a>
+                
+                <a href="#" class="list-group-item clearfix list-group-item-action flex-column align-items-start" style="border-radius:0px">
+                <div class="row">
+                    <div class="col-md-4 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;"><h4>Total Fees</h4>
+                	</div><!----><div class="col-md-8 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;color:green"><h4>$0</h4>
+                	</div>
+                </div>
+                </a>
+                
+                <a href="#" class="list-group-item clearfix list-group-item-action flex-column align-items-start" style="border-radius:0px">
+                <div class="row">
+                    <div class="col-md-4 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;"><h4>Total Invested</h4>
+                	</div><!----><div class="col-md-8 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;color:green"><h4>$5</h4>
+                	</div>
+                </div>
+                </a>
+                
+           	</div>
+      		</div>
+      			<div class="modal-footer">
+        		<button type="button" class="btn btn-success" data-dismiss="modal" style="width:90px">Invest</button>
+        		<button type="button" class="btn btn-default" data-dismiss="modal" style="width:90px">Dismiss</button>
+      			</div>
+  			</div>
+  			
+  		</div>
+  	</div>   
+   
+
+
+
+  	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="width:650px;height:800px; position: absolute;top: 50%;left: 50%;margin-top: -25px;margin-left: -200px; margin-left: -200px;padding: 20px;">
+  	    <div class="modal-content" 
+    <div >
+        <ul class="nav nav-tabs nav-justified" style="font-size:2em">
+  		<li class="active" style="color:green"><a data-toggle="tab" href="#Cash" >Cash</a></li>
+  		<li ><a data-toggle="tab" href="#Invest" >Invest</a></li>
+		</ul>
+        		
+        <div class="tab-content" >
+        	<div id="Cash" class="tab-pane fade in active">
+        		<div class="row">
+        		<div class="col-md-6" style="height:150px;border-right-style:solid;border-right-color:#dcdcdc; border-right-width:thin;border-bottom-style:solid;border-bottom-color:#dcdcdc; border-bottom-width:thin;text-align:center">
+        			<p style="padding-top:10px; font-size:1em">Available cash<br>
+        			<span style="color:green;font-size:4em; padding-top:25px">$<%=current_user.funds/100%></span></p>
+        		</div><!---><div class="col-md-6" style="height:150px;text-align:center;border-bottom-style:solid;border-bottom-color:#dcdcdc; border-bottom-width:thin">
+        		<p style="padding-top:10px;font-size:1em">How much do you want to invest?<br><br>
+        			<span><input class="form-control form-control-lg" type="text" placeholder="Enter here"></span></p>
+        		</div>
+        		</div>
+        		<br>
+        		
+            <div class="modal-body">
+        	<h3 style="text-align:center">How can I get virtual cash to invest?</h3>
+       		<br>
+            
+            <div class="list-group" style="font-family:'Roboto'; font-size:16px; color:#666666; padding-top:0px">
+                
+                <a href="#" class="list-group-item clearfix list-group-item-action flex-column align-items-start" style="border-radius:0px">
+                <div class="row">
+                    <div class="col-md-1"><h4 style="color:green"><i class="fa fa-check" aria-hidden="true"></i></h4>
+                    </div><!----><div class="col-md-9 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;"><h4>Take a quiz</h4>
+                	</div><!----><div class="col-md-2 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;color:green"><h4><button type="button" class="btn btn-default" data-dismiss="modal">Go</button></h4>
+                	</div>
+                </div>
+                </a>
+            
+                <a href="#" class="list-group-item  list-group-item-action flex-column align-items-start" style="border-radius:0px">
+                <div class="row">
+                    <div class="col-md-1"><h4 style="color:green"><i class="fa fa-check" aria-hidden="true"></i></h4>
+                    </div><!----><div class="col-md-9 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;"><h4>Share on facebook</h4>
+                	</div><!----><div class="col-md-2 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;color:green"><h4><button type="button" class="btn btn-default" data-dismiss="modal">Go</button></h4>
+                	</div>
+                </div>
+                </a>
+                
+                <a href="#" class="list-group-item  list-group-item-action flex-column align-items-start" style="border-radius:0px">
+                <div class="row">
+                    <div class="col-md-1"><h4 style="color:green"><i class="fa fa-check" aria-hidden="true"></i></h4>
+                    </div><!----><div class="col-md-9 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;"><h4>Invite a friend</h4>
+                	</div><!----><div class="col-md-2 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;color:green"><h4><button type="button" class="btn btn-default" data-dismiss="modal">Go</button></h4>
+                	</div>
+                </div>
+                </a>
+                
+                <a href="#" class="list-group-item  list-group-item-action flex-column align-items-start" style="border-radius:0px">
+                <div class="row">
+                    <div class="col-md-1"><h4 style="color:green"><i class="fa fa-check" aria-hidden="true"></i></h4>
+                    </div><!----><div class="col-md-9 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;"><h4>Come back here every 6 hours and click</h4>
+                	</div><!----><div class="col-md-2 vcenter" style="height:80;border:0px solid #F00; padding-left:10px;color:green"><h4><button type="button" class="btn btn-default" data-dismiss="modal">Go</button></h4>
+                	</div>
+                </div>
+                </a>
+                
+           	</div>
+      		</div>
+      			<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      			</div>
+      	</div>
+     </div>
+    </div>
+
+<div class="clearfix"></div>
 </body>
 </html>

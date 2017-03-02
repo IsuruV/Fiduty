@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
+  resources :progress_points
   # devise_for :users
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   root to: 'home#index'
   get '/home' => "home#home"
-  
   get '/home/index' => 'home#index'
   get '/users/profile' => 'users#profile'
   get '/users/dashboard' => 'users#dashboard'
@@ -15,10 +15,16 @@ Rails.application.routes.draw do
   get '/portfolios/etf_return' => 'portfolios#etf_return'
   get '/users/recent_everyone_investment' => 'users#recent_everyone_investment'
   get '/users/sign_out' => "users#log_out"
+  post '/users/update' => "users#update"
+  post '/users/add_points' => "users#add_points"
   
+  get '/portfolios/ten_portfolios' => "portfolios#ten_portfolios"
+  resources :user_portfolios
+  post '/user_portfolios/watson_proxy' => "user_portfolios#watson_proxy"
   # devise_scope :user do
   #   get '/signout', to: 'devise/sessions#destroy', as: :signout
   # end
+  
   namespace :api do
   # resources :reviews
   resources :users

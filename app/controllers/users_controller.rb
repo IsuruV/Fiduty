@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  # before_action :authenticate_user!
+  before_filter :authenticate_user!
+ 
    layout 'users'
    
    def dashboard
@@ -133,7 +134,15 @@ end
     sign_out current_user
     redirect_to root_path
   end
-    
+  
+  def add_points
+    points = params[:points]
+    if points
+      current_user.add_points(points)
+    else
+      current_user.add_points
+    end
+  end
 
 
   # private
