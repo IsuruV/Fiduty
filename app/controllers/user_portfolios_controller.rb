@@ -45,4 +45,19 @@ class UserPortfoliosController < ApplicationController
       end
     end
     
+    def watson_proxy
+      conn = Faraday.new(:url => "https://gateway.watsonplatform.net/conversation/api/v1" )
+      conn.basic_auth('fcd45e5b-e1d8-42ea-8b1e-51b506b5d9dd', 'gU37Hs0zV7ti')
+
+      resp = conn.post do |req|
+        req.url '/conversation/api/v1/workspaces/6b52eac7-5172-4546-8d84-cf5a0adf659c/message?version=2017-02-03'
+        req.headers['Content-Type'] = 'application/json' 
+        req.body = params[:insert].to_json
+      end
+      respond_to do |format|
+        format.json{ render json: resp.body}
+      end
+    end 
+
 end
+  

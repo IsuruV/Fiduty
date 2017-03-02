@@ -1,0 +1,2 @@
+class ProgressPointsController < ApplicationController
+end

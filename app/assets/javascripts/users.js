@@ -698,27 +698,56 @@ const messageFormat = (input)=>{
                 </li>`
 }
 
+const userMessageFormat = (input, name)=>{
+  return `                <li class="right clearfix" style="padding:0px">
+                <div class="chat-body clearfix" style="padding:0px">
+                <div class="header">
+                <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>10 mins ago</small>
+                <strong class="pull-right primary-font" style="color:rgba(51, 153, 204, 1)">${name}</strong>
+                </div>
+                     <p>
+                        ${input}
+                     </p>
+                </div>
+                </li>`
+}
+
 const ibmBlueMixSendMesssage = ()=>{
   $(document).on('submit','#watson',(ev)=>{
       ev.preventDefault();
-    debugger;
+    // debugger;
     let message = $('input#user-input').val();
+     $('ul.chat').append(userMessageFormat(message, $('#username').val()));
+       $('input#user-input').val('');
    $.ajax
     ({
-       type: "GET",
-        url: "https://gateway.watsonplatform.net/conversation/api/v1/workspaces/6b52eac7-5172-4546-8d84-cf5a0adf659c/message?version=2017-02-03",
+       type: "POST",
         dataType: 'json',
-        async: false,
-        username: 'fcd45e5b-e1d8-42ea-8b1e-51b506b5d9dd',
-        password: 'gU37Hs0zV7ti',
-        data: { "input": {"text": message } }
+        url: "/user_portfolios/watson_proxy.json",
+        data: {"insert":{ "input": {"text": message } }}
     }).done(function(data) {
-          debugger;
+          $('ul.chat').append(messageFormat(data.output.text[0]));
+          $("#chatBox").animate({ scrollTop: $(document).height() }, "slow");
           });
     
   });
 
 }
+
+  // $.ajax
+  //   ({
+  //     type: "POST",
+  //       contentType: 'application/json',
+  //       dataType: 'json',
+  //       username: 'fcd45e5b-e1d8-42ea-8b1e-51b506b5d9dd',
+  //       password: 'gU37Hs0zV7ti',
+  //       url: "https://gateway.watsonplatform.net/conversation/api/v1/workspaces/6b52eac7-5172-4546-8d84-cf5a0adf659c/message?version=2017-02-03",
+  //       data: { "input": {"text": message } }
+  //   }).done(function(data) {
+  //         debugger;
+  //         });
+    
+  // });
 
 $(document).ready(function(){
     clickSocial();

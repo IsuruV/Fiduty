@@ -1,6 +1,5 @@
-
-	<script>
-	           $(document).on('click','#nextBtnSlider',(ev)=>{
+<script>
+	           $(document).on('click','#nextSlide',function(ev){
                     ev.preventDefault();
               $('.my-slider').unslider('next');
   })
@@ -9,6 +8,8 @@
 	<script> 
 	    $(document).on('click', '#closeModel', ()=>{
 	         $('#toggle').toggle('slow');
+	         $('a.unslider-arrow').hide()
+	         $('nav.unslider-nav').hide()
 	    })
 	</script>
 	
@@ -49,7 +50,7 @@
     <div class="col-md-4 col-md-offset-4" style="text-align:center">
         <br>
         <!--<a id="nextBtn" class="btn btn-default btn-lg" style="white-space: normal; color:white; background-color:transparent"><h4>NEXT</h4></a>-->
-        <a id="nextBtnSlider" href="#" style="text-align:center;white-space: normal; color:white; background-color:transparent">NEXT</a>
+        <a id="nextSlide" href="#" style="text-align:center;white-space: normal; color:white; background-color:transparent">NEXT</a>
     </div>
     </div>
 		</li>

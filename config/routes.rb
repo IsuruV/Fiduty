@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :progress_points
   # devise_for :users
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
@@ -15,10 +16,11 @@ Rails.application.routes.draw do
   get '/users/recent_everyone_investment' => 'users#recent_everyone_investment'
   get '/users/sign_out' => "users#log_out"
   post '/users/update' => "users#update"
+  post '/users/add_points' => "users#add_points"
   
   get '/portfolios/ten_portfolios' => "portfolios#ten_portfolios"
   resources :user_portfolios
-  
+  post '/user_portfolios/watson_proxy' => "user_portfolios#watson_proxy"
   # devise_scope :user do
   #   get '/signout', to: 'devise/sessions#destroy', as: :signout
   # end

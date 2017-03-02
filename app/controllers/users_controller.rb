@@ -134,7 +134,15 @@ end
     sign_out current_user
     redirect_to root_path
   end
-    
+  
+  def add_points
+    points = params[:points]
+    if points
+      current_user.add_points(points)
+    else
+      current_user.add_points
+    end
+  end
 
 
   # private

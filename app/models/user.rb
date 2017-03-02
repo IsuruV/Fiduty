@@ -286,6 +286,11 @@ end
     graph.get_connections("me", "friends")
   end
   
+  def add_points(points = 1)
+    self.points += points
+    self.save
+  end
+  
 end
 # User.recent_friend_investment(["10209468294638125", "10207796683019394", "676779145826476"])
 # very_inital_investment, active
